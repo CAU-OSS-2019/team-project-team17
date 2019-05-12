@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/lol.jpg</file>
+        <file>img/lol_background.jpg</file>
+    </qresource>
+</RCC>

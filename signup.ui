@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>612</width>
     <height>562</height>
    </rect>
   </property>
@@ -16,9 +16,9 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>40</y>
-     <width>341</width>
+     <width>561</width>
      <height>431</height>
     </rect>
    </property>
@@ -30,7 +30,7 @@
      <rect>
       <x>0</x>
       <y>40</y>
-      <width>341</width>
+      <width>511</width>
       <height>41</height>
      </rect>
     </property>
@@ -43,7 +43,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="lineEdit_lol_nickname"/>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_3">
@@ -59,7 +59,7 @@
      <rect>
       <x>0</x>
       <y>100</y>
-      <width>341</width>
+      <width>511</width>
       <height>41</height>
      </rect>
     </property>
@@ -72,7 +72,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="lineEdit_id"/>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">
@@ -88,7 +88,7 @@
      <rect>
       <x>0</x>
       <y>150</y>
-      <width>341</width>
+      <width>511</width>
       <height>41</height>
      </rect>
     </property>
@@ -101,15 +101,93 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="lineEdit_password">
+       <property name="echoMode">
+        <enum>QLineEdit::Normal</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>200</y>
+      <width>511</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>PW check</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_password2"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>531</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>희망 포지션</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>듀오희망 포지션</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>듀오희망 티어</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButton_OK">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>220</x>
      <y>490</y>
      <width>93</width>
      <height>28</height>

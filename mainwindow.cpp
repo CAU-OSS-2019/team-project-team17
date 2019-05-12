@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include <QSplashScreen>
+#include <QTimer>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,8 +30,18 @@ void MainWindow::on_pushButton_Login_clicked()
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
 
+        QSplashScreen *splash =new QSplashScreen;
+        QPixmap qpixmap =(QPixmap(":/img/img/lol_background.jpg"));
+
+        splash->setPixmap(qpixmap);
+        splash->show();
+
         secDialog = new SecDialog(this);
-        secDialog->show();
+        QTimer::singleShot(2500,splash,SLOT(close));
+        QTimer::singleShot(1500,secDialog,SLOT(show()));
+        splash->finish(secDialog);
+
+
 
     }
     else {

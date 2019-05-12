@@ -14,7 +14,8 @@ class SignUp : public QDialog
 public:
     explicit SignUp(QWidget *parent = nullptr);
     ~SignUp();
-
+private slots:
+    void on_pushButton_OK_clicked();
 private:
     Ui::SignUp *ui;
 };
