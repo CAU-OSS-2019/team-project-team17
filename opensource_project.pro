@@ -25,17 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    addfriend.cpp \
         main.cpp \
         mainwindow.cpp \
     secdialog.cpp \
     signup.cpp
 
 HEADERS += \
+    addfriend.h \
         mainwindow.h \
     secdialog.h \
     signup.h
 
 FORMS += \
+    addfriend.ui \
         mainwindow.ui \
     secdialog.ui \
     signup.ui
