@@ -25,3 +25,5 @@ void SignUp::on_pushButton_OK_clicked()
     QMessageBox::information(this,"Sing in","Sign in Complete");
     close();
 }
+
+
