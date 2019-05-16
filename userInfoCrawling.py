@@ -2,16 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
+import pymysql
 
 driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
 driver.implicitly_wait(3)
-driver.get('https://www.op.gg/')
+driver.get('https://www.op.gg/') 
+
+db = pymysql.connect(host='gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com', port=3306, user= 'gamehaeduo', passwd= 'caugamehaeduo', db='gamehaeduo', charset='utf8')
+cursor = db.cursor()
 
 search_name = driver.find_element_by_name('userName')
-search_name.send_keys('Hide on bush') # 여기다가 사용자 이름 넣어주기
+user_character_name = 'Hide on bush' # 여기다가 db에서 꺼낸 사용자 이름 넣어주기
+search_name.send_keys(user_character_name) 
 search_name.submit()
 
-#검색 메인화면
 html = driver.page_source #페이지의 elements 모두 가져오기
 soup = BeautifulSoup(html, 'lxml') #BeautifulSoup 사용하기
 #BeautifulSoup 객체로 변환 -> 웹문서 파싱 상태 -> 태그 별로 분해되어 태그로 구성된 트리
@@ -34,6 +38,11 @@ print("RoleRate2 : " + UserPositionStatContentDetail1[0].get_text())
 print("WinRatio2 : " + UserPositionStatContentDetail1[1].get_text())
 
 print()
+
+#sql = "INSERT INTO cpu_info (id, name, model_num, model_type) VALUES(" + "3" + ", 'i5', '7700', 'Kaby Lake')"
+#insert update delete 등의 문장을 db 서버에 보냄
+
+#cursor.execute(sql)
 
 a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
 driver.get(a.get_attribute('href'))
@@ -62,22 +71,8 @@ for UserChampionListRow in UserChampionListRows:
     print("Death: " + UserChampionListRow.find(class_='Death').get_text())
     print("Assist: " + UserChampionListRow.find(class_='Assist').get_text())
 
+cursor.execute("SHOW TABLES")
 
-characterNamesList = ['garen', 'galio', 'gangplank'] #디비에 있는 캐릭터 이름 다 넣어주기
-tireList = ['iron', 'bronze', 'silver', 'gold', '', 'diamond', 'master']
+db.commit() #데이터를 커밋
 
-for characterName in characterNamesList:
-    for tire in tireList:
-        driver.get('https://www.leagueofgraphs.com/ko/champions/counters/'+characterName+'/'+tire)
-        driver.find_element_by_xpath('//*[@id="mainContent"]/div/div[1]/div/table/tbody//td/button').click()
-        html = driver.page_source
-        soup = BeautifulSoup(html, 'lxml')
-
-        DataTable = soup.find('table', class_='data_table sortable_table')
-        DataTableNames = DataTable.find_all('div', class_='txt')
-        DataTableWinRatios = DataTable.select('#mainContent > div > div:nth-child(1) > div > table > tbody > tr > td:nth-child(2) > div.progress-bar-container.show-for-small-down-custom > span')
-
-        for DataTableName, DataTableWinRatio in zip(DataTableNames,DataTableWinRatios):
-            print("이름: "+ DataTableName.span.get_text())
-            print("설명: "+ DataTableName.i.get_text())
-            print("승률: "+ DataTableWinRatio.get_text()[1:-1])
+db.close()
