@@ -3,7 +3,6 @@
 
 #include "socket_client.h"
 
-using namespace std;
 
 
 typedef struct SourceForMatching{
@@ -21,44 +20,50 @@ typedef struct ResultOfMatching{
 }result_of_matching;
 
 
-class UtilMatching{
-	static void pressMatching(void){
-		cout << " press matching button " << endl;
-		cout << " ---running matching--- " << endl;
-		matching.runMatching();
-	}
 
-	static void endMatching(void){
-		cout << " end matching " << endl;
-		
-	}
-}
+
+class UtilMatching{
+	public :
+		static void pressMatching(void){
+			cout << " press matching button " << endl;
+			cout << " ---running matching--- " << endl;
+//			matching.runMatching();
+		}
+
+		static void endMatching(void){
+			cout << " end matching " << endl;
+			
+		}
+};
+
+
 
 
 class matching{
 	private:
 		// data needed for the matching.
-		source_for_matching source;
+		static source_for_matching source;
 
 		// data that gotten from the matching.
-		result_of_matching result;
+		static result_of_matching result;
 
 		int running_state = false;
 
 	public:
-		//constructor
+		//Constructor
 		matching(int input_data1, int input_data2, int input_data3){
 
 			running_state = true;
 			
+			// initalize sources needed for the matching.
 			init_source(input_data1, input_data2, input_data3);
 		}
-		
+
 
 		/* start matching */
 		static bool runMatching(void){
 			
-			// connect matching socket to the main server.
+			// connect to the main server through matching socket.
 			static MatchingSocketClient * matchingSock_p = 
 				new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
 			
@@ -93,7 +98,7 @@ class matching{
 		 * free all dynamic allocation related to the matching 
 		 * or if needed, initialize member variables
 		 * and then exit matching.*/
-		exitMatching(){
+		void exitMatching(){
 			cout << "--- end of matching ---" << endl;
 			
 			if (result.success)
@@ -102,6 +107,11 @@ class matching{
 			else
 				displayMatchingFailInfo();
 		}
-}
+
+		void displayMatchedUserInfo(){
+			cout << "success : " << result.success << "  "
+				<< " data :  " << result.data1 << "  " << result.data2 << "  " << endl;
+		}
+};
 
 #endif // __MATCHING_H__
