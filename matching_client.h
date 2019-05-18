@@ -1,4 +1,4 @@
-#ifdef __MATCHING_H__
+#ifndef __MATCHING_H__
 #define __MATCHING_H__
 
 #include "socket_client.h"
@@ -9,17 +9,17 @@ typedef struct SourceForMatching{
 	int data1;
 	int data2;
 	int data3;
-}source_for_matching;
+}SourceForMatching;
 
 
 // To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{
+struct ResultOfMatching{
 	bool success;
 	int data1;
 	int data2;
-}result_of_matching;
+};
 
-
+typedef struct ResultOfMatching result_of_matching
 
 
 class UtilMatching{
@@ -87,7 +87,7 @@ class matching{
 		}
 		
 
-		init_source(int input_data1, int input_data2, int input_data3){
+		void init_source(int input_data1, int input_data2, int input_data3){
 			source.data1 = input_data1;
 			source.data2 = input_data2;
 			source.data3 = input_data3;

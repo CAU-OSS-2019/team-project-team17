@@ -1,11 +1,14 @@
-#ifdef __SOCKET_H__
+#ifndef __SOCKET_H__
 #define __SOCKET_H__
 
 #include <iostream>
 #include <string>
-#include <cunistd>
-#include <carpa/inet>
-#include <csys/socket>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <string.h>
+#include <string>
+#include "matching_client.h"
 
 using namespace std;
 
@@ -26,7 +29,7 @@ class SocketClient{
 		void createSocket(void){
 			sock = socket(PF_INET, SOCK_STREAM, 0);
 
-			if(serv_sock == -1)
+			if(sock == -1)
 				cout<< "socket() error" << endl;;
 
 			memset(&serv_addr, 0, sizeof(serv_addr));
@@ -68,7 +71,7 @@ class SocketClient{
 		*/
 
 	public:
-		SocketClinet(string socket_name, char server_ip[], int server_port)
+		SocketClient(string socket_name, char server_ip[], int server_port)
 			: socket_name(socket_name), target_server_ip(server_ip),
 			target_server_port(server_port){}
 
@@ -78,7 +81,7 @@ class SocketClient{
 		}
 
 
-		long getSocketIp(void){
+		char* getSocketIp(void){
 			return target_server_ip;
 		}
 
@@ -109,7 +112,7 @@ class MatchingSocketClient : public SocketClient{
 		 * If the matching is succeeded, return a string, 
 		 * that is an information of user matched
 		 * else, return NULL */
-		virtual result_of_matching receiveData(void){
+		result_of_matching result_of_matching receiveData(void){
 			int success;
 
 			result_of_matching result;
@@ -126,7 +129,7 @@ class MatchingSocketClient : public SocketClient{
 		}
 		
 
-		virtual void sendData(source_for_matching source){
+		void sendData(SourceForMatching source){
 			int success;
 
 			success = write(sock, &source, sizeof(source));
@@ -137,7 +140,6 @@ class MatchingSocketClient : public SocketClient{
 
 			else{
 				cout << "Success : succeeded to execute write()" <<endl;
-				return result;
 			}
 		}
 		
