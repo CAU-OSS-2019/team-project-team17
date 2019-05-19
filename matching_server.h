@@ -68,17 +68,17 @@ class MatchingSocketServer : public SocketServer{
 				
 				if(matchingQueue.clnt_cnt == 10){
 					Matching matching(matchingQueue);
+					matched_user matchedUser = matching.runMatching();
+					
+					removeMatchedUserFromQueue(matchedUser);
 				}
 				pthread_mutex_unlock(&matching_queue_mutex);
 				
-				matching.runMatching();
 				
 			}
-
-			Matching matching(matchingQueue);
 			pthread_mutex_unlock(&matching_mutex);
 
-			matching.runMatching();
+
 		}
 		
 		void mutexInit(void){
@@ -86,7 +86,16 @@ class MatchingSocketServer : public SocketServer{
 			pthread_mutex_init(&matching_queue_mutex, NULL);
 		}
 
+		void removeMatchedUserFromQueue(matched_user matchedUser){
+			// nickname에 해당하는 것 있는 키 값 얻어서 그 부분 없앰. sockets에서도 그 인덱스 부분 없앰. 
+		}
+
 };
+
+struct matchedUser{
+	string userNickname1;
+	string userNickname2;
+}matched_user;
 
 class Matching{
 	private:
@@ -106,10 +115,22 @@ class Matching{
 			: matchingQueue(matchingQueueInput){}
 		
 		/* start matching */
-		bool runMatching(void){
+		matched_user runMatching(void){
 			cout<<"runMatching"<<endl;
-			
-
+			runAlgorithm(matchingQueue.nicknames)[0]
+		}
+		
+		double runAlgorithm(string userNickname1, string userNickname2){
+			// 디비에서 각 유저들 정보 꺼내와서
+			// 알고리즘 돌리고
+			// 그 결과(double 적합도)를 반환.
+		}
+		
+		/*
+		 source_of_matching getSourceFromDB(string userNickname){
+		 	//디비에서 그 유저의 정보 꺼내오기.
+		 }
+		 */
 
 
 

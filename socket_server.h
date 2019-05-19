@@ -74,22 +74,8 @@ class SocketServer{
 					<<endl;
 		}
 		
-		/*
-		void receiveData(void){
-			str_len = read(sock, message, sizeof(message)-1);
-			if(str_len == -1)
-				cout << "read() error" << endl;
-
-			printf("Message from server:%s\n", message);
-
-			close(sock);
-			return 0;
-
-		}
-		*/
-
 	public:
-		SocketClient(string socket_name, int open_port, int clnt_listen_cnt)
+		SocketServer(string socket_name, int open_port, int clnt_listen_cnt)
 			: socket_name(socket_name), opened_port(open_port), 
 				clnt_cnt_listen(clnt_listen_cnt){}
 
