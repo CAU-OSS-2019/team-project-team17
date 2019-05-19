@@ -21,8 +21,8 @@ typedef struct ResultOfMatching{
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	set<int> clnt_sockets;
-	set<char *> nicknames;
+	map< string, int > clnt_nickname_socket_map;
+
 }matching_queue;
 
 class MatchingSocketServer : public SocketServer{
@@ -55,16 +55,20 @@ class MatchingSocketServer : public SocketServer{
 				
 				pthread_mutex_lock(&matching_queue_mutex);
 				
-				matchingQueue.clnt_sockets.insert(clnt_sock);
+				//matchingQueue.clnt_sockets.insert(clnt_sock);
 
 				//matchingQueue.clnt_sockets.insert(make_pair(matchingQueue.clnt_cnt, clnt_sock));
 				// (matchingQueue.clnt_sockets)[matchingQueue.clnt_cnt] = clnt_sock;
-				char * buffer = (char *)malloc(sizeof(char)*31);
+				char buffer[31];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1)
 					cout << "Error : server -- read() in handleMatching()."<<endl;
-				matchingQueue.nicknames.insert(buffer);
+				
+				string buffer_s(buffer);
+				matchingQueue.clnt_nickname_socket_map.insert(make_pair(buffer_s, clnt_sock));
+				
+				//matchingQueue.nicknames.insert(buffer);
 
 				//matchingQueue.nicknames.insert(make_pair(matchingQueue.clnt_cnt, buffer));
 
@@ -87,8 +91,17 @@ class MatchingSocketServer : public SocketServer{
 
 		void sendData(matched_user matchedUser){
 			cout << "server --- sendData() run. "<<endl;
+			
+			//되는지 확인해보기 맵에서 값 접근 방법 -  a[1] 접근
+			map< string, int >::matchingIter1;
+			map< string, int >::matchingIter2;
+			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
+			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
+			int userSock1 = matchingUserIter1->second;
+			int userSock2 = matchingUserIter2->second;
 
-			write(
+			write(userSock1, &matchedUser.userInfo1, sizeof(matchedUser.userInfo1));
+			write(userSock2, &matchedUser.userInfo2, sizeof(matchedUser.userInfo2));
 
 		}
 
@@ -105,7 +118,11 @@ class MatchingSocketServer : public SocketServer{
 
 struct matchedUser{
 	string userNickname1;
+	result_of_matching userInfo1;
+
 	string userNickname2;
+	result_of_matching userInfo2;
+
 }matched_user;
 
 class Matching{
