@@ -41,6 +41,9 @@ void main()
 	cout << "id : ";
 	cin >> user.id;
 
+	cout << "password : ";
+	cin >> user.pwd;
+
 	mysql_init(&conn);
 
 	connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
@@ -50,7 +53,7 @@ void main()
 		return;
 	}
 
-	sprintf(query, "SELECT * FROM login WHERE id='%s'", user.id);
+	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id, user.pwd);
 
 	query_state = mysql_query(connection, query);
 
