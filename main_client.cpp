@@ -21,6 +21,6 @@ bool signup(void){
 
 // program starts
 int main(void){
-	UtilMatching test;
+	UtilMatching::pressMatching();
 	return 0;
 }

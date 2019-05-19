@@ -75,31 +75,13 @@ class MatchingSocketClient : public SocketClient{
 		
 };
 
-
-class UtilMatching{
-	public :
-		static void pressMatching(void){
-			cout << " press matching button " << endl;
-			cout << " ---running matching--- " << endl;
-//			matching.runMatching();
-		}
-
-		static void endMatching(void){
-			cout << " end matching " << endl;
-			
-		}
-};
-
-
-
-
 class matching{
 	private:
 		// data needed for the matching.
-		static source_of_matching source;
+		source_of_matching source;
 
 		// data that gotten from the matching.
-		static result_of_matching result;
+		result_of_matching result;
 
 		int running_state = false;
 
@@ -115,18 +97,23 @@ class matching{
 
 
 		/* start matching */
-		static bool runMatching(void){
+		bool runMatching(void){
+			cout<<"runMatching"<<endl;	
 			
 			// connect to the main server through matching socket.
-			static MatchingSocketClient * matchingSock_p = 
+			MatchingSocketClient * matchingSock_p = 
 				new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
 			
+			cout<<"runMatching2"<<endl;	
+
 			// send data needed for the matching.
 			matchingSock_p->sendData(source);
 			
+			cout<<"runMatching3"<<endl;	
 			// get data for the matching from main server.
 			result = matchingSock_p->receiveData();
 			
+			cout<<"runMatching4"<<endl;	
 			exitMatching();
 		}
 
@@ -152,7 +139,7 @@ class matching{
 		 * free all dynamic allocation related to the matching 
 		 * or if needed, initialize member variables
 		 * and then exit matching.*/
-		static void exitMatching(){
+		void exitMatching(){
 			cout << "--- end of matching ---" << endl;
 			
 			if (result.success)
@@ -162,15 +149,36 @@ class matching{
 				displayMatchingFailInfo();
 		}
 
-		static void displayMatchedUserInfo(){
+		void displayMatchedUserInfo(){
 			cout << "success : " << result.success << "  "
 				<< " data :  " << result.data1 << "  " << result.data2 << "  " << endl;
 		}
 
-		static void displayMatchingFailInfo(){
+		void displayMatchingFailInfo(){
 			cout << "fail matching ( due to time-out, server communication failure etc..) "<< endl;
 		}
 };
+
+class UtilMatching{
+	public :
+		static void pressMatching(void){
+			cout << " press matching button " << endl;
+			cout << " ---running matching--- " << endl;
+			static matching * matching_object = new matching(1,2,3);
+			matching_object->runMatching();
+
+			delete matching_object;
+		}
+
+		static void endMatching(void){
+			cout << " end matching " << endl;
+			
+		}
+};
+
+
+
+
 
 
 #endif // __MATCHING_H__
