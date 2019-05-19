@@ -4,18 +4,66 @@ from bs4 import BeautifulSoup
 import time
 import pymysql
 
-db = pymysql.connect(host='gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com', port=3306, user= 'gamehaeduo', passwd= 'caugamehaeduo', db='gamehaeduo', charset='utf8')
+host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com'
+username = 'gamehaeduo'
+password = 'caugamehaeduo'
+database_name = 'gamehaeduo'
+
+db = pymysql.connect(
+    host= host_name,
+    port=3306,
+    user= username,
+    passwd= password,
+    db= database_name,
+    charset='utf8')
+
 cursor = db.cursor()
 
-driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
+driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe")
 
-characterNamesList = ['garen', 'galio', 'gangplank'] #디비에 있는 캐릭터 이름 다 넣어주기
+
+sql = """
+        TRUNCATE TABLE baseCharacterInfo
+"""
+cursor.execute(sql)
+
+sql = """
+        TRUNCATE TABLE bestPickCharacter
+"""
+cursor.execute(sql)
+
+
 tireList = ['iron', 'bronze', 'silver', 'gold', '', 'diamond', 'master']
 
-for characterName in characterNamesList:
+driver.get('https://www.leagueofgraphs.com/ko/champions/counters/garen')
+driver.find_element_by_xpath('//*[@id="championsFilter"]/a').click()
+
+html = driver.page_source
+soup = BeautifulSoup(html, 'lxml')
+
+for link in soup.select('#drop-champions> ul > li > a'):
+    if 'href' in link.attrs:
+        characterName = link.attrs['href'][23:]
+    if characterName == '':
+        continue
     for tire in tireList:
+        driver.get('https://www.leagueofgraphs.com/ko/champions/builds/'+characterName+'/'+tire)
+        html = driver.page_source
+        soup = BeautifulSoup(html, 'lxml')
+
+        base_win_rate = float(soup.find('div', id="graphDD2").get_text().strip()[:-1])
+
+        sql = """
+                INSERT IGNORE baseCharacterInfo
+                    (character_name, rank, win_rate)
+                VALUES
+                    (%s, %s, %s)
+        """
+        cursor.execute(sql, (characterName, tire, base_win_rate))
+
         driver.get('https://www.leagueofgraphs.com/ko/champions/counters/'+characterName+'/'+tire)
         driver.find_element_by_xpath('//*[@id="mainContent"]/div/div[1]/div/table/tbody//td/button').click()
+
         html = driver.page_source
         soup = BeautifulSoup(html, 'lxml')
 
@@ -24,12 +72,17 @@ for characterName in characterNamesList:
         DataTableWinRatios = DataTable.select('#mainContent > div > div:nth-child(1) > div > table > tbody > tr > td:nth-child(2) > div.progress-bar-container.show-for-small-down-custom > span')
 
         for DataTableName, DataTableWinRatio in zip(DataTableNames,DataTableWinRatios):
-            print("이름: "+ DataTableName.span.get_text())
-            print("설명: "+ DataTableName.i.get_text())
-            print("승률: "+ DataTableWinRatio.get_text()[1:-1])
+            bestCharacterName = DataTableName.span.get_text()
+            des = DataTableName.i.get_text()
+            winRate = float(DataTableWinRatio.get_text()[1:-1])
+            sql = """
+                INSERT IGNORE INTO bestPickCharacter
+                    (base_character_name, rank, best_character_name, win_rate, description)
+                VALUES
+                    (%s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (characterName, tire, bestCharacterName, winRate, des))
 
-cursor.execute("SHOW TABLES")
-
-db.commit() #데이터를 커밋
+db.commit()
 
 db.close()
