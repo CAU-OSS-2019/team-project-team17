@@ -26,6 +26,9 @@
     <ClCompile Include="db_connection.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="signup.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="login.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
