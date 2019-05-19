@@ -3,23 +3,77 @@
 
 #include "socket_client.h"
 
-
+using namespace std;
 
 typedef struct SourceForMatching{
 	int data1;
 	int data2;
 	int data3;
-}SourceForMatching;
+}source_of_matching;
 
 
 // To do : data를 string으로 했을 때 다루는 것 해보기.
-struct ResultOfMatching{
+typedef struct ResultOfMatching{
 	bool success;
 	int data1;
 	int data2;
-};
+}result_of_matching;
 
-typedef struct ResultOfMatching result_of_matching
+
+class MatchingSocketClient : public SocketClient{
+	
+	/* google style */
+	public :
+		
+
+	public :
+		/* IF TO DO : server_ip[] 에서 오류나면 스트링으로 바꾸고 스트링으로 서버 주소
+		 *  받아서 나중에 사용할때 char *로 변환 해줄 것. */
+		MatchingSocketClient(string socket_name, char server_ip[], int server_port)
+			: SocketClient(socket_name, server_ip, server_port){
+
+			this -> createSocket();
+			this -> connectServer();
+			
+		}
+	
+		/* receive result data for matching
+		 * If the matching is succeeded, return a string, 
+		 * that is an information of user matched
+		 * else, return NULL */
+		result_of_matching receiveData(void){
+			int success;
+
+			result_of_matching result;
+			success = read(sock, &result, sizeof(result));
+
+			if(!success){
+				cout<< "--- read waiting---" <<endl;
+			}
+
+			else{
+				cout << "Success : succeeded to execute read()" <<endl;
+				return result;
+			}
+		}
+		
+
+		void sendData(source_of_matching source){
+			int success;
+
+			success = write(sock, &source, sizeof(source));
+			
+			if(!success){
+				cout<< "Fail : fail to send data" <<endl;
+			}
+
+			else{
+				cout << "Success : succeeded to execute write()" <<endl;
+			}
+		}
+		
+		
+};
 
 
 class UtilMatching{
@@ -42,7 +96,7 @@ class UtilMatching{
 class matching{
 	private:
 		// data needed for the matching.
-		static source_for_matching source;
+		static source_of_matching source;
 
 		// data that gotten from the matching.
 		static result_of_matching result;
@@ -98,7 +152,7 @@ class matching{
 		 * free all dynamic allocation related to the matching 
 		 * or if needed, initialize member variables
 		 * and then exit matching.*/
-		void exitMatching(){
+		static void exitMatching(){
 			cout << "--- end of matching ---" << endl;
 			
 			if (result.success)
@@ -108,10 +162,15 @@ class matching{
 				displayMatchingFailInfo();
 		}
 
-		void displayMatchedUserInfo(){
+		static void displayMatchedUserInfo(){
 			cout << "success : " << result.success << "  "
 				<< " data :  " << result.data1 << "  " << result.data2 << "  " << endl;
 		}
+
+		static void displayMatchingFailInfo(){
+			cout << "fail matching ( due to time-out, server communication failure etc..) "<< endl;
+		}
 };
+
 
 #endif // __MATCHING_H__

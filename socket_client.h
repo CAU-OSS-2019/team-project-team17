@@ -8,7 +8,6 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <string>
-#include "matching_client.h"
 
 using namespace std;
 
@@ -37,12 +36,6 @@ class SocketClient{
 			serv_addr.sin_addr.s_addr = inet_addr(target_server_ip);
 			serv_addr.sin_port = htons(target_server_port);
 		}
-
-
-		virtual void receiveData(void) = 0;
-
-		virtual void sendData(void) = 0;
-
 
 		void connectServer(void){
 
@@ -91,59 +84,5 @@ class SocketClient{
 
 };
 
-class MatchingSocketClient : public SocketClient{
-	
-	/* google style */
-	public :
-		
-
-	public :
-		/* IF TO DO : server_ip[] 에서 오류나면 스트링으로 바꾸고 스트링으로 서버 주소
-		 *  받아서 나중에 사용할때 char *로 변환 해줄 것. */
-		MatchingSocketClient(string socket_name, char server_ip[], int server_port)
-			: SocketClient(socket_name, server_ip, server_port){
-
-			this -> createSocket();
-			this -> connectServer();
-			
-		}
-	
-		/* receive result data for matching
-		 * If the matching is succeeded, return a string, 
-		 * that is an information of user matched
-		 * else, return NULL */
-		result_of_matching result_of_matching receiveData(void){
-			int success;
-
-			result_of_matching result;
-			success = read(sock, &result, sizeof(result));
-
-			if(!success){
-				cout<< "--- read waiting---" <<endl;
-			}
-
-			else{
-				cout << "Success : succeeded to execute read()" <<endl;
-				return result;
-			}
-		}
-		
-
-		void sendData(SourceForMatching source){
-			int success;
-
-			success = write(sock, &source, sizeof(source));
-			
-			if(!success){
-				cout<< "Fail : fail to send data" <<endl;
-			}
-
-			else{
-				cout << "Success : succeeded to execute write()" <<endl;
-			}
-		}
-		
-		
-};
 
 #endif // __SOCKET_H__
