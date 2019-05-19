@@ -32,5 +32,8 @@
     <ClCompile Include="login.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="get_duo_info.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

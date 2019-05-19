@@ -16,17 +16,20 @@ using namespace std;
 #define DBNAME "gamehaeduo"
 #define PORTNUM 3306
 
-struct UserInfo {
+struct DuoInfo {
 
 	char nickname[30];
-	char id[30];
-	char pwd[30];
+	char rank[30];
+	int wins;
+	int losses;
+	/*char wins[10];
+	char losses[10];*/
 
 };
 
 void main()
 {
-	UserInfo user;
+	DuoInfo duo;
 
 	MYSQL conn;
 	MYSQL *connection = NULL;
@@ -36,13 +39,10 @@ void main()
 
 	char query[255];
 
-	cout << "Sign In" << endl;
+	cout << "Get Duo Information" << endl;
 
-	cout << "id : ";
-	cin >> user.id;
-
-	cout << "password : ";
-	cin >> user.pwd;
+	cout << "Duo Nickname : ";
+	cin >> duo.nickname;
 
 	mysql_init(&conn);
 
@@ -53,12 +53,12 @@ void main()
 		return;
 	}
 
-	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id, user.pwd);
+	sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s'", duo.nickname);
 
 	query_state = mysql_query(connection, query);
 
 	if (query_state != 0) {
-		cout << "Login failed : " << mysql_error(&conn) << endl;
+		cout << "Getting Duo Information failed : " << mysql_error(&conn) << endl;
 		mysql_close(&conn);
 		return;
 	}
@@ -66,14 +66,27 @@ void main()
 	sql_result = mysql_store_result(connection);
 
 	while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-		strcpy(user.nickname, sql_row[0]);
-		strcpy(user.id, sql_row[1]);
-		strcpy(user.pwd, sql_row[2]);
+
+		strcpy(duo.nickname, sql_row[0]);
+		strcpy(duo.rank, sql_row[1]);
+		/*strcpy(duo.wins, sql_row[2]);
+		strcpy(duo.losses, sql_row[3]);*/
+		duo.wins = atoi(sql_row[2]);
+		duo.losses = atoi(sql_row[3]);
 	}
 
-	cout << "nickname\tid\tpassword" << endl;
-	cout << user.nickname << "\t" << user.id << "\t" << user.pwd << endl;
-	
+	cout << "nickname : ";
+	cout << duo.nickname << endl;
+
+	cout << "rank : ";
+	cout << duo.rank << endl;
+
+	cout << "wins : ";
+	cout << duo.wins << endl;
+
+	cout << "losses : ";
+	cout << duo.losses << endl;
+
 	mysql_free_result(sql_result);
 
 	mysql_close(&conn);
