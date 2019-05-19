@@ -2,7 +2,7 @@
 #define __MATCHING_H__
 
 #include "socket_server.h"
-#include <map>
+#include <set>
 
 using namespace std;
 
@@ -21,8 +21,8 @@ typedef struct ResultOfMatching{
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	map< int, int > clnt_sockets;
-	map< int, char* >nicknames;
+	set<int> clnt_sockets;
+	set<char *> nicknames;
 }matching_queue;
 
 class MatchingSocketServer : public SocketServer{
@@ -55,21 +55,25 @@ class MatchingSocketServer : public SocketServer{
 				
 				pthread_mutex_lock(&matching_queue_mutex);
 				
-				matchingQueue.clnt_sockets.insert(make_pair(matchingQueue.clnt_cnt, clnt_sock));
+				matchingQueue.clnt_sockets.insert(clnt_sock);
+
+				//matchingQueue.clnt_sockets.insert(make_pair(matchingQueue.clnt_cnt, clnt_sock));
 				// (matchingQueue.clnt_sockets)[matchingQueue.clnt_cnt] = clnt_sock;
 				char * buffer = (char *)malloc(sizeof(char)*31);
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1)
 					cout << "Error : server -- read() in handleMatching()."<<endl;
-				matchingQueue.nicknames.insert(make_pair(matchingQueue.clnt_cnt, buffer));
+				matchingQueue.nicknames.insert(buffer);
+
+				//matchingQueue.nicknames.insert(make_pair(matchingQueue.clnt_cnt, buffer));
 
 				matchingQueue.clnt_cnt++;
 				
 				if(matchingQueue.clnt_cnt == 10){
 					Matching matching(matchingQueue);
 					matched_user matchedUser = matching.runMatching();
-					
+					sendData(matchedUser);
 					removeMatchedUserFromQueue(matchedUser);
 				}
 				pthread_mutex_unlock(&matching_queue_mutex);
@@ -80,7 +84,14 @@ class MatchingSocketServer : public SocketServer{
 
 
 		}
-		
+
+		void sendData(matched_user matchedUser){
+			cout << "server --- sendData() run. "<<endl;
+
+			write(
+
+		}
+
 		void mutexInit(void){
 			pthread_mutex_init(&matching_mutex);
 			pthread_mutex_init(&matching_queue_mutex, NULL);
@@ -117,7 +128,7 @@ class Matching{
 		/* start matching */
 		matched_user runMatching(void){
 			cout<<"runMatching"<<endl;
-			runAlgorithm(matchingQueue.nicknames)[0]
+			// runAlgorithm(matchingQueue.nicknames);
 		}
 		
 		double runAlgorithm(string userNickname1, string userNickname2){

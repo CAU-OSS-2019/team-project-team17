@@ -74,25 +74,15 @@ class SocketServer{
 					<<endl;
 		}
 		
+		void sendData(){
+
+		}
+
 	public:
 		SocketServer(string socket_name, int open_port, int clnt_listen_cnt)
 			: socket_name(socket_name), opened_port(open_port), 
 				clnt_cnt_listen(clnt_listen_cnt){}
-
-
-		string getSocketName(void){
-			return socket_name;
-		}
-
-
-		char* getSocketIp(void){
-			return target_server_ip;
-		}
-
-		int getSocketPort(void){
-			return target_server_port;
-		}
-
+		
 };
 
 
