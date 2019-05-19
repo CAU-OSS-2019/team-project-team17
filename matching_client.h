@@ -14,9 +14,9 @@ typedef struct SourceForMatching{
 
 // To do : data를 string으로 했을 때 다루는 것 해보기.
 typedef struct ResultOfMatching{
-	bool success;
 	int data1;
 	int data2;
+	int data3;
 }result_of_matching;
 
 
@@ -24,7 +24,8 @@ class MatchingSocketClient : public SocketClient{
 	
 	/* google style */
 	public :
-		
+		int receive_success;
+		int send_success;
 
 	public :
 		/* IF TO DO : server_ip[] 에서 오류나면 스트링으로 바꾸고 스트링으로 서버 주소
@@ -36,43 +37,52 @@ class MatchingSocketClient : public SocketClient{
 			this -> connectServer();
 			
 		}
-	
+		
+		/*	
+		int getSocket(){
+			return sock;
+		}
+		*/
+
+		/* send data needed for a matching to server.
+		   return : if sending is succeeded, true. else, false */
+		void sendData(source_of_matching source){
+			cout << "sendData() run. "<<endl <<endl;
+			
+			cout << "souce.data1 : " << source.data1 <<"   " 
+				<<"source.data2 : " <<source.data2 <<"   " 
+				<< "source.data3 : "<<source.data3 <<"   " <<endl;
+
+			send_success = write(sock, &source, sizeof(source));
+			
+			if(send_success == -1){
+				cout<< "Fail : sendData()" <<endl;
+			}
+
+			else{
+				cout << "Success : sendData()" <<endl;
+			}
+		}
+		
 		/* receive result data for matching
 		 * If the matching is succeeded, return a string, 
 		 * that is an information of user matched
 		 * else, return NULL */
 		result_of_matching receiveData(void){
-			int success;
 
 			result_of_matching result;
-			success = read(sock, &result, sizeof(result));
+			receive_success = read(sock, &result, sizeof(result));
 
-			if(!success){
-				cout<< "--- read waiting---" <<endl;
+			if(receive_success == -1){
+				cout<< "Fail : receiveData()" <<endl;
 			}
 
 			else{
-				cout << "Success : succeeded to execute read()" <<endl;
+				cout << "Success : receiveData()" <<endl;
 				return result;
 			}
-		}
-		
-
-		void sendData(source_of_matching source){
-			int success;
-
-			success = write(sock, &source, sizeof(source));
 			
-			if(!success){
-				cout<< "Fail : fail to send data" <<endl;
-			}
-
-			else{
-				cout << "Success : succeeded to execute write()" <<endl;
-			}
 		}
-		
-		
 };
 
 class matching{
@@ -84,7 +94,7 @@ class matching{
 		result_of_matching result;
 
 		int running_state = false;
-
+		MatchingSocketClient * matchingSock_p;
 	public:
 		//Constructor
 		matching(int input_data1, int input_data2, int input_data3){
@@ -101,32 +111,24 @@ class matching{
 			cout<<"runMatching"<<endl;	
 			
 			// connect to the main server through matching socket.
-			MatchingSocketClient * matchingSock_p = 
+			matchingSock_p = 
 				new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
 			
 			cout<<"runMatching2"<<endl;	
 
 			// send data needed for the matching.
 			matchingSock_p->sendData(source);
-			
+
+
 			cout<<"runMatching3"<<endl;	
+
 			// get data for the matching from main server.
 			result = matchingSock_p->receiveData();
 			
 			cout<<"runMatching4"<<endl;	
-			exitMatching();
+
+			exitMatching(matchingSock_p->receive_success);
 		}
-
-
-		/* send data needed for a matching to server.
-		   return : if sending is succeeded, true. else, false */
-		bool sendMatchingSources(void){
-			int data1;
-			int data2;
-			int data3;
-
-		}
-		
 
 		void init_source(int input_data1, int input_data2, int input_data3){
 			source.data1 = input_data1;
@@ -139,10 +141,10 @@ class matching{
 		 * free all dynamic allocation related to the matching 
 		 * or if needed, initialize member variables
 		 * and then exit matching.*/
-		void exitMatching(){
+		void exitMatching(int receive_success){
 			cout << "--- end of matching ---" << endl;
 			
-			if (result.success)
+			if (receive_success)
 				displayMatchedUserInfo();
 
 			else
@@ -150,8 +152,8 @@ class matching{
 		}
 
 		void displayMatchedUserInfo(){
-			cout << "success : " << result.success << "  "
-				<< " data :  " << result.data1 << "  " << result.data2 << "  " << endl;
+			cout << "data1 : " << result.data1 << "  "
+				<< " data2 :  " << result.data2 << "  " << "data3 : "<<result.data3 << "  " << endl;
 		}
 
 		void displayMatchingFailInfo(){
