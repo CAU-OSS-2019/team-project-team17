@@ -55,8 +55,8 @@ class SignUp {
 		// Constructor
 		
 		void init_user(user_info input) {
-			strcpy(user.nickname, input.nickname);
 			strcpy(user.id, input.id);
+			strcpy(user.pwd, input.pwd);
 		}
 		
 		void connect_db(void) {
