@@ -240,7 +240,7 @@ def runServer():
     print('Crawling Server Initialized')
     
     try:
-        server = CrawlingServer((HOST,PORT),TcpHandler)
+        server = CrawlingServer((HOST,PORT),TcpHandler)#
         server.serve_forever()
 
     except KeyboardInterrupt:
