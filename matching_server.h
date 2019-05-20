@@ -75,6 +75,7 @@ class MatchingSocketServer : public SocketServer{
 				matchingQueue.clnt_cnt++;
 				
 				if(matchingQueue.clnt_cnt == 10){
+					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
 					Matching matching(matchingQueue);
 					matched_user matchedUser = matching.runMatching();
 					sendData(matchedUser);
@@ -145,10 +146,28 @@ class Matching{
 		/* start matching */
 		matched_user runMatching(void){
 			cout<<"runMatching"<<endl;
-			// runAlgorithm(matchingQueue.nicknames);
+			
+			int i = 0;
+			double userConformity[10];
+			string userNickname[10];
+			map< string, int >::iterator iter;
+			
+			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
+				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <10;
+					 ++i, ++iter){
+				userNickname[i] = iter->second;
+			}
+			
+			return compareConformity(userNickname);
+			
 		}
 		
-		double runAlgorithm(string userNickname1, string userNickname2){
+		matched_user compareConformity(string userNickname[]){
+			
+		}
+		
+		double runAlgorithm(string ){
+			
 			// 디비에서 각 유저들 정보 꺼내와서
 			// 알고리즘 돌리고
 			// 그 결과(double 적합도)를 반환.
