@@ -75,7 +75,7 @@ class MatchingSocketClient : public SocketClient{
 
 			if(receive_success == -1){
 				cout<< "Fail : receiveData()" <<endl;
-				exit(1);
+				return result;
 			}
 
 			else{
@@ -125,10 +125,15 @@ class matching{
 
 			// get data for the matching from main server.
 			result = matchingSock_p->receiveData();
-			
-			cout<<"runMatching4"<<endl;	
 
-			exitMatching(matchingSock_p->receive_success);
+			if((matchingSock_p->receive_success) == -1)
+				displayMatchingFailInfo();
+
+			else
+				displayMatchedUserInfo();
+			
+			delete matchingSock_p;
+
 		}
 
 		void init_source(int input_data1, int input_data2, int input_data3){
@@ -142,15 +147,12 @@ class matching{
 		 * free all dynamic allocation related to the matching 
 		 * or if needed, initialize member variables
 		 * and then exit matching.*/
+		
+		/*
 		void exitMatching(int receive_success){
-			cout << "--- end of matching ---" << endl;
-			
-			if (receive_success)
-				displayMatchedUserInfo();
 
-			else
-				displayMatchingFailInfo();
 		}
+		*/
 
 		void displayMatchedUserInfo(){
 			cout << "data1 : " << result.data1 << "  "
