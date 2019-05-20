@@ -163,6 +163,11 @@ class Matching{
 		}
 		
 		matched_user compareConformity(string userNickname[]){
+			for(int i = 0; i < 10; i++){
+				for(int j = i+1; j < 10; j++){
+					userNickname[i]
+				}
+			}
 			
 		}
 		
