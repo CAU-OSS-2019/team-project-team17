@@ -1,5 +1,5 @@
-#ifndef __SIGNUP_H__
-#define __SIGNUP_H__
+#ifndef __GETCHARACTERINFO_H__
+#define __GETCHARACTERINFO_H__
 
 #include "socket_server.h"
 
@@ -20,12 +20,14 @@ typedef UserInfo {
 	char pwd[30];
 	
 }user_info;
+
+
+
 /*
 class SignUpSocketServer : public SocketServer {
 	public :
 		int receive_success;
 		int send_success;
-		pthread_mutex_t signup_mutex;
 	
 	public :
 		SignupSocketServer(string socket_name, char server_ip[], int server_port)
@@ -34,19 +36,12 @@ class SignUpSocketServer : public SocketServer {
 			this -> prepareServerSocket();
 			
 		}
-		
-		void handleSignUp(void) {
-			int tread_create_success = -1;
-			pthread_init(&signup_mutex, NULL);
 
-			pthread_mutex_lock(&signup_mutex);
-			
-		}            
 		
 }
 */
 
-class SignUp {
+class GetCharacterInfo {
 	private :
 		// data needed for signup
 		user_info user;
@@ -64,7 +59,6 @@ class SignUp {
 		// Constructor
 		
 		void init_user(user_info input) {
-			strcpy(user.nickname, input.nickname);
 			strcpy(user.id, input.id);
 			strcpy(user.pwd, input.pwd);
 		}
@@ -81,27 +75,38 @@ class SignUp {
 		}
 
 		
-		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
-		void signup(user_info input) {
-			cout << "Sign Up" << endl;
+		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯
+		bool login(user_info input) {
+			cout << "Log In" << endl;
 
 			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
 
 			connect_db();	
 		
-			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", user.nickname, user.id, user.pwd);
+
+			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", user.id, user.pwd);
 
 			query_state = mysql_query(connection, query);
-	
+
 			if (query_state != 0) {
-				cout << "Sign Up failed" << mysql_error(&conn) << endl;
+				cout << "Login failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return;
+				return false;
 			}
 
+			sql_result = mysql_store_result(connection);
 
+			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+				strcpy(user.nickname, sql_row[0]);
+				strcpy(user.id, sql_row[1]);
+				strcpy(user.pwd, sql_row[2]);
+			}	
+
+			mysql_free_result(sql_result);
 			mysql_close(&conn);
+
+			return true;
 		}
 }
 
-#endif // __SIGNUP_H__
+endif // __GETCHARACTERINFO_H__

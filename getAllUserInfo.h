@@ -1,5 +1,5 @@
-#ifndef __SIGNUP_H__
-#define __SIGNUP_H__
+#ifndef __GETALLUSERINFO_H__
+#define __GETALLUSERINFO_H__
 
 #include "socket_server.h"
 
@@ -13,19 +13,25 @@
 
 using namespace std;
 
-typedef UserInfo {
+typedef UserCharacterInfo {
 	
+}user_character_info;
+
+typedef UserGameInfo {
+			
 	char nickname[30];
-	char id[30];
-	char pwd[30];
+	char rank[30];
+	int entire_wins;
+	int entire_losses;
 	
-}user_info;
+	user_character_info character[150];
+	
+}user_game_info;
 /*
-class SignUpSocketServer : public SocketServer {
+class DisplayUserInfoSocketServer : public SocketServer {
 	public :
 		int receive_success;
 		int send_success;
-		pthread_mutex_t signup_mutex;
 	
 	public :
 		SignupSocketServer(string socket_name, char server_ip[], int server_port)
@@ -34,22 +40,14 @@ class SignUpSocketServer : public SocketServer {
 			this -> prepareServerSocket();
 			
 		}
-		
-		void handleSignUp(void) {
-			int tread_create_success = -1;
-			pthread_init(&signup_mutex, NULL);
-
-			pthread_mutex_lock(&signup_mutex);
-			
-		}            
-		
+				
 }
 */
 
-class SignUp {
+class GetAllUserInfo {
 	private :
 		// data needed for signup
-		user_info user;
+		user_game_info user;
 		
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -58,16 +56,11 @@ class SignUp {
 		char query[255];
 		
 		int running_state = false;
-		SignUpSocketServer *signupSocket_p;
+		DisplayUserInfoSocketServer *userInfoSocket_p;
 
 	public :
 		// Constructor
 		
-		void init_user(user_info input) {
-			strcpy(user.nickname, input.nickname);
-			strcpy(user.id, input.id);
-			strcpy(user.pwd, input.pwd);
-		}
 		
 		void connect_db(void) {
 			mysql_init(&conn);
@@ -81,27 +74,34 @@ class SignUp {
 		}
 
 		
-		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
-		void signup(user_info input) {
-			cout << "Sign Up" << endl;
-
-			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
+		user_game_info displayUserInfo(char id[]) {
+			cout << "DisplayUserInfo" << endl;
 
 			connect_db();	
 		
-			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", user.nickname, user.id, user.pwd);
+
+			sprintf(query, "SELECT nickname, rank FROM userEntireInfo NATURAL JOIN login WHERE id='%s' LIMIT 1", id);
 
 			query_state = mysql_query(connection, query);
-	
+
 			if (query_state != 0) {
-				cout << "Sign Up failed" << mysql_error(&conn) << endl;
+			i	cout << "Display User Info failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return;
+				return user;
 			}
 
+			sql_result = mysql_store_result(connection);
 
+			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+				strcpy(user.nickname, sql_row[0]);
+				strcpy(user.rank, sql_row[1]);
+			}	
+
+			mysql_free_result(sql_result);
 			mysql_close(&conn);
+
+			return user;
 		}
 }
 
-#endif // __SIGNUP_H__
+#endif // __GETALLUSERINFO_H__

@@ -21,6 +21,7 @@ typedef UserInfo {
 	
 }user_info;
 
+/*
 class SignUpSocketServer : public SocketServer {
 	public :
 		int receive_success;
@@ -36,8 +37,9 @@ class SignUpSocketServer : public SocketServer {
 
 		
 }
+*/
 
-class SignUp {
+class LogIn {
 	private :
 		// data needed for signup
 		user_info user;
@@ -71,23 +73,23 @@ class SignUp {
 		}
 
 		
-		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
-		void signup(void) {
-			cout << "Sign Up"" << endl;
+		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯
+		bool login(user_info input) {
+			cout << "Log In" << endl;
 
-			init_user();	//받아온 정보 저장하는 함수 parameter 추가해야함 
+			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
 
 			connect_db();	
 		
 
-			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id, user.pwd);
+			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", user.id, user.pwd);
 
 			query_state = mysql_query(connection, query);
 
 			if (query_state != 0) {
 				cout << "Login failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return;
+				return false;
 			}
 
 			sql_result = mysql_store_result(connection);
@@ -100,7 +102,9 @@ class SignUp {
 
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
+
+			return true;
 		}
 }
 
-#endif // __MATCHING_H__
+endif // __LOGIN_H__
