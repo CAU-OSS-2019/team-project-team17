@@ -75,6 +75,7 @@ class MatchingSocketClient : public SocketClient{
 
 			if(receive_success == -1){
 				cout<< "Fail : receiveData()" <<endl;
+				exit(1);
 			}
 
 			else{

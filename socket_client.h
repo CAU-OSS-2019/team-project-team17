@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
