@@ -89,7 +89,7 @@ def List_Append():
     search_name2.send_keys(Next_user)
     search_name2.send_keys(Keys.RETURN)
 
-driver = webdriver.Chrome(r'C:\Users\dbsks\AppData\Local\Programs\Python\Python37-32\chromedriver.exe')
+driver = webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
 driver.implicitly_wait(3)
 driver.get('https://www.op.gg/')
 search_name = driver.find_element_by_name('userName')
