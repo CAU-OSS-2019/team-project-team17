@@ -50,9 +50,9 @@ try:
     cursor.execute(sql, (user_nick, TireRank, win, loss))
 except pymysql.IntegrityError:
     sql = """
-        UPDATE userEntireInfo SET rank = %s, wins = %s, losses = %s
+        UPDATE userEntireInfo SET rank = %s, wins = %s, losses = %s WHERE nickname = %s
         """
-    cursor.execute(sql, (TireRank, win, loss))
+    cursor.execute(sql, (TireRank, win, loss, user_nick))
 
 
 UserPositionStatContent = soup.find_all('div', class_='PositionStatContent')
@@ -78,10 +78,19 @@ try:
     cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
 except pymysql.IntegrityError:
     sql = """
-        UPDATE userPosition SET role_rate = %s, win_rate = %s WHERE position = %s
+        DELETE FROM userPosition
+        WHERE nickname = %s
         """
-    cursor.execute(sql, (RoleRate1, WinRatio1, position1))
-    cursor.execute(sql, (RoleRate2, WinRatio2, position2))
+    cursor.execute(sql, user_nick)
+
+    sql = """
+        INSERT INTO userPosition
+            (nickname, position, role_rate, win_rate)
+        values
+            (%s, %s, %s, %s)
+        """
+    cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
+    cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
 
 
 a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
@@ -122,9 +131,9 @@ for UserChampionListRow in UserChampionListRows:
         cursor.execute(sql, (i, user_nick, ChampionName, wins, losses, Kill, Death, Assist))
     except pymysql.IntegrityError:
         sql = """
-        UPDATE userCharacterInfo SET character_name = %s, wins = %s, losses = %s, kills = %s, deaths = %s, assist = %s
+        UPDATE userCharacterInfo SET character_name = %s, wins = %s, losses = %s, kills = %s, deaths = %s, assist = %s WHERE most_index = %s AND nickname = %s
         """
-        cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist))
+        cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, user_nick))
    
     i=i+1
 
