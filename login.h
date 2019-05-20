@@ -15,9 +15,9 @@ using namespace std;
 
 typedef UserInfo {
 	
-	char nickname[30];
-	char id[30];
-	char pwd[30];
+	string nickname;
+	string id;
+	string pwd;
 	
 }user_info;
 
@@ -41,29 +41,22 @@ class SignUpSocketServer : public SocketServer {
 
 class LogIn {
 	private :
-		// data needed for signup
+
+		// variables for login
 		user_info user;
-		
+
 		MYSQL conn;
 		MYSQL *connection = NULL;
 		int query_state;
-
 		char query[255];
-		
+
+		// variables for socket
 		int running_state = false;
 		SignUpSocketServer *signupSocket_p;
 
-	public :
-		// Constructor
-		
-		void init_user(user_info input) {
-			strcpy(user.id, input.id);
-			strcpy(user.pwd, input.pwd);
-		}
-		
 		void connect_db(void) {
 			mysql_init(&conn);
-	
+
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
 
 			if (connection == NULL) {
@@ -72,39 +65,44 @@ class LogIn {
 			}
 		}
 
+		void set_user(MYSQL_ROW input) {
+			user.nickname = input[0];
+			user.id = input[1];
+			user.pwd = input[2];
+		}
+
+	public :
+		// Constructor
+
 		
-		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯
-		bool login(user_info input) {
+		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 됨
+		string login(user_info input) {
 			cout << "Log In" << endl;
 
-			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
+			connect_db();
 
-			connect_db();	
-		
-
-			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", user.id, user.pwd);
+			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", input.id.c_str(), input.pwd.c_str());
 
 			query_state = mysql_query(connection, query);
 
 			if (query_state != 0) {
 				cout << "Login failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return false;
+				return "";
 			}
 
 			sql_result = mysql_store_result(connection);
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				strcpy(user.nickname, sql_row[0]);
-				strcpy(user.id, sql_row[1]);
-				strcpy(user.pwd, sql_row[2]);
+				
+				set_user(sql_row);
 			}	
 
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
 
-			return true;
+			return user.id;
 		}
 }
 
-endif // __LOGIN_H__
+#endif // __LOGIN_H__

@@ -14,12 +14,13 @@
 using namespace std;
 
 typedef UserInfo {
-	
-	char nickname[30];
-	char id[30];
-	char pwd[30];
-	
+
+	string nickname;
+	string id;
+	string pwd;
+
 }user_info;
+
 /*
 class SignUpSocketServer : public SocketServer {
 	public :
@@ -48,30 +49,20 @@ class SignUpSocketServer : public SocketServer {
 
 class SignUp {
 	private :
-		// data needed for signup
-		user_info user;
-		
+
+		// variables for signup
 		MYSQL conn;
 		MYSQL *connection = NULL;
 		int query_state;
-
 		char query[255];
-		
+
+		// variables for socket
 		int running_state = false;
 		SignUpSocketServer *signupSocket_p;
 
-	public :
-		// Constructor
-		
-		void init_user(user_info input) {
-			strcpy(user.nickname, input.nickname);
-			strcpy(user.id, input.id);
-			strcpy(user.pwd, input.pwd);
-		}
-		
 		void connect_db(void) {
 			mysql_init(&conn);
-	
+
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
 
 			if (connection == NULL) {
@@ -80,16 +71,17 @@ class SignUp {
 			}
 		}
 
+	public :
+		// Constructor
+		
 		
 		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
 		void signup(user_info input) {
 			cout << "Sign Up" << endl;
 
-			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
-
 			connect_db();	
 		
-			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", user.nickname, user.id, user.pwd);
+			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", input.nickname.c_str(), input.id.c_str(), input.pwd.c_str());
 
 			query_state = mysql_query(connection, query);
 	

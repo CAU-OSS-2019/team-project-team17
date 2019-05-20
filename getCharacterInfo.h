@@ -4,6 +4,7 @@
 #include "socket_server.h"
 
 #include <mysql.h>
+#include <map>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
 #define USERNAME "gamehaeduo"
