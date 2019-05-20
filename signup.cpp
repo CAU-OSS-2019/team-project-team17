@@ -76,3 +76,5 @@ void SignUp::SubPositon() {
     if (ui->radioButton_10->isChecked())
         subPosition = ui->radioButton->text();
 }
+
+
