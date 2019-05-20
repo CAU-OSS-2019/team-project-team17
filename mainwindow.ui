@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>482</height>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>40</y>
-      <width>361</width>
-      <height>371</height>
+      <x>10</x>
+      <y>10</y>
+      <width>641</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -32,82 +32,100 @@
     <property name="title">
      <string>Sign In</string>
     </property>
-    <widget class="QWidget" name="horizontalLayoutWidget">
+    <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>80</y>
-       <width>221</width>
-       <height>41</height>
+       <x>59</x>
+       <y>49</y>
+       <width>521</width>
+       <height>321</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>IID</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_username"/>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_username"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>PW</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_password">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pushButton_Login">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Login</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Signup">
+            <property name="text">
+             <string>Sign up</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
-    </widget>
-    <widget class="QWidget" name="horizontalLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>160</y>
-       <width>221</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>PW</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_password">
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="pushButton_Login">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>250</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Login</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_Signup">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>310</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Sign up</string>
-     </property>
     </widget>
    </widget>
   </widget>
@@ -117,7 +135,7 @@
      <x>0</x>
      <y>0</y>
      <width>659</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

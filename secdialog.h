@@ -3,8 +3,10 @@
 
 #include <QDialog>
 #include <QProgressBar>
+#include <QMovie>
 #include <QPropertyAnimation>
 #include "addfriend.h"
+#include "matching_client.h"
 
 namespace Ui {
 class SecDialog;
@@ -20,10 +22,16 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void displayMatchedUserInfo();
 
 private:
     Ui::SecDialog *ui;
     AddFriend *addf;
+    MatchingSocketClient *matchingSock;
+    source_of_matching source;
+    result_of_matching result;
+    bool running_state = false;
+
 };
 
 #endif // SECDIALOG_H

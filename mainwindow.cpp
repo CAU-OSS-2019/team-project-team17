@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+
+//    loginSock = new LoginSocketClient("login socket", "13.209.15.157", 8888);
     ui->setupUi(this);
     //QPixmap pix(":/resources/img/login-icon.png");
     //int w = ui->label_pic->width();
@@ -23,10 +26,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_Login_clicked()
 {
-    QString username = ui->lineEdit_username->text();
-    QString password = ui->lineEdit_password->text();
+    ID = ui->lineEdit_username->text().toUtf8();
+    PW = ui->lineEdit_password->text().toUtf8();
 
-    if(username ==  "test" && password == "test") {
+    loginInfo.id = ID.toLocal8Bit().constData();
+    loginInfo.pwd = PW.toLocal8Bit().constData();
+/*
+    loginSock->sendData(loginInfo);
+    loginSuccess = loginSock->receiveData();
+
+    if(loginSuccess) {
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
 
@@ -40,14 +49,25 @@ void MainWindow::on_pushButton_Login_clicked()
         QTimer::singleShot(2500,splash,SLOT(close));
         QTimer::singleShot(1500,secDialog,SLOT(show()));
         splash->finish(secDialog);
-
-
-
     }
     else {
         QMessageBox::warning(this,"Login", "Username and password is not correct");
-    }
+    }*/
+
+    hide();
+
+    QSplashScreen *splash =new QSplashScreen;
+    QPixmap qpixmap =(QPixmap(":/img/img/lol_background.jpg"));
+
+    splash->setPixmap(qpixmap);
+    splash->show();
+
+    secDialog = new SecDialog(this);
+    QTimer::singleShot(2500,splash,SLOT(close));
+    QTimer::singleShot(1500,secDialog,SLOT(show()));
+    splash->finish(secDialog);
 }
+
 void MainWindow::on_pushButton_Signup_clicked()
 {
     //hide();

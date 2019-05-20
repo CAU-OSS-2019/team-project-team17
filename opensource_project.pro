@@ -33,9 +33,13 @@ SOURCES += \
 
 HEADERS += \
     addfriend.h \
+    login.h \
         mainwindow.h \
+    matching_client.h \
     secdialog.h \
-    signup.h
+    signup.h \
+    signup_socket.h \
+    socket_client.h
 
 FORMS += \
     addfriend.ui \
@@ -49,4 +53,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    loading.qrc \
     resources.qrc

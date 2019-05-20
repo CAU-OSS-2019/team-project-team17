@@ -2,8 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMovie>
 #include "secdialog.h"
 #include "signup.h"
+#include "login.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +27,11 @@ private:
     Ui::MainWindow *ui;
     SecDialog *secDialog;
     SignUp *signUp;
+    login_info loginInfo;
+    LoginSocketClient *loginSock;
+    bool loginSuccess = false;
+    QString ID;
+    QString PW;
 };
 
 #endif // MAINWINDOW_H
