@@ -165,3 +165,79 @@ print(User_list)
 F = open("DuoList.txt", 'a')
 F.write('\n'.join(User_list))
 F.close()
+
+
+
+
+
+driver =webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
+driver.implicitly_wait(3)
+driver.get('https://www.op.gg/')
+
+
+
+search_name = driver.find_element_by_name('userName')
+search_name.send_keys('Gen G Bonnie') # 여기다가 사용자 이름 넣어주기
+search_name.submit()
+
+html = driver.page_source 
+soup = BeautifulSoup(html, 'html.parser')
+
+num_won=0
+num_lost=0
+
+for user in User_list:
+    need=5
+    driver =webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
+    driver.implicitly_wait(3)
+    driver.get('https://www.op.gg/')
+
+    search_name = driver.find_element_by_name('userName')
+    search_name.send_keys(user) # 여기다가 사용자 이름 넣어주기
+    search_name.submit()
+
+    html = driver.page_source 
+    soup = BeautifulSoup(html, 'html.parser')
+    
+    duo_prev=0
+
+    driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[1]/div/ul/li[2]/a').click()
+    
+    driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[2]/div[4]/a').click()#더보기클릭
+    game_prev=0
+    duo=soup.select('#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.SideContent > div.SummonersMostGame.Box > div.Content > table > tbody > tr:nth-child(1) > td.SummonerName.Cell > a')
+    duo_name=duo[0].text# 검색하는 사람 듀오 닉넴!!!
+    
+    print(user,'가 ',duo_name,'랑 해서 얼마나 많이 이긴건지 크롤링중')
+    gamelist=soup.find('div',"GameItemList")
+    games=soup.select('.GameItemWrap:contains("'+duo_name+'")')
+    game_next=len(games)
+    print('게임 한 횟수' ,game_next)
+
+    while game_prev < game_next : # 더보기 증가하면 계속 클릭
+        game_prev=game_next
+        driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[2]/div['+str(need)+']/a').click()#더보기클릭
+        need+=1
+        html = driver.page_source 
+        soup = BeautifulSoup(html, 'html.parser')
+        gamelist=soup.find('div',"GameItemList")
+        games=soup.select('.GameItemWrap:contains("'+duo_name+'")')
+        game_next=(len(games))
+        print('게임 한 횟수' ,game_next)
+        if need==10 : # 이거 안하면 무한루프임 더보기가 need-4 번 눌린다는 뜻 need-5일수도있음
+            break
+            
+        
+        
+    for game in games: # 승리횟수 패배횟수 세기
+        if game.find('div','GameResult').get_text().strip() == '승리':
+            num_won+=1
+        elif game.find('div','GameResult').get_text().strip() == '패배':
+            num_lost+=1
+
+    print('승 :',num_won)
+    print('패 :',num_lost)
+    percentage=num_won / (num_lost+num_won) *100
+    print(percentage,'%')
+        
+                
