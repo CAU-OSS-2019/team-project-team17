@@ -26,6 +26,8 @@ typedef struct UserCharacterInfo {
 	string rank;
 	float wins;
 	float losses;
+	string my_pref_pos;
+	string duo_pref_pos;
 	map<string, character_info> character;
 	
 }user_character_info;
