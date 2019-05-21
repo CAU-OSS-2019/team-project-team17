@@ -35,5 +35,14 @@
     <ClCompile Include="get_duo_info.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="get_best_pick_character.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="get_base_info.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="get_user_info.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 
 #include <winsock2.h>
 #include <mysql.h>
@@ -18,11 +19,20 @@ using namespace std;
 
 struct UserInfo {
 
-	char nickname[30];
-	char id[30];
-	char pwd[30];
+	string nickname;
+	string id;
+	string pwd;
 
 };
+
+UserInfo set_user(MYSQL_ROW input, UserInfo user) {
+	user.nickname = input[0];
+	user.id = input[1];
+	user.pwd = input[2];
+	
+
+	return user;
+}
 
 void main()
 {
@@ -53,7 +63,7 @@ void main()
 		return;
 	}
 
-	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id, user.pwd);
+	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id.c_str(), user.pwd.c_str());
 
 	query_state = mysql_query(connection, query);
 
@@ -66,9 +76,7 @@ void main()
 	sql_result = mysql_store_result(connection);
 
 	while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-		strcpy(user.nickname, sql_row[0]);
-		strcpy(user.id, sql_row[1]);
-		strcpy(user.pwd, sql_row[2]);
+		user = set_user(sql_row, user);
 	}
 
 	cout << "nickname\tid\tpassword" << endl;
