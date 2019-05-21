@@ -31,7 +31,6 @@ private:
     source_of_matching source;
     result_of_matching result;
     bool running_state = false;
-
 };
 
 #endif // SECDIALOG_H

@@ -38,16 +38,24 @@ void SignUp::on_pushButton_OK_clicked()
     signuInfo.position1 = mainPosition.toLocal8Bit().constData();
     signuInfo.position2 = subPosition.toLocal8Bit().constData();
 
-    signupSock->sendData(signuInfo);
-    signupSuccess = signupSock->receiveData();
+    QMessageBox Msgbox;
 
-    if (signupSuccess) {
-        QMessageBox::information(this,"Sing in","Sign in Complete");
-        delete signupSock;
-        close();
-    }
-    else {
-        QMessageBox::information(this,"Sing in","Sign in Failed");
+    if (nickname.isEmpty() || id.isEmpty() || pwd.isEmpty() || mainPosition.isEmpty() || subPosition.isEmpty()) {
+        Msgbox.setText("Please write without blank");
+        Msgbox.exec();
+    } else {
+        signupSock->sendData(signuInfo);
+        signupSuccess = signupSock->receiveData();
+
+        if (signupSuccess) {
+            Msgbox.setText("Sign in Complete");
+            Msgbox.exec();
+            delete signupSock;
+            close();
+        } else {
+            Msgbox.setText("Sign in Failed");
+            Msgbox.exec();
+        }
     }
 }
 

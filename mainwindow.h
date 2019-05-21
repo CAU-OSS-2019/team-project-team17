@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMovie>
+#include <string>
 #include "secdialog.h"
 #include "signup.h"
 #include "login.h"
@@ -30,6 +31,7 @@ private:
     login_info loginInfo;
     LoginSocketClient *loginSock;
     bool loginSuccess = false;
+    char *buf;
     QString ID;
     QString PW;
 };

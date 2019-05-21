@@ -19,23 +19,22 @@ class LoginSocketClient : public SocketClient{
             this -> connectServer();
         }
 
-        void sendData(login_info loginInfo){
-            cout << "client -- sendData() in login."<< endl <<endl;
-
-            cout << "ID : " << loginInfo.id << endl;
-            cout << "PWD : " << loginInfo.pwd << endl;
-
+        void sendData(login_info loginInfo) {
             send_success = send(sock, (char*)&loginInfo, sizeof(loginInfo), 0);
-
             if(send_success == -1){
                 cout << "Fail : sendData() in login." << endl;
             }
-
             else{
                 cout << "Success : sendData() in login." << endl;
             }
+        }
 
+        void sendbuf(char *buf) {
+            send(sock, buf, 1024, 0);
+        }
 
+        void recvbuf(char *buf) {
+            recv(sock, buf, 1024, 0);
         }
 
         bool receiveData(void){
