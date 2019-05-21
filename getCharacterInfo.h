@@ -17,25 +17,58 @@ using namespace std;
 typedef struct BaseCharacterKey {
 	string character_name;
 	string rank;
+
+	bool operator<(const BaseCharacterKey& k) const {
+
+		if (character_name < k.character_name)
+			return true;
+		else if (character_name > k.character_name)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else
+			return false;
+	}
+
 }base_character_key;
 
-bool operator<(const BaseCharacterKey& t1, const BaseCharacterKey& t2) {
-
-	if (t1.character_name < t2.character_name)
-		return true;
-	else if (t1.character_name > t2.character_name)
-		return false;
-
-	if (t1.rank < t2.rank)
-		return true;
-	else
-		return false;
-}
+//bool operator<(const BaseCharacterKey& t1, const BaseCharacterKey& t2) {
+//
+//	if (t1.character_name < t2.character_name)
+//		return true;
+//	else if (t1.character_name > t2.character_name)
+//		return false;
+//
+//	if (t1.rank < t2.rank)
+//		return true;
+//	else
+//		return false;
+//}
 
 typedef struct BestPickKey {
 	string character_name;
 	string rank;
 	string best_character;
+
+	bool operator<(const BestPickKey& k) const {
+
+		if (character_name < k.character_name)
+			return true;
+		else if (character_name > k.character_name)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else if (rank > k.rank)
+			return false;
+
+		if (best_character < k.best_character)
+			return true;
+		else
+			return false;
+	}
+
 }best_pick_key;
 
 typedef struct BestPickValue {
@@ -45,25 +78,6 @@ typedef struct BestPickValue {
 
 }best_pick_value;
 
-
-
-/*
-class SignUpSocketServer : public SocketServer {
-	public :
-		int receive_success;
-		int send_success;
-	
-	public :
-		SignupSocketServer(string socket_name, char server_ip[], int server_port)
-			: SocketClient(socket_name, server_ip, server_port){
-
-			this -> prepareServerSocket();
-			
-		}
-
-		
-}
-*/
 
 class GetCharacterInfo {
 	private :
@@ -77,12 +91,7 @@ class GetCharacterInfo {
 		char query[255];
 		
 		// variables for socket
-		int running_state = false;
-		SignUpSocketServer *signupSocket_p;
 
-		void set_base_character_info(MYSQL_ROW input) {
-
-		}
 
 	public :
 		// Constructor
@@ -139,6 +148,8 @@ class GetCharacterInfo {
 
 			// Connect
 			mysql_init(&conn);
+			mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "euckr");		//euckr
+			mysql_options(&conn, MYSQL_INIT_COMMAND, "SET NAMES euckr");
 
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
 

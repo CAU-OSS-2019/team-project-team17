@@ -20,23 +20,6 @@ typedef struct UserGameInfo {
 	
 }user_game_info;
 
-/*
-class DisplayUserInfoSocketServer : public SocketServer {
-	public :
-		int receive_success;
-		int send_success;
-	
-	public :
-		SignupSocketServer(string socket_name, char server_ip[], int server_port)
-			: SocketClient(socket_name, server_ip, server_port){
-
-			this -> prepareServerSocket();
-			
-		}
-				
-}
-*/
-
 class DisplayUserInfo {
 	private :
 		// variables for displayUserInfo
@@ -48,15 +31,6 @@ class DisplayUserInfo {
 		char query[255];
 		
 		// variables for socket
-		int running_state = false;
-		DisplayUserInfoSocketServer *userInfoSocket_p;
-
-		void set_user_info(MYSQL_ROW input) {
-			user.nickname = input[0];
-			user.rank = input[1];
-
-
-		}
 
 	public :
 		// Constructor
@@ -90,7 +64,8 @@ class DisplayUserInfo {
 			sql_result = mysql_store_result(connection);
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				set_user_info(sql_row);
+				user.nickname = sql_row[0];
+				user.rank = sql_row[1];
 			}	
 
 			// Close
