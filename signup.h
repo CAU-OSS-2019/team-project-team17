@@ -28,7 +28,7 @@ class SignupSocketClient : public SocketClient{
 			cout << "ID : " << signupInfo.id << endl;
 			cout << "PWD : " << loginInfo.pwd << endl;
 
-			send_success = write(sock, &signupInfo, sizeof(signupInfo));
+			send_success = send(sock, (char*)&signupInfo, sizeof(signupInfo), 0);
 
 			if(send_success == -1){
 				cout << "Fail : sendData() in signup." << endl;
@@ -41,7 +41,7 @@ class SignupSocketClient : public SocketClient{
 
 		bool receiveData(void){
 			bool signupSuccess;
-			receive_success = read(sock, &signupSuccess, sizeof(signupSuccess));
+			receive_success = recv(sock, (char *)&signupSuccess, sizeof(signupSuccess), 0);
 
 			if(receive_success == -1){
 				cout << "Fail : receiveData() in signup." << endl;

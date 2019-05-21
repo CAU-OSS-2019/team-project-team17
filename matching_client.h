@@ -39,7 +39,7 @@ class MatchingSocketClient : public SocketClient{
 		}
 		
 		~MatchingSocketClient(){
-			close(sock);
+			closesocket(sock);
 		}
 
 		/*	
@@ -57,7 +57,7 @@ class MatchingSocketClient : public SocketClient{
 				<<"source.data2 : " <<source.data2 <<"   " 
 				<< "source.data3 : "<<source.data3 <<"   " <<endl;
 
-			send_success = write(sock, &source, sizeof(source));
+			send_success = send(sock, (char*) &source, sizeof(source), 0);
 			
 			if(send_success == -1){
 				cout<< "Fail : sendData()" <<endl;
@@ -75,7 +75,7 @@ class MatchingSocketClient : public SocketClient{
 		result_of_matching receiveData(void){
 
 			result_of_matching result;
-			receive_success = read(sock, &result, sizeof(result));
+			receive_success = recv(sock, (char*)&result, sizeof(result), 0);
 
 			if(receive_success == -1){
 				cout<< "Fail : receiveData()" <<endl;

@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
+//#include <unistd.h>
+//#include <arpa/inet.h>
+//#include <sys/socket.h>
+#include <WinSock2.h>
+#include <WS2tcpip.h>
+#pragma comment(lib, "ws2_32.lib")
 #include <string.h>
 #include <string>
 #include <stdlib.h>
@@ -20,13 +23,17 @@ class SocketClient{
 		char * target_server_ip;
 		int target_server_port;
 
-		int sock;
+		SOCKET sock;
 
 		struct sockaddr_in serv_addr;
 
 	protected:
 		/* create client socket */
 		void createSocket(void){
+			WSADATA data;
+			WORD ver = MAKEWORD(2, 2);
+			int wsInit = WSAStartup(ver, &data);
+
 			sock = socket(PF_INET, SOCK_STREAM, 0);
 
 			if(sock == -1)
