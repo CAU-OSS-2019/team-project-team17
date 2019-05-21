@@ -38,6 +38,10 @@ class MatchingSocketClient : public SocketClient{
 			
 		}
 		
+		~MatchingSocketClient(){
+			close(sock);
+		}
+
 		/*	
 		int getSocket(){
 			return sock;
