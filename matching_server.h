@@ -137,7 +137,7 @@ class Matching{
 		matching_queue matchingQueue;
 
 		int running_state = false;
-		MatchingSocketServer * matchingSock_p;
+		// MatchingSocketServer * matchingSock_p;
 	public:
 		//Constructor
 		Matching(matching_queue matchingQueueInput)
