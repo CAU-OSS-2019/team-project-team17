@@ -62,9 +62,11 @@ class MatchingSocketServer : public SocketServer{
 				char buffer[31];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
-				if(read(clnt_sock, buffer, sizeof(buffer)) == -1)
+				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){
 					cout << "Error : server -- read() in handleMatching()."<<endl;
-				
+					close(clnt_sock);
+				}
+
 				string buffer_s(buffer);
 				matchingQueue.clnt_nickname_socket_map.insert(make_pair(buffer_s, clnt_sock));
 				
