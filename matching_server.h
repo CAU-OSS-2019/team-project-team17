@@ -2,7 +2,7 @@
 #define __MATCHING_H__
 
 #include "socket_server.h"
-#include <set>
+#include <map>
 
 using namespace std;
 
@@ -24,6 +24,97 @@ typedef struct MatchingQueue{
 	map< string, int > clnt_nickname_socket_map;
 
 }matching_queue;
+
+typedef struct matchedUser{
+	string userNickname1;
+	//result_of_matching userInfo1;
+	int userInfo1;
+
+	string userNickname2;
+	//result_of_matching userInfo2;
+	int userInfo2;
+
+}matched_user;
+
+
+
+class Matching{
+	private:
+		// data needed for the matching.
+		source_of_matching source;
+
+		// data that gotten from the matching.
+		result_of_matching result;
+		
+		matching_queue matchingQueue;
+
+		int running_state = false;
+
+	public:
+		//Constructor
+		Matching(matching_queue matchingQueueInput)
+			: matchingQueue(matchingQueueInput){}
+		
+		/* start matching */
+		matched_user runMatching(void){
+			cout<<"runMatching"<<endl;
+			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
+			int i = 0;
+			string userNickname[10];
+			map< string, int >::iterator iter;
+			
+			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
+				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <10;
+					 ++i, ++iter){
+				userNickname[i] = iter->second;
+			}
+			
+			return compareConformity(userNickname);
+			
+		}
+		
+
+		matched_user compareConformity(string userNickname[]){
+			double userConformity[10][9];
+			
+			double max = 0;
+			int maxI =0, maxJ =0;
+			
+			userConformity[0][0] = -1;
+			max = runAlgorithm(userNickname[0], userNickname[1]);
+			for(int i = 0; i < 10; i++){
+				for(int j = i+1; j < 10; j++){
+					userConformity[i][j] = runAlgorithm(userNickname[i], userNickname[j]);
+					
+					if(max < userConformity[i][j]){
+						max = userConformity[i][j];
+						maxI = i;
+						maxJ = j;
+					}
+				}
+			}
+			
+			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
+			matched_user bestMatchedUser = {userNickname[maxI], 1, userNickname[maxJ], 2};
+			return  bestMatchedUser;
+		}
+		
+		double runAlgorithm(string userNickname1, string userNickname2){
+			
+			// 디비에서 각 유저들 정보 꺼내와서
+			// 알고리즘 돌리고
+			// 그 결과(double 적합도)를 반환.
+		}
+		
+		/*
+		 source_of_matching getSourceFromDB(string userNickname){
+		 	//디비에서 그 유저의 정보 꺼내오기.
+		 }
+		 */
+};
+
+
+
 
 class MatchingSocketServer : public SocketServer{
 	
@@ -55,10 +146,6 @@ class MatchingSocketServer : public SocketServer{
 				
 				pthread_mutex_lock(&matching_queue_mutex);
 				
-				//matchingQueue.clnt_sockets.insert(clnt_sock);
-
-				//matchingQueue.clnt_sockets.insert(make_pair(matchingQueue.clnt_cnt, clnt_sock));
-				// (matchingQueue.clnt_sockets)[matchingQueue.clnt_cnt] = clnt_sock;
 				char buffer[31];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
@@ -69,16 +156,12 @@ class MatchingSocketServer : public SocketServer{
 
 				string buffer_s(buffer);
 				matchingQueue.clnt_nickname_socket_map.insert(make_pair(buffer_s, clnt_sock));
-				
-				//matchingQueue.nicknames.insert(buffer);
-
-				//matchingQueue.nicknames.insert(make_pair(matchingQueue.clnt_cnt, buffer));
 
 				matchingQueue.clnt_cnt++;
 				
 				if(matchingQueue.clnt_cnt == 10){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
-					Matching matching = new Matching(matchingQueue);
+					Matching * matching = new Matching(matchingQueue);
 					matched_user matchedUser = matching->runMatching();
 					delete matching;
 
@@ -99,8 +182,8 @@ class MatchingSocketServer : public SocketServer{
 			cout << "server --- sendData() run. "<<endl;
 			
 			//되는지 확인해보기 맵에서 값 접근 방법 -  a[1] 접근
-			map< string, int >::matchingIter1;
-			map< string, int >::matchingIter2;
+			map< string, int >::iterator matchingUserIter1;
+			map< string, int >::iterator matchingUserIter2;
 			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
 			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
 			int userSock1 = matchingUserIter1->second;
@@ -112,7 +195,7 @@ class MatchingSocketServer : public SocketServer{
 		}
 
 		void mutexInit(void){
-			pthread_mutex_init(&matching_mutex);
+			pthread_mutex_init(&matching_mutex, NULL);
 			pthread_mutex_init(&matching_queue_mutex, NULL);
 		}
 
@@ -121,110 +204,6 @@ class MatchingSocketServer : public SocketServer{
 		}
 
 };
-
-struct matchedUser{
-	string userNickname1;
-	//result_of_matching userInfo1;
-	
-
-	string userNickname2;
-	//result_of_matching userInfo2;
-
-}matched_user;
-
-class Matching{
-	private:
-		// data needed for the matching.
-		source_of_matching source;
-
-		// data that gotten from the matching.
-		result_of_matching result;
-		
-		matching_queue matchingQueue;
-
-		int running_state = false;
-		// MatchingSocketServer * matchingSock_p;
-	public:
-		//Constructor
-		Matching(matching_queue matchingQueueInput)
-			: matchingQueue(matchingQueueInput){}
-		
-		/* start matching */
-		matched_user runMatching(void){
-			cout<<"runMatching"<<endl;
-			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
-			int i = 0;
-			// vector<vector<double> > userConformity;
-			double userConformity[10][9];
-			string userNickname[10];
-			map< string, int >::iterator iter;
-			
-			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
-				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <10;
-					 ++i, ++iter){
-				userNickname[i] = iter->second;
-			}
-			
-			return compareConformity(userNickname);
-			
-		}
-		
-
-		matched_user compareConformity(string userNickname[]){
-			double max = 0;
-			int maxI =0, maxJ =0;
-			
-			userConformity[0][0] = -1;
-			max = runAlgorithm(userNickname[0], userNickname[1]);
-			for(int i = 0; i < 10; i++){
-				for(int j = i+1; j < 10; j++){
-					userConformity[i][j] = runAlgorithm(userNickname[i], userNickname[j]);
-					
-					if(max < userConformity[i][j]){
-						max = userConformity[i][j];
-						maxI = i;
-						maxJ = j;
-					}
-				}
-			}
-			
-			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
-			matched_user bestMatchedUser(userNickname[maxI], userNickname[maxJ]);
-			return  bestMatchedUser;
-		}
-		
-		double runAlgorithm(string userNickname1, string userNickname2){
-			
-			// 디비에서 각 유저들 정보 꺼내와서
-			// 알고리즘 돌리고
-			// 그 결과(double 적합도)를 반환.
-		}
-		
-		/*
-		 source_of_matching getSourceFromDB(string userNickname){
-		 	//디비에서 그 유저의 정보 꺼내오기.
-		 }
-		 */
-};
-
-class UtilMatching{
-	public :
-		static void pressMatching(void){
-			cout << " press matching button " << endl;
-			cout << " ---running matching--- " << endl;
-			static matching * matching_object = new matching(1,2,3);
-			matching_object->runMatching();
-
-			delete matching_object;
-		}
-
-		static void endMatching(void){
-			cout << " end matching " << endl;
-			
-		}
-};
-
-
 
 
 

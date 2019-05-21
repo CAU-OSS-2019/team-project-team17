@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <string>
+#include <stdlib.h>
 #include <pthread.h>
 #define MAX_CLNT 1000
 
@@ -29,7 +30,7 @@ class SocketServer{
 		struct sockaddr_in serv_addr;
 		struct sockaddr_in clnt_addr;
 	
-		int clnt_addr_size;
+		socklen_t clnt_addr_size;
 
 	protected:
 		void prepareServerSocket(void){
