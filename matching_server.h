@@ -78,10 +78,13 @@ class MatchingSocketServer : public SocketServer{
 				
 				if(matchingQueue.clnt_cnt == 10){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
-					Matching matching(matchingQueue);
-					matched_user matchedUser = matching.runMatching();
+					Matching matching = new Matching(matchingQueue);
+					matched_user matchedUser = matching->runMatching();
+					delete matching;
+
 					sendData(matchedUser);
 					removeMatchedUserFromQueue(matchedUser);
+					
 				}
 				pthread_mutex_unlock(&matching_queue_mutex);
 				
@@ -121,10 +124,11 @@ class MatchingSocketServer : public SocketServer{
 
 struct matchedUser{
 	string userNickname1;
-	result_of_matching userInfo1;
+	//result_of_matching userInfo1;
+	
 
 	string userNickname2;
-	result_of_matching userInfo2;
+	//result_of_matching userInfo2;
 
 }matched_user;
 
@@ -148,9 +152,10 @@ class Matching{
 		/* start matching */
 		matched_user runMatching(void){
 			cout<<"runMatching"<<endl;
-			
+			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
 			int i = 0;
-			double userConformity[10];
+			// vector<vector<double> > userConformity;
+			double userConformity[10][9];
 			string userNickname[10];
 			map< string, int >::iterator iter;
 			
@@ -164,16 +169,31 @@ class Matching{
 			
 		}
 		
+
 		matched_user compareConformity(string userNickname[]){
+			double max = 0;
+			int maxI =0, maxJ =0;
+			
+			userConformity[0][0] = -1;
+			max = runAlgorithm(userNickname[0], userNickname[1]);
 			for(int i = 0; i < 10; i++){
 				for(int j = i+1; j < 10; j++){
-					userNickname[i]
+					userConformity[i][j] = runAlgorithm(userNickname[i], userNickname[j]);
+					
+					if(max < userConformity[i][j]){
+						max = userConformity[i][j];
+						maxI = i;
+						maxJ = j;
+					}
 				}
 			}
 			
+			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
+			matched_user bestMatchedUser(userNickname[maxI], userNickname[maxJ]);
+			return  bestMatchedUser;
 		}
 		
-		double runAlgorithm(string ){
+		double runAlgorithm(string userNickname1, string userNickname2){
 			
 			// 디비에서 각 유저들 정보 꺼내와서
 			// 알고리즘 돌리고
@@ -185,77 +205,6 @@ class Matching{
 		 	//디비에서 그 유저의 정보 꺼내오기.
 		 }
 		 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			// connect to the main server through matching socket.
-			matchingSock_p = 
-				new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
-			
-			cout<<"runMatching2"<<endl;	
-
-			// send data needed for the matching.
-			matchingSock_p->sendData(source);
-
-
-			cout<<"runMatching3"<<endl;	
-
-			// get data for the matching from main server.
-			result = matchingSock_p->receiveData();
-			
-			cout<<"runMatching4"<<endl;	
-
-			exitMatching(matchingSock_p->receive_success);
-		}
-
-		void init_source(int input_data1, int input_data2, int input_data3){
-			source.data1 = input_data1;
-			source.data2 = input_data2;
-			source.data3 = input_data3;
-		}
-		
-
-		/* To do : 
-		 * free all dynamic allocation related to the matching 
-		 * or if needed, initialize member variables
-		 * and then exit matching.*/
-		void exitMatching(int receive_success){
-			cout << "--- end of matching ---" << endl;
-			
-			if (receive_success)
-				displayMatchedUserInfo();
-
-			else
-				displayMatchingFailInfo();
-		}
-
-		void displayMatchedUserInfo(){
-			cout << "data1 : " << result.data1 << "  "
-				<< " data2 :  " << result.data2 << "  " << "data3 : "<<result.data3 << "  " << endl;
-		}
-
-		void displayMatchingFailInfo(){
-			cout << "fail matching ( due to time-out, server communication failure etc..) "<< endl;
-		}
 };
 
 class UtilMatching{
