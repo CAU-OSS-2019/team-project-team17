@@ -14,21 +14,22 @@
 
 using namespace std;
 
-typedef UserCharacterInfo {
+typedef struct CharacterInfo {
+	int wins;
+	int losses;
+	float kills;
+	float deaths;
+	float assist;
+}character_info;
 
+typedef struct UserCharacterInfo {
+	string rank;
+	float wins;
+	float losses;
+	map<string, character_info> character;
 	
 }user_character_info;
 
-typedef UserGameInfo {
-			
-	char nickname[30];
-	char rank[30];
-	int entire_wins;
-	int entire_losses;
-	
-	user_character_info character[150];
-	
-}user_game_info;
 /*
 class DisplayUserInfoSocketServer : public SocketServer {
 	public :

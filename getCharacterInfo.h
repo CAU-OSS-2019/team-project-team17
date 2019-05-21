@@ -14,13 +14,36 @@
 
 using namespace std;
 
-typedef UserInfo {
-	
-	char nickname[30];
-	char id[30];
-	char pwd[30];
-	
-}user_info;
+typedef struct BaseCharacterKey {
+	string character_name;
+	string rank;
+}base_character_key;
+
+bool operator<(const BaseCharacterKey& t1, const BaseCharacterKey& t2) {
+
+	if (t1.character_name < t2.character_name)
+		return true;
+	else if (t1.character_name > t2.character_name)
+		return false;
+
+	if (t1.rank < t2.rank)
+		return true;
+	else
+		return false;
+}
+
+typedef struct BestPickKey {
+	string character_name;
+	string rank;
+	string best_character;
+}best_pick_key;
+
+typedef struct BestPickValue {
+	float win_rate;
+	string description;
+
+
+}best_pick_value;
 
 
 
@@ -44,70 +67,121 @@ class SignUpSocketServer : public SocketServer {
 
 class GetCharacterInfo {
 	private :
-		// data needed for signup
-		user_info user;
+		// variables for getCharacterInfo
+		map<base_character_key, float> base_character_map;
+		map<best_pick_key, best_pick_value> best_pick_map;
 		
 		MYSQL conn;
 		MYSQL *connection = NULL;
 		int query_state;
-
 		char query[255];
 		
+		// variables for socket
 		int running_state = false;
 		SignUpSocketServer *signupSocket_p;
 
+		void set_base_character_info(MYSQL_ROW input) {
+
+		}
+
 	public :
 		// Constructor
-		
-		void init_user(user_info input) {
-			strcpy(user.id, input.id);
-			strcpy(user.pwd, input.pwd);
-		}
-		
-		void connect_db(void) {
+
+
+		map<base_character_key, float> getBaseCharacterInfo() {
+			cout << "Get Base Character Information" << endl;
+
+			// Connect
 			mysql_init(&conn);
-	
+
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
 
 			if (connection == NULL) {
 				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
-				return;
+				return base_character_map;
 			}
-		}
 
-		
-		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯
-		bool login(user_info input) {
-			cout << "Log In" << endl;
-
-			init_user(input);	//받아온 정보 저장하는 함수 parameter 추가해야함 
-
-			connect_db();	
-		
-
-			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", user.id, user.pwd);
+			// Query
+			sprintf(query, "SELECT * FROM baseCharacterInfo");
 
 			query_state = mysql_query(connection, query);
 
 			if (query_state != 0) {
-				cout << "Login failed : " << mysql_error(&conn) << endl;
+				cout << "getting character information failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return false;
+				return base_character_map;
 			}
 
+			// Result
 			sql_result = mysql_store_result(connection);
 
+			base_character_key bc_key;
+			float win_rate;
+
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				strcpy(user.nickname, sql_row[0]);
-				strcpy(user.id, sql_row[1]);
-				strcpy(user.pwd, sql_row[2]);
+				//set_base_character_info(sql_row);
+				bc_key.character_name = sql_row[0];
+				bc_key.rank = sql_row[1];
+				win_rate = atof(sql_row[2]);
+
+				base_character_map.insert(pair<base_character_key, float>(bc_key, win_rate));
 			}	
 
+			// Close
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
 
-			return true;
+			return base_character_map;
 		}
+
+		map<best_pick_key, best_pick_value> getBestPickCharacter() {
+			cout << "Get Best Pick Character Information" << endl;
+
+			// Connect
+			mysql_init(&conn);
+
+			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
+
+			if (connection == NULL) {
+				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
+				return best_pick_map;
+			}
+
+			// Query
+			sprintf(query, "SELECT * FROM bestPickCharacter");
+
+			query_state = mysql_query(connection, query);
+
+			if (query_state != 0) {
+				cout << "getting best character information failed : " << mysql_error(&conn) << endl;
+				mysql_close(&conn);
+				return best_pick_map;
+			}
+
+			// Result
+			sql_result = mysql_store_result(connection);
+			best_pick_key bp_key;
+			best_pick_value bp_value;
+
+			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+				//set_base_character_info(sql_row);
+				bp_key.character_name = sql_row[0];
+				bp_key.rank = sql_row[1];
+				bp_key.best_character = sql_row[2];
+				bp_value.win_rate = atof(sql_row[3]);
+				bp_value.description = sql_row[4];
+
+				best_pick_map.insert(pair<best_pick_key, best_pick_value>(bp_key, bp_value));
+			}
+
+			// Close
+			mysql_free_result(sql_result);
+			mysql_close(&conn);
+
+			return best_pick_map;
+		}
+
+
 }
 
-endif // __GETCHARACTERINFO_H__
+#endif // __GETCHARACTERINFO_H__

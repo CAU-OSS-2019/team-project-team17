@@ -13,7 +13,7 @@
 
 using namespace std;
 
-typedef UserGameInfo {
+typedef struct UserGameInfo {
 
 	string nickname;
 	string rank;
@@ -51,17 +51,6 @@ class DisplayUserInfo {
 		int running_state = false;
 		DisplayUserInfoSocketServer *userInfoSocket_p;
 
-		void connect_db(void) {
-			mysql_init(&conn);
-
-			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
-
-			if (connection == NULL) {
-				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
-				return;
-			}
-		}
-
 		void set_user_info(MYSQL_ROW input) {
 			user.nickname = input[0];
 			user.rank = input[1];
@@ -73,13 +62,21 @@ class DisplayUserInfo {
 		// Constructor
 		
 		
-		user_game_info displayUserInfo(string id) {
+		user_game_info displayUserInfo(string nickname) {
 			cout << "Display User Info" << endl;
 
-			connect_db();	
-		
+			// Connect
+			mysql_init(&conn);
 
-			sprintf(query, "SELECT nickname, rank FROM userEntireInfo NATURAL JOIN login WHERE id='%s' LIMIT 1", id.c_str());
+			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
+
+			if (connection == NULL) {
+				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
+				return user;
+			}
+			
+			// Query
+			sprintf(query, "SELECT nickname, rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname.c_str());
 
 			query_state = mysql_query(connection, query);
 
@@ -89,14 +86,14 @@ class DisplayUserInfo {
 				return user;
 			}
 
+			// Result
 			sql_result = mysql_store_result(connection);
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-
 				set_user_info(sql_row);
-
 			}	
 
+			// Close
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
 

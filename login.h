@@ -13,7 +13,7 @@
 
 using namespace std;
 
-typedef UserInfo {
+typedef struct UserInfo {
 	
 	string nickname;
 	string id;
@@ -54,17 +54,6 @@ class LogIn {
 		int running_state = false;
 		SignUpSocketServer *signupSocket_p;
 
-		void connect_db(void) {
-			mysql_init(&conn);
-
-			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
-
-			if (connection == NULL) {
-				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
-				return;
-			}
-		}
-
 		void set_user(MYSQL_ROW input) {
 			user.nickname = input[0];
 			user.id = input[1];
@@ -76,32 +65,40 @@ class LogIn {
 
 		
 		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 됨
-		string login(user_info input) {
+		user_info login(user_info input) {
 			cout << "Log In" << endl;
 
-			connect_db();
+			// Connect
+			mysql_init(&conn);
 
+			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
+
+			if (connection == NULL) {
+				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
+				return user;
+			}
+
+			// Query
 			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", input.id.c_str(), input.pwd.c_str());
 
 			query_state = mysql_query(connection, query);
-
 			if (query_state != 0) {
 				cout << "Login failed : " << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return "";
+				return user;
 			}
 
+			// Result
 			sql_result = mysql_store_result(connection);
-
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				
 				set_user(sql_row);
 			}	
 
+			// Close
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
 
-			return user.id;
+			return user;
 		}
 }
 

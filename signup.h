@@ -13,7 +13,7 @@
 
 using namespace std;
 
-typedef UserInfo {
+typedef struct UserInfo {
 
 	string nickname;
 	string id;
@@ -60,17 +60,6 @@ class SignUp {
 		int running_state = false;
 		SignUpSocketServer *signupSocket_p;
 
-		void connect_db(void) {
-			mysql_init(&conn);
-
-			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
-
-			if (connection == NULL) {
-				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
-				return;
-			}
-		}
-
 	public :
 		// Constructor
 		
@@ -79,8 +68,17 @@ class SignUp {
 		void signup(user_info input) {
 			cout << "Sign Up" << endl;
 
-			connect_db();	
+			// Connect
+			mysql_init(&conn);
+
+			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
+
+			if (connection == NULL) {
+				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
+				return;
+			}	
 		
+			// Query
 			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", input.nickname.c_str(), input.id.c_str(), input.pwd.c_str());
 
 			query_state = mysql_query(connection, query);
@@ -91,7 +89,7 @@ class SignUp {
 				return;
 			}
 
-
+			// Close
 			mysql_close(&conn);
 		}
 }
