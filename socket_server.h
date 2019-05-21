@@ -35,7 +35,7 @@ class SocketServer{
 	protected:
 		void prepareServerSocket(void){
 			createSocket();
-			connectClient();
+			bindSocket();
 			enterListenState();
 		}
 
@@ -52,7 +52,7 @@ class SocketServer{
 			serv_addr.sin_port = htons(opened_port);
 		}
 
-		void connectClient(void){
+		void bindSocket(void){
 			if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
 				cout << "Error : server -- bind()" << endl;
 
