@@ -59,7 +59,8 @@ for link in soup.select('#drop-champions> ul > li > a'):
                 VALUES
                     (%s, %s, %s)
         """
-        cursor.execute(sql, (characterName, tire, base_win_rate))
+        
+        cursor.execute(sql, (characterName, tire if (tire == '') else 'platinum', base_win_rate))
 
         driver.get('https://www.leagueofgraphs.com/ko/champions/counters/'+characterName+'/'+tire)
         driver.find_element_by_xpath('//*[@id="mainContent"]/div/div[1]/div/table/tbody//td/button').click()
