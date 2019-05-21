@@ -49,4 +49,5 @@
 	limitations under the License.  
 
 **NOTE:** This software depends on other packages that may be licensed under different open source licenses.  
+
 Part of our project uses [Autohotkey](https://www.autohotkey.com/) library which uses a [GNU GENERAL PUBLIC LICENSE2.0](https://www.autohotkey.com/docs/license.htm#GNU_GENERAL_PUBLIC_LICENSE). And also [Tesseract](https://github.com/tesseract-ocr/tesseract) library which uses a [Apache2.0.](https://www.apache.org/licenses/LICENSE-2.0)
