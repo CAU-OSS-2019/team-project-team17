@@ -6,9 +6,7 @@
 using namespace std;
 
 typedef struct SourceForMatching{
-	int data1;
-	int data2;
-	int data3;
+	string nickname;
 }source_of_matching;
 
 
@@ -53,11 +51,15 @@ class MatchingSocketClient : public SocketClient{
 		void sendData(source_of_matching source){
 			cout << "sendData() run. "<<endl <<endl;
 			
-			cout << "souce.data1 : " << source.data1 <<"   " 
-				<<"source.data2 : " <<source.data2 <<"   " 
-				<< "source.data3 : "<<source.data3 <<"   " <<endl;
-
-			send_success = send(sock, (char*) &source, sizeof(source), 0);
+			cout << "souce.nickname : " << source.nickname <<"   " <<endl;
+			char nickname_c[31];
+			strcpy(nickname_c, (source.nickname).c_str());
+			
+			cout << nickname_c << endl;
+			
+			//send_success = send(sock, (char*) &source.nickname, sizeof(source.nickname), 0);
+			
+			send_success = send(sock, (char*) &nickname_c, sizeof(nickname_c), 0);
 			
 			if(send_success == -1){
 				cout<< "Fail : sendData()" <<endl;
@@ -72,7 +74,7 @@ class MatchingSocketClient : public SocketClient{
 		 * If the matching is succeeded, return a string, 
 		 * that is an information of user matched
 		 * else, return NULL */
-		result_of_matching receiveData(void){
+		result_of_matching receiveMatchingData(void){
 
 			result_of_matching result;
 			receive_success = recv(sock, (char*)&result, sizeof(result), 0);
@@ -88,6 +90,23 @@ class MatchingSocketClient : public SocketClient{
 			}
 			
 		}
+		
+		bool receiveWaitData(void){
+			bool match_success;
+			receive_success = recv(sock, (char*)&match_success, sizeof(match_success), 0);
+
+			if(receive_success == -1){
+				cout<< "------Fail : receiveData()---------" <<endl;
+				return match_success;
+			}
+
+			else{
+				cout << "Success : receiveData()" <<endl;
+				return match_success;
+			}
+
+			return match_success;
+		}
 };
 
 class matching{
@@ -102,12 +121,12 @@ class matching{
 		MatchingSocketClient * matchingSock_p;
 	public:
 		//Constructor
-		matching(int input_data1, int input_data2, int input_data3){
+		matching(string nickname){
 
 			running_state = true;
 			
 			// initalize sources needed for the matching.
-			init_source(input_data1, input_data2, input_data3);
+			init_source(nickname);
 		}
 
 
@@ -117,7 +136,7 @@ class matching{
 			
 			// connect to the main server through matching socket.
 			matchingSock_p = 
-				new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
+				new MatchingSocketClient("matching socket", "13.209.15.157", 9000);
 			
 			cout<<"runMatching2"<<endl;	
 
@@ -126,9 +145,20 @@ class matching{
 
 
 			cout<<"runMatching3"<<endl;	
+				
+			bool match_success;
 
+			match_success = matchingSock_p->receiveWaitData();
+			while(!match_success){
+				cout <<"---Wait---" <<endl;
+				matchingSock_p->sendData(source);
+				match_success = matchingSock_p->receiveWaitData();
+			}
+			/*
+			 * 매칭이 몇초동안 안되면 강제 연결 종료 시키는 것 여기 추가하면 됨.
+			 */
 			// get data for the matching from main server.
-			result = matchingSock_p->receiveData();
+			result = matchingSock_p->receiveMatchingData();
 
 			if((matchingSock_p->receive_success) == -1)
 				displayMatchingFailInfo();
@@ -140,31 +170,17 @@ class matching{
 
 		}
 
-		void init_source(int input_data1, int input_data2, int input_data3){
-			source.data1 = input_data1;
-			source.data2 = input_data2;
-			source.data3 = input_data3;
+		void init_source(string nickname){
+			source.nickname = nickname;
 		}
 		
-
-		/* To do : 
-		 * free all dynamic allocation related to the matching 
-		 * or if needed, initialize member variables
-		 * and then exit matching.*/
-		
-		/*
-		void exitMatching(int receive_success){
-
-		}
-		*/
 
 		void displayMatchedUserInfo(){
-			cout << "data1 : " << result.data1 << "  "
-				<< " data2 :  " << result.data2 << "  " << "data3 : "<<result.data3 << "  " << endl;
+			cout << "data1 : " << "  "<< endl;
 		}
 
 		void displayMatchingFailInfo(){
-			cout << "fail matching ( due to time-out, server communication failure etc..) "<< endl;
+			cout << "fail matching ( due to server communication failure etc..) "<< endl;
 		}
 };
 
@@ -173,7 +189,7 @@ class UtilMatching{
 		static void pressMatching(void){
 			cout << " press matching button " << endl;
 			cout << " ---running matching--- " << endl;
-			static matching * matching_object = new matching(1,2,3);
+			static matching * matching_object = new matching("hide on bush"); ///// 띄어스기 있는 닉네임 써보기.
 			matching_object->runMatching();
 
 			delete matching_object;
