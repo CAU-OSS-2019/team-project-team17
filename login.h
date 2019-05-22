@@ -25,7 +25,7 @@ class LoginSocketClient : public SocketClient{
 			cout << "ID : " << loginInfo.id << endl;
 			cout << "PWD : " << loginInfo.pwd << endl;
 
-			send_success = send(sock, (char*)&loginInfo, sizeof(loginInfo), 0);
+			send_success = send(sock, (login_info*)&loginInfo, sizeof(loginInfo), 0);
 
 			if(send_success == -1){
 				cout << "Fail : sendData() in login." << endl;
@@ -40,7 +40,7 @@ class LoginSocketClient : public SocketClient{
 
 		bool receiveData(void){
 			bool loginSuccess;
-			receive_success = recv(sock, (char*)&loginSuccess, sizeof(loginSuccess), 0);
+			receive_success = recv(sock, (bool*)&loginSuccess, sizeof(loginSuccess), 0);
 			
 			if(receive_success == -1){
 				cout << "Fail : receiveData() in login."<< endl;
@@ -78,7 +78,7 @@ class Login{
 				enterLoginInfo();
 				
 				loginSock_p =
-					new LoginSocketClient("login socket", "13.209.15.157", 8888);
+					new LoginSocketClient("login socket", "13.209.15.157", 9100);
 
 				loginSock_p -> sendData(inputLoginInfo);
 				loginSuccess = loginSock_p -> receiveData();
