@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from random import *
 import time 
+import os
 
 
 Check = False
@@ -89,7 +90,7 @@ def List_Append():
     search_name2.send_keys(Next_user)
     search_name2.send_keys(Keys.RETURN)
 
-driver = webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
+driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
 driver.implicitly_wait(3)
 driver.get('https://www.op.gg/')
 search_name = driver.find_element_by_name('userName')
@@ -157,7 +158,7 @@ search_name2 = driver.find_element_by_name('userName')
 search_name2.send_keys(Next_user) # 사용자 이름
 search_name2.send_keys(Keys.RETURN)
 
-while Num != 5: #  구하고 싶은 유저의 수 입력
+while Num != 1: #  구하고 싶은 유저의 수 입력
     List_Append()
 
 print(User_list)
@@ -170,7 +171,7 @@ F.close()
 
 
 
-driver =webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
+driver =webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
 driver.implicitly_wait(3)
 driver.get('https://www.op.gg/')
 
@@ -188,7 +189,7 @@ num_lost=0
 
 for user in User_list:
     need=5
-    driver =webdriver.Chrome(r"C:\Users\yoons\Desktop/chromedriver.exe")
+    driver =webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
     driver.implicitly_wait(3)
     driver.get('https://www.op.gg/')
 
