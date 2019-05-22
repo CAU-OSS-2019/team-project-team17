@@ -166,31 +166,13 @@ print(User_list)
 F = open("DuoList.txt", 'a')
 F.write('\n'.join(User_list))
 F.close()
-
-
-
-
-
-driver =webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
-driver.implicitly_wait(3)
-driver.get('https://www.op.gg/')
-
-
-
-search_name = driver.find_element_by_name('userName')
-search_name.send_keys('Gen G Bonnie') # 여기다가 사용자 이름 넣어주기
-search_name.submit()
-
-html = driver.page_source 
-soup = BeautifulSoup(html, 'html.parser')
+#여기까지 목록만든거
 
 num_won=0
 num_lost=0
 
 for user in User_list:
-    need=5
-    driver =webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
-    driver.implicitly_wait(3)
+    need=5 #중요
     driver.get('https://www.op.gg/')
 
     search_name = driver.find_element_by_name('userName')
