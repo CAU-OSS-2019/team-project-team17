@@ -2,7 +2,7 @@
 #ifndef __LOGIN_SERVER_H__
 #define __LOGIN_SERVER_H__
 
-#include "matching_server.h"
+#include "login.h"
 
 using namespace std;
 /*
@@ -24,6 +24,18 @@ typedef struct LoginInfo{
 	string id;
 	string pwd;
 }login_info;
+
+/*
+
+typedef struct UserInfo {
+	
+	string nickname;
+	string id;
+	string pwd;
+	
+}user_info;
+
+*/
 
 class LoginSocketServer : public SocketServer{
 	
@@ -75,32 +87,38 @@ class LoginSocketServer : public SocketServer{
 		}*/
 		static void * loginClnt(void * arg){
 			int clnt_sock = *((int*)arg);
-
 			
 			
 			while(1){
+
+				/*
 				char id_c[31];
 				char pwd_c[31];
+				*/
 
-				if(read(clnt_sock, id_c, sizeof(id_c)) == -1){
+				login_info * loginInfo_p;
+				char buffer[200]
+				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){
 					cout << "Error : server -- read() in loginClnt() thread." <<endl;
 					close(clnt_sock);
 				}
 			
-					
+				/*
 				if(read(clnt_sock, pwd_c, sizeof(pwd_c)) == -1){
 					cout << "Error : server -- read() in loginClnt() thread." <<endl;
 					close(clnt_sock);
 				}
+				
 
 				string id_s(id_c);
 				string pwd_s(pwd_c);
-
-				bool loginSuccess = verifyLogin(id_s, pwd_s);
+				*/
+				loginInfo_p = (login_info*)buffer;
+				Login login_temp;
+				bool loginSuccess = login_temp.login((*loginInfo_p));
 			
 				if(loginSuccess){
 					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
-					close(clnt_sock);
 					break;
 				}
 				
@@ -108,7 +126,7 @@ class LoginSocketServer : public SocketServer{
 					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
 				}
 			}
-
+			close(clnt_sock);
 			return NULL;
 		}
 
