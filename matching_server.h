@@ -136,9 +136,11 @@ class MatchingSocketServer : public SocketServer{
 
 			this -> prepareServerSocket();
 			cout << "test"<<endl;
-		}
-		
-		void handleMatching(void){
+		}/*
+		static void *handleMatching_helper(void *context){
+			return ((MatchingSocketServer*)context)->handleMatching();
+		}*/
+		void * handleMatching(){
 			int thread_create_success = -1;
 			mutexInit();
 
@@ -199,7 +201,7 @@ class MatchingSocketServer : public SocketServer{
 			}
 			pthread_mutex_unlock(&matching_mutex);
 
-
+			return NULL;
 		}
 
 		void sendMatchingData(matched_user matchedUser, bool match_success){

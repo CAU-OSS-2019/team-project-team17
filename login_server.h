@@ -2,7 +2,7 @@
 #ifndef __LOGIN_SERVER_H__
 #define __LOGIN_SERVER_H__
 
-#include "socket_server.h"
+#include "matching_server.h"
 
 using namespace std;
 /*
@@ -40,11 +40,15 @@ class LoginSocketServer : public SocketServer{
 			: SocketServer(socket_name, open_port, clnt_listen_cnt){
 
 			this -> prepareServerSocket();
-			mutexInit();
+			
 			cout << "prepare login "<<endl;
-		}
-		
-		void handleLogin(void){
+
+			pthread_mutex_init(&mutx,NULL);
+		}/*
+		static void* handleLogin_helper(void *context){
+			return ((LoginSocketServer*)context)->handleLogin();
+		}*/	
+		void* handleLogin(){
 			pthread_t t_id;
 			int clnt_sock_temp;
 			while(1){
@@ -63,11 +67,13 @@ class LoginSocketServer : public SocketServer{
 			}
 
 			close(serv_sock);
+			return NULL;
 
-
-		}
-
-		void * loginClnt(void * arg){
+		}/*
+		static void * loginClnt_helper(void *context){
+			return ((LoginSocketServer*)context)->loginClnt();
+		}*/
+		static void * loginClnt(void * arg){
 			int clnt_sock = *((int*)arg);
 
 			
@@ -111,7 +117,8 @@ class LoginSocketServer : public SocketServer{
 			pthread_mutex_init(&mutx, NULL);
 		}
 
-		bool verifyLogin(string id, string pwd){
+		static bool verifyLogin(string id, string pwd){
+			int a = 1;
 			//디비로부터 아이디 비번 정보를 가져와 있는지 확인 후 있으면 true 반환. 없으면 false반환.
 			return true; // 임시.
 		}
