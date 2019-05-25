@@ -1,71 +1,43 @@
+
 #ifndef __MATCHING_H__
 #define __MATCHING_H__
 
 #include "socket_server.h"
-#include "algorithm.h"
-
 
 using namespace std;
-
-#include <map>
-
-#define MATCHING_QUEUE_SIZE 2  // must be >=2
-
-using namespace std;
-
-typedef struct SourceOfMatching{
-	int data1;
-	int data2;
-	int data3;
-}source_of_matching;
-
-// To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{
-	int data1;
-	int data2;
-	int data3;
-}result_of_matching;
-
-typedef struct MatchingQueue{
+/*
+typedef struct LoginQueue{
 	int clnt_cnt = 0;
-	map< string, int > clnt_nickname_socket_map;
+	map< string, int > clnt_id_socket_map;
+	map< int, string > clnt_socket_pwd_map;
 
-}matching_queue;
+}login_queue;
+*/
 
-typedef struct matchedUser{
-	string userNickname1;
-	//result_of_matching userInfo1;
-	int userInfo1;
+typedef struct LoginSocketInfo{
+	int clnt_socket;
+	string id;
+	string pwd;
+}login_socket_info;
 
-	string userNickname2;
-	//result_of_matching userInfo2;
-	int userInfo2;
+typedef struct LoginInfo{
+	string id;
+	string pwd;
+}login_info;
 
-}matched_user;
-
-
-
-class Matching{
+class Login{
 	private:
-		// data needed for the matching.
-		source_of_matching source;
-
-		// data that gotten from the matching.
-		result_of_matching result;
-		
-		matching_queue matchingQueue;
-
-		int running_state = false;
+		matching_queue loginQueue;
 
 	public:
 		//Constructor
-		Matching(matching_queue matchingQueueInput)
-			: matchingQueue(matchingQueueInput){}
+		Login(login_queue loginQueueInput)
+			: loginQueue(loginQueueInput){}
 		
 		/* start matching */
-		matched_user runMatching(void){
-			cout<<"runMatching"<<endl;
-			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
+		bool runLogin(void){
+			cout<<"runLogin"<<endl;
+			// 로그인 데이터 받은 것을 바탕으로 
 			int i = 0;
 			string userNickname[MATCHING_QUEUE_SIZE];
 			map< string, int >::iterator iter;
@@ -76,7 +48,6 @@ class Matching{
 				userNickname[i] = iter->second;
 			}
 			
-			return compareConformity(userNickname);
 		}
 		
 
@@ -122,38 +93,30 @@ class Matching{
 
 
 
-class MatchingSocketServer : public SocketServer{
+class LoginSocketServer : public SocketServer{
 	
 	/* google style */
 	public :
 		int receive_success;
 		int send_success;
-		matching_queue matchingQueue;
-		pthread_t t_id;
-		pthread_mutex_t matching_mutex;
-		pthread_mutex_t matching_queue_mutex;
+		//login_queue loginQueue;
+
 
 	public :
 		/* IF TO DO : server_ip[] 에서 오류나면 스트링으로 바꾸고 스트링으로 서버 주소
 		 *  받아서 나중에 사용할때 char *로 변환 해줄 것. */
-		MatchingSocketServer(string socket_name, int open_port, int clnt_listen_cnt)
+		LoginSocketServer(string socket_name, int open_port, int clnt_listen_cnt)
 			: SocketServer(socket_name, open_port, clnt_listen_cnt){
 
 			this -> prepareServerSocket();
-			cout << "test"<<endl;
-		}/*
-		static void *handleMatching_helper(void *context){
-			return ((MatchingSocketServer*)context)->handleMatching();
-		}*/
-		void * handleMatching(){
-			int thread_create_success = -1;
-			mutexInit();
+			cout << "prepare login "<<endl;
+		}
+		
+		void handleLogin(void){
 
-			pthread_mutex_lock(&matching_mutex);
 			while(1){
 				acceptClient();
 				cout << "accept()" << endl;
-				pthread_mutex_lock(&matching_queue_mutex);
 				cout << "connect" <<endl;	
 				
 				/*
@@ -166,7 +129,7 @@ class MatchingSocketServer : public SocketServer{
 				}
 				*/
 
-				
+				/*
 				char buffer[31];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
@@ -176,27 +139,30 @@ class MatchingSocketServer : public SocketServer{
 				}
 
 				string buffer_s(buffer);
-				matchingQueue.clnt_nickname_socket_map.insert(make_pair(buffer_s, clnt_sock));
+				*/
+				login_info loginInfo;
 
+				if(read(clnt_sock, &loginInfo, sizeof(loginInfo)) == -1){
+					cout << "Error : server -- read() in handleLogin()."<<endl;
+					close(clnt_sock);
+				}
+				
+				login_socket_info loginSocketInfo;
+				
+				loginSocketInfo.clnt_sock = clnt_sock;
+				loginSocketInfo.id = loginInfo.id;
+				loginSocketInfo.pwd = loginInfo.pwd;
+
+				/*
+				loginQueue.clnt_id_socket_map.insert(make_pair(loginInfo.id, clnt_sock));
+				loginQueue.clnt_socket_pwd_map.insert(make_pair(clnt_sock, loginInfo.pwd));
 				matchingQueue.clnt_cnt++;
-				
-				if(matchingQueue.clnt_cnt == MATCHING_QUEUE_SIZE){
-					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
-					Matching * matching = new Matching(matchingQueue);
-					matched_user matchedUser = matching->runMatching();
-					delete matching;
-					
-					sendMatchingData(matchedUser, true);
-					removeMatchedUserFromQueue(matchedUser);
-					
-					bool match_success = false;	
-					sendWaitData(match_success);
-				}
-				
-				else{
-					bool match_success = false;
-					sendWaitData(match_success);
-				}
+				*/
+
+				pthread_create(&t_id, NULL, loginClnt, (void*)&loginSocketInfo);
+
+				// 사실 멀티쓰레딩 돌려야 함. 로그인 실패 보내주고 다시 하려면.	
+
 
 				pthread_mutex_unlock(&matching_queue_mutex);
 				
@@ -204,7 +170,30 @@ class MatchingSocketServer : public SocketServer{
 			}
 			pthread_mutex_unlock(&matching_mutex);
 
-			return NULL;
+
+		}
+
+		void * loginClnt(void * loginSocketInfo_arg){
+			login_socket_info loginSocketInfo = *((login_socket_info *)loginSocketInfo_arg);
+			
+			int clnt_sock = loginSocketInfo.clnt_sock;
+			string id = loginSocketInfo.id;
+			string pwd = loginSocketInfo.pwd;
+
+
+
+
+			
+			if(loginSuccess){
+				sendLoginData(true);
+				removeLoginedUserFromQueue(loginQueue);
+			}
+			
+			else{
+				sendLoginData(false);
+				removeLoginedUserFromQueue(loginQueue);
+				
+			}
 		}
 
 		void sendMatchingData(matched_user matchedUser, bool match_success){
