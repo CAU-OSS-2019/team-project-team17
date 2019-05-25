@@ -19,23 +19,6 @@ typedef struct UserInfo {
 	
 }user_info;
 
-/*
-class SignUpSocketServer : public SocketServer {
-	public :
-		int receive_success;
-		int send_success;
-	
-	public :
-		SignupSocketServer(string socket_name, char server_ip[], int server_port)
-			: SocketClient(socket_name, server_ip, server_port){
-
-			this -> prepareServerSocket();
-			
-		}
-
-		
-}
-*/
 
 class Login {
 	private :
