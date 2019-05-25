@@ -22,9 +22,6 @@ typedef struct SourceOfMatching{
 }source_of_matching;
 
 
-
-
-
 class Algorithm{
 
     public:
