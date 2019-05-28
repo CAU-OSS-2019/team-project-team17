@@ -53,14 +53,16 @@ class SocketServer{
 		}
 
 		void bindSocket(void){
-			if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
+			if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1){
 				cout << "Error : server -- bind()" << endl;
+			}
 
 		}
 
 		void enterListenState(void){
-			if(listen(serv_sock, clnt_cnt_listen) == -1)
+			if(listen(serv_sock, clnt_cnt_listen) == -1){
 				cout << "Error : server -- listen()" << endl;
+			}
 		}
 
 		void acceptClient(void){

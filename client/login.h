@@ -78,7 +78,7 @@ class Login{
 				enterLoginInfo();
 				
 				loginSock_p =
-					new LoginSocketClient("login socket", "13.209.15.157", 9100);
+					new LoginSocketClient("login socket", "13.209.7.127", 9100);
 
 				loginSock_p -> sendData(inputLoginInfo);
 				loginSuccess = loginSock_p -> receiveData();

@@ -77,7 +77,7 @@ class signup{
 				enterSignupInfo();
 				
 				signupSock_p = 
-					new SignupSocketClient("signup socket", "13.209.15.157", 8888);
+					new SignupSocketClient("signup socket", "13.209.7.127", 9200);
 				
 				signupSock_p -> sendData(inputSignupInfo);
 				signupSuccess = signupSock_p -> receiveData();

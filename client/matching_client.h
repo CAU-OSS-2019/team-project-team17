@@ -136,7 +136,7 @@ class matching{
 			
 			// connect to the main server through matching socket.
 			matchingSock_p = 
-				new MatchingSocketClient("matching socket", "13.209.15.157", 9000);
+				new MatchingSocketClient("matching socket", "13.209.7.127", 9000);
 			
 			cout<<"runMatching2"<<endl;	
 
