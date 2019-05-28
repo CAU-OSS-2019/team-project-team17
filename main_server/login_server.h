@@ -1,9 +1,8 @@
-
 #ifndef __LOGIN_SERVER_H__
 #define __LOGIN_SERVER_H__
 
 #include "db/login_server_db.h"
-
+#include "../structs/struct.h"
 using namespace std;
 /*
 typedef struct LoginQueue{
@@ -14,16 +13,6 @@ typedef struct LoginQueue{
 }login_queue;
 */
 
-typedef struct LoginSocketInfo{
-	int clnt_socket;
-	string id;
-	string pwd;
-}login_socket_info;
-
-typedef struct LoginInfo{
-	string id;
-	string pwd;
-}login_info;
 
 /*
 

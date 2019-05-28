@@ -2,12 +2,8 @@
 #define __SIGN_UP__
 
 #include "socket_client.h"
+#include "../structs/struct.h"
 
-typedef struct singupInfo{
-	string id;
-	string pwd;
-	string nickname;
-}signup_info;
 
 class SignupSocketClient : public SocketClient{
 	public :

@@ -1,7 +1,7 @@
 /*  client program --- main  */
 
 #include "matching_client.h"
-
+#include "../structs/struct.h"
 class login{
 
 };

@@ -4,10 +4,10 @@
 
 #include <iostream>
 #include <string>
-#include "../db/getAllUserInfo.h"
-#include "../db/getCharacterInfo.h"
+#include "db/getAllUserInfo.h"
+#include "db/getCharacterInfo.h"
 #include <map>
-
+#include "../structs/struct.h"
 
 
 using namespace std;
@@ -15,13 +15,6 @@ using namespace std;
 
 
 
-typedef struct SourceOfMatchingS{ //소켓 추가
-	string mynickname;
-	string myposition;
-	string duoposition;
-	string rank;
-	int clnt_sock;
-}source_of_matching_s;
 
 
 

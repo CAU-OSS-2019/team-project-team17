@@ -2,21 +2,10 @@
 #define __MATCHING_H__
 
 #include "socket_client.h"
-
+#include "../structs/struct.h"
 using namespace std;
 
-typedef struct SourceOfMatching{
-	string myposition;
-	string duoposition;
-	string rank;
-}source_of_matching;
 
-// To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭크, 적합도 3가지이다.
-	string duonickname;
-	string duorank;
-	int conformity;
-}result_of_matching;
 
 class MatchingSocketClient : public SocketClient{
 	

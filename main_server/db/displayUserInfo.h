@@ -13,12 +13,7 @@
 
 using namespace std;
 
-typedef struct UserGameInfo {
-
-	string nickname;
-	string rank;
-	
-}user_game_info;
+#include "../structs/struct.h"
 
 class DisplayUserInfo {
 	private :

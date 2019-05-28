@@ -2,7 +2,7 @@
 #define __GETCHARACTERINFO_H__
 
 #include "socket_server.h"
-
+#include "../structs/struct.h"
 #include <mysql.h>
 #include <map>
 

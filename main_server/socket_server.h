@@ -10,6 +10,9 @@
 #include <string>
 #include <stdlib.h>
 #include <pthread.h>
+#include "../structs/struct.h"
+
+
 #define MAX_CLNT 1000
 
 

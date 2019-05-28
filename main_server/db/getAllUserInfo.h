@@ -2,7 +2,7 @@
 #define __GETALLUSERINFO_H__
 
 #include "socket_server.h"
-
+#include "../structs/struct.h"
 #include <mysql.h>
 #include <map>
 
@@ -14,23 +14,6 @@
 
 using namespace std;
 
-typedef struct CharacterInfo {
-	int wins;
-	int losses;
-	float kills;
-	float deaths;
-	float assist;
-}character_info;
-
-typedef struct UserCharacterInfo {
-	string rank;
-	float wins;
-	float losses;
-	string my_pref_pos;
-	string duo_pref_pos;
-	map<string, character_info> character;
-	
-}user_character_info;
 
 
 class GetAllUserInfo {

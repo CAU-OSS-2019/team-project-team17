@@ -2,7 +2,7 @@
 #define __SIGNUP_H__
 
 #include "socket_server.h"
-
+#include "../structs/struct.h"
 #include <mysql.h>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
@@ -13,13 +13,6 @@
 
 using namespace std;
 
-typedef struct UserInfo {
-
-	string nickname;
-	string id;
-	string pwd;
-
-}user_info;
 
 /*
 class SignUpSocketServer : public SocketServer {

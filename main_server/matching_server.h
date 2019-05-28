@@ -3,7 +3,7 @@
 
 #include "socket_server.h"
 #include "../algorithm/algorithm.h"
-
+#include "../structs/struct.h"
 
 using namespace std;
 
@@ -13,45 +13,7 @@ using namespace std;
 
 using namespace std;
 
-typedef struct SourceOfMatching{
-	string mynickname;
-	string myposition;
-	string duoposition;
-	string rank;
-}source_of_matching;
 
-typedef struct SourceOfMatchingS{ //소켓 추가
-	string mynickname;
-	string myposition;
-	string duoposition;
-	string rank;
-	int clnt_sock;
-}source_of_matching_s;
-
-
-// To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭크, 적합도 3가지이다.
-	string duonickname;
-	string duorank;
-	int conformity;
-}result_of_matching;
-
-typedef struct MatchingQueue{
-	int clnt_cnt = 0;
-	map< string, source_of_matching_s > clnt_nickname_socket_map;
-
-}matching_queue;
-
-typedef struct matchedUser{
-	string userNickname1;
-	//result_of_matching userInfo1;
-	int userInfo1;
-
-	string userNickname2;
-	//result_of_matching userInfo2;
-	int userInfo2;
-
-}matched_user;
 
 
 

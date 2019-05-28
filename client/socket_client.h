@@ -12,6 +12,7 @@
 #include <string.h>
 #include <string>
 #include <stdlib.h>
+#include "../structs/struct.h"
 
 using namespace std;
 

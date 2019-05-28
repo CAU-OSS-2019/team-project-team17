@@ -2,11 +2,8 @@
 #define __LOGIN_H__
 
 #include "socket_client.h"
+#include "../structs/struct.h"
 
-typedef struct LoginInfo{
-	string id;
-	string pwd;
-}login_info;
 
 class LoginSocketClient : public SocketClient{
 	public :

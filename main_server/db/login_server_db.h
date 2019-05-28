@@ -2,7 +2,7 @@
 #define __LOGIN_H__
 
 #include "socket_server.h"
-
+#include "../structs/struct.h"
 #include </usr/include/mysql/mysql.h>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
@@ -13,18 +13,14 @@
 
 using namespace std;
 
-typedef struct UserInfo {
-	string id;
-	string pwd;
-	
-}user_info;
+
 
 
 class Login {
 	public :
 
 		// variables for login
-		user_info user;
+		login_info user;
 
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -67,7 +63,7 @@ class Login {
 
 		
 		// 로그인 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 됨
-		bool login(user_info input) {
+		bool login(login_info input) {
 			cout << "Log In" << endl;
 
 			connect_db();

@@ -3,7 +3,7 @@
 #define __LOGIN_SERVER_H__
 
 #include "db/signup_server_db.h"
-
+#include "../structs/struct.h"
 using namespace std;
 /*
 typedef struct LoginQueue{
@@ -14,11 +14,7 @@ typedef struct LoginQueue{
 }login_queue;
 */
 
-typedef struct singupInfo{
-	string id;
-	string pwd;
-	string nickname;
-}signup_info;
+
 /*
 
 typedef struct UserInfo {
@@ -76,7 +72,7 @@ class SignupSocketServer : public SocketServer{
 			return NULL;
 
 		}
-		
+
 		static void * signupClnt(void * arg){
 			int clnt_sock = *((int*)arg);
 			
