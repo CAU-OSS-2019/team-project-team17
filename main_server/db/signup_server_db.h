@@ -92,6 +92,6 @@ class SignUp {
 			// Close
 			mysql_close(&conn);
 		}
-}
+};
 
 #endif // __SIGNUP_H__
