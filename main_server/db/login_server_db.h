@@ -21,7 +21,7 @@ typedef struct UserInfo {
 
 
 class Login {
-	private :
+	public :
 
 		// variables for login
 		user_info user;
@@ -30,17 +30,21 @@ class Login {
 		MYSQL *connection = NULL;
 		int query_state;
 		char query[255];
+		MYSQL_RES *sql_result;
+		MYSQL_ROW sql_row;
 
 		// variables for socket
 		int running_state = false;
 		//SignUpSocketServer *signupSocket_p;
 
 		Login(void){
-			user.id = NULL;
+		/*	user.id(NULL);
 			cout << "user.id : " << user.id << endl;
 
-			user.pwd = NULL;
-			cout << "user.pwd : " <<user.pwd <<endl;
+			user.pwd(NULL);
+			cout << "user.pwd : " <<user.pwd <<endl;*/
+
+			cout << "User Initialized ! " << endl;
 		}
 
 		void connect_db(void) {
@@ -59,7 +63,6 @@ class Login {
 			user.pwd = input[1];
 		}
 
-	public :
 		// Constructor
 
 		
@@ -91,7 +94,7 @@ class Login {
 
 			return true;
 		}
-}
+};
 
 #endif // __LOGIN_H__
 
