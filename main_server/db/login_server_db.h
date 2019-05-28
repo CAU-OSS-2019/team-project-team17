@@ -2,7 +2,7 @@
 #define __LOGIN_H__
 
 #include "socket_server.h"
-#include "../structs/struct.h"
+#include "../../structs/struct.h"
 #include </usr/include/mysql/mysql.h>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"

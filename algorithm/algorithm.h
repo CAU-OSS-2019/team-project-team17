@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <string>
-#include "db/getAllUserInfo.h"
-#include "db/getCharacterInfo.h"
+#include "../main_server/db/getAllUserInfo.h"
+#include "../main_server/db/getCharacterInfo.h"
 #include <map>
 #include "../structs/struct.h"
 

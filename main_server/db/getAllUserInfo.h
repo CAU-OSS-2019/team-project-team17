@@ -2,8 +2,8 @@
 #define __GETALLUSERINFO_H__
 
 #include "socket_server.h"
-#include "../structs/struct.h"
-#include <mysql.h>
+#include "../../structs/struct.h"
+#include </usr/include/mysql/mysql.h>
 #include <map>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
@@ -25,6 +25,8 @@ class GetAllUserInfo {
 		MYSQL *connection = NULL;
 		int query_state;
 		char query[255];
+		MYSQL_RES *sql_result;
+		MYSQL_ROW sql_row;
 
 		// variables for socket
 

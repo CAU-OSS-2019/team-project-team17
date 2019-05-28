@@ -85,7 +85,7 @@ class SignupSocketServer : public SocketServer{
 				*/
 
 				signup_info * signup_info_p;
-				char buffer[200]
+				char buffer[200];
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){//클라이언트로부터 로그인 데이터를 받을때까지 대기, 제대로 받았는지 체크
 					cout << "Error : server -- read() in signupClnt() thread." <<endl;
 					close(clnt_sock);
@@ -102,7 +102,7 @@ class SignupSocketServer : public SocketServer{
 				string pwd_s(pwd_c);
 				*/
 				signup_info_p = (signup_info*)buffer;
-				Signup signup_temp;
+				SignUp signup_temp;
 				
 				bool signupSuccess = signup_temp.signup((*signup_info_p));
 			

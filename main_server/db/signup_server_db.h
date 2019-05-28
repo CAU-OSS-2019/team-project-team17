@@ -2,8 +2,9 @@
 #define __SIGNUP_H__
 
 #include "socket_server.h"
-#include "../structs/struct.h"
-#include <mysql.h>
+#include "../../structs/struct.h"
+#include "../signup_server.h"
+#include </usr/include/mysql/mysql.h>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
 #define USERNAME "gamehaeduo"
@@ -51,14 +52,14 @@ class SignUp {
 
 		// variables for socket
 		int running_state = false;
-		SignUpSocketServer *signupSocket_p;
+	//	SignupSocketServer *signupSocket_p;
 
 	public :
 		// Constructor
 		
 		
 		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
-		bool signup(user_info input) {
+		bool signup(signup_info input) {
 			cout << "Sign Up" << endl;
 
 			// Connect
