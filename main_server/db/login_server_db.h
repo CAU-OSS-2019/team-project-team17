@@ -33,7 +33,7 @@ class Login {
 
 		// variables for socket
 		int running_state = false;
-		SignUpSocketServer *signupSocket_p;
+		//SignUpSocketServer *signupSocket_p;
 
 		Login(void){
 			user.id = NULL;
