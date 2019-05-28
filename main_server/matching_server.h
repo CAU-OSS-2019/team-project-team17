@@ -2,7 +2,7 @@
 #define __MATCHING_H__
 
 #include "socket_server.h"
-#include "algorithm.h"
+#include "../algorithm/algorithm.h"
 
 
 using namespace std;
@@ -14,21 +14,31 @@ using namespace std;
 using namespace std;
 
 typedef struct SourceOfMatching{
-	int data1;
-	int data2;
-	int data3;
+	string mynickname;
+	string myposition;
+	string duoposition;
+	string rank;
 }source_of_matching;
 
+typedef struct SourceOfMatchingS{ //소켓 추가
+	string mynickname;
+	string myposition;
+	string duoposition;
+	string rank;
+	int clnt_sock;
+}source_of_matching_s;
+
+
 // To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{
-	int data1;
-	int data2;
-	int data3;
+typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭크, 적합도 3가지이다.
+	string duonickname;
+	string duorank;
+	int conformity;
 }result_of_matching;
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	map< string, int > clnt_nickname_socket_map;
+	map< string, source_of_matching_s > clnt_nickname_socket_map;
 
 }matching_queue;
 
@@ -68,29 +78,31 @@ class Matching{
 			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
 			int i = 0;
 			string userNickname[MATCHING_QUEUE_SIZE];
-			map< string, int >::iterator iter;
+			source_of_matching userInfo[MATCHING_QUEUE_SIZE];
+
+			map< string, source_of_matching_s >::iterator iter;
 			
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
 					 ++i, ++iter){
-				userNickname[i] = iter->second;
+				userInfo[i]=iter->first;
 			}
 			
-			return compareConformity(userNickname);
+			return compareConformity(userInfo);
 		}
 		
 
-		matched_user compareConformity(string userNickname[]){
+		matched_user compareConformity(source_of_matching_s userInfo[]){
 			double userConformity[MATCHING_QUEUE_SIZE][MATCHING_QUEUE_SIZE-1];
 			
 			double max = 0;
 			int maxI =0, maxJ =0;
 			
 			userConformity[0][0] = -1;
-			max = runAlgorithm(userNickname[0], userNickname[1]);
+			max = Algorithm::runAlgorithm(userInfo[0], userInfo[1]);
 			for(int i = 0; i < MATCHING_QUEUE_SIZE; i++){
 				for(int j = i+1; j < MATCHING_QUEUE_SIZE; j++){
-					userConformity[i][j] = runAlgorithm(userNickname[i], userNickname[j]);
+					userConformity[i][j] = Algorithm::runAlgorithm(userInfo[i], userInfo[j]);
 					
 					if(max < userConformity[i][j]){
 						max = userConformity[i][j];
@@ -101,16 +113,10 @@ class Matching{
 			}
 			
 			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
-			matched_user bestMatchedUser = {userNickname[maxI], 1, userNickname[maxJ], 2};
+			matched_user bestMatchedUser = {userInfo[maxI].mynickname, 1, userInfo[maxJ].mynickname, 2};
 			return  bestMatchedUser;
 		}
 		
-		double runAlgorithm(string userNickname1, string userNickname2){
-			return 1;
-			// 디비에서 각 유저들 정보 꺼내와서
-			// 알고리즘 돌리고
-			// 그 결과(double 적합도)를 반환.
-		}
 		
 		/*
 		 source_of_matching getSourceFromDB(string userNickname){
@@ -167,7 +173,7 @@ class MatchingSocketServer : public SocketServer{
 				*/
 
 				
-				char buffer[31];
+				char buffer[300];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){
@@ -175,8 +181,17 @@ class MatchingSocketServer : public SocketServer{
 					close(clnt_sock);
 				}
 
-				string buffer_s(buffer);
-				matchingQueue.clnt_nickname_socket_map.insert(make_pair(buffer_s, clnt_sock));
+				source_of_matching *tempsrc;
+				tempsrc=(source_of_matching*)buffer;
+			
+				source_of_matching_s tempsrc2;
+				tempsrc2.mynickname = tempsrc->mynickname;
+				tempsrc2.myposition = tempsrc->myposition;
+				tempsrc2.duoposition = tempsrc->duoposition;
+				tempsrc2.rank = tempsrc->rank;
+				tempsrc2.clnt_sock = clnt_sock;
+
+				matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2->mynickname, tempsrc2));
 
 				matchingQueue.clnt_cnt++;
 				
@@ -215,8 +230,8 @@ class MatchingSocketServer : public SocketServer{
 			map< string, int >::iterator matchingUserIter2;
 			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
 			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
-			int userSock1 = matchingUserIter1->second;
-			int userSock2 = matchingUserIter2->second;
+			int userSock1 = (matchingUserIter1->second).clnt_sock;
+			int userSock2 = (matchingUserIter2->second).clnt_sock;
 			
 			write(userSock1, &match_success, sizeof(match_success));
 			write(userSock1, &matchedUser.userInfo1, sizeof(matchedUser.userInfo1));

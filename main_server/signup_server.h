@@ -2,7 +2,7 @@
 #ifndef __LOGIN_SERVER_H__
 #define __LOGIN_SERVER_H__
 
-#include "db/login_server_db.h"
+#include "db/signup_server_db.h"
 
 using namespace std;
 /*
@@ -14,17 +14,11 @@ typedef struct LoginQueue{
 }login_queue;
 */
 
-typedef struct LoginSocketInfo{
-	int clnt_socket;
+typedef struct singupInfo{
 	string id;
 	string pwd;
-}login_socket_info;
-
-typedef struct LoginInfo{
-	string id;
-	string pwd;
-}login_info;
-
+	string nickname;
+}signup_info;
 /*
 
 typedef struct UserInfo {
@@ -37,7 +31,7 @@ typedef struct UserInfo {
 
 */
 
-class LoginSocketServer : public SocketServer{
+class SignupSocketServer : public SocketServer{
 	
 	/* google style */
 	public :
@@ -48,19 +42,19 @@ class LoginSocketServer : public SocketServer{
 	public :
 		/* IF TO DO : server_ip[] 에서 오류나면 스트링으로 바꾸고 스트링으로 서버 주소
 		 *  받아서 나중에 사용할때 char *로 변환 해줄 것. */
-		LoginSocketServer(string socket_name, int open_port, int clnt_listen_cnt)
+		SignupSocketServer(string socket_name, int open_port, int clnt_listen_cnt)
 			: SocketServer(socket_name, open_port, clnt_listen_cnt){
 
 			this -> prepareServerSocket();
 			
-			cout << "prepare login "<<endl;
+			cout << "prepare signup "<<endl;
 
 			pthread_mutex_init(&mutx,NULL);
 		}/*
 		static void* handleLogin_helper(void *context){
 			return ((LoginSocketServer*)context)->handleLogin();
 		}*/	
-		void* handleLogin(){
+		void* handleSignup(){
 			pthread_t t_id;
 			int clnt_sock_temp;
 			while(1){
@@ -71,7 +65,7 @@ class LoginSocketServer : public SocketServer{
 				pthread_mutex_lock(&mutx);
 				clnt_sock_temp = clnt_sock;
 
-				pthread_create(&t_id, NULL, loginClnt, (void*)&clnt_sock_temp);
+				pthread_create(&t_id, NULL, signupClnt, (void*)&clnt_sock_temp);
 				pthread_mutex_unlock(&mutx);
 				pthread_detach(t_id);
 				cout << "Connected client" << endl;	
@@ -81,11 +75,9 @@ class LoginSocketServer : public SocketServer{
 			close(serv_sock);
 			return NULL;
 
-		}/*
-		static void * loginClnt_helper(void *context){
-			return ((LoginSocketServer*)context)->loginClnt();
-		}*/
-		static void * loginClnt(void * arg){
+		}
+		
+		static void * signupClnt(void * arg){
 			int clnt_sock = *((int*)arg);
 			
 			
@@ -96,10 +88,10 @@ class LoginSocketServer : public SocketServer{
 				char pwd_c[31];
 				*/
 
-				login_info * loginInfo_p;
-				char buffer[200];
+				signup_info * signup_info_p;
+				char buffer[200]
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){//클라이언트로부터 로그인 데이터를 받을때까지 대기, 제대로 받았는지 체크
-					cout << "Error : server -- read() in loginClnt() thread." <<endl;
+					cout << "Error : server -- read() in signupClnt() thread." <<endl;
 					close(clnt_sock);
 				}
 			
@@ -113,18 +105,18 @@ class LoginSocketServer : public SocketServer{
 				string id_s(id_c);
 				string pwd_s(pwd_c);
 				*/
-				loginInfo_p = (login_info*)buffer;
-				Login login_temp;
+				signup_info_p = (signup_info*)buffer;
+				Signup signup_temp;
 				
-				bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
+				bool signupSuccess = signup_temp.signup((*signup_info_p));
 			
-				if(loginSuccess){
-					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
+				if(signupSuccess){
+					write(clnt_sock, &signupSuccess, sizeof(signupSuccess));
 					break;
 				}
 				
 				else{	
-					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
+					write(clnt_sock, &signupSuccess, sizeof(signupSuccess));
 				}
 			}
 			close(clnt_sock);

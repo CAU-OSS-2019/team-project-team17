@@ -25,7 +25,7 @@ class LoginSocketClient : public SocketClient{
 			cout << "ID : " << loginInfo.id << endl;
 			cout << "PWD : " << loginInfo.pwd << endl;
 
-			send_success = send(sock, (login_info*)&loginInfo, sizeof(loginInfo), 0);
+			send_success = send(sock, (char*)&loginInfo, sizeof(loginInfo), 0);
 
 			if(send_success == -1){
 				cout << "Fail : sendData() in login." << endl;

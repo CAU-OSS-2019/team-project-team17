@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <string>
-#include "getAllUserInfo.h"
-#include "getCharacterInfo.h"
+#include "../db/getAllUserInfo.h"
+#include "../db/getCharacterInfo.h"
 #include <map>
 
 
@@ -15,11 +15,13 @@ using namespace std;
 
 
 
-typedef struct SourceOfMatching{
+typedef struct SourceOfMatchingS{ //소켓 추가
+	string mynickname;
 	string myposition;
 	string duoposition;
 	string rank;
-}source_of_matching;
+	int clnt_sock;
+}source_of_matching_s;
 
 
 
@@ -29,16 +31,18 @@ class Algorithm{
 
     public:
 
-        static double runAlgorithm(string userNickname1, string userNickname2, source_of_matching usersrc1, source_of_matching usersrc2){
+        static double runAlgorithm(source_of_matching_s usersrc1, source_of_matching_s usersrc2){
                 
-            if(usersrc1.myposition.compare(usersrc2.duoposition)!=0|| usersrc1.duoposition.compare(usersrc2.myposition)!=0)
+            if(usersrc1.myposition.compare(usersrc2.duoposition)!=0|| usersrc1.duoposition.compare(usersrc2.myposition)!=0){
                 return 0;//선호 포지션이 서로 맞지 않을경우 매칭 실패
+            }
 
             int user1rank = getRanknum(usersrc1.rank);
             int user2rank = getRanknum(usersrc1.rank);
 
-            if(user1rank-user2rank>=2 || user1rank-user2rank<=-2)//티어 차이가 2단계 이상일 경우
+            if(user1rank-user2rank>=2 || user1rank-user2rank<=-2){//티어 차이가 2단계 이상일 경우
                 return 0;//매칭실패
+            }
 
             int avgrank = returnSmall(user1rank, user2rank);
 

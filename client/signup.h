@@ -7,8 +7,6 @@ typedef struct singupInfo{
 	string id;
 	string pwd;
 	string nickname;
-	string position1;
-	string position2;
 }signup_info;
 
 class SignupSocketClient : public SocketClient{
@@ -28,7 +26,7 @@ class SignupSocketClient : public SocketClient{
 			cout << "ID : " << signupInfo.id << endl;
 			cout << "PWD : " << loginInfo.pwd << endl;
 
-			send_success = send(sock, (char*)&signupInfo, sizeof(signupInfo), 0);
+			send_success = send(sock, (char*)&signupInfo, sizeof(signupInfo), 0);//회원가입 정보 보냄
 
 			if(send_success == -1){
 				cout << "Fail : sendData() in signup." << endl;

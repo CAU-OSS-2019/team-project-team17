@@ -65,7 +65,7 @@ class SignUp {
 		
 		
 		// 회원 가입 후 아이디와 닉네임은 user.nickname, user.id로 사용하면 될듯!
-		void signup(user_info input) {
+		bool signup(user_info input) {
 			cout << "Sign Up" << endl;
 
 			// Connect
@@ -75,7 +75,7 @@ class SignUp {
 
 			if (connection == NULL) {
 				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
-				return;
+				return false;
 			}	
 		
 			// Query
@@ -86,7 +86,7 @@ class SignUp {
 			if (query_state != 0) {
 				cout << "Sign Up failed" << mysql_error(&conn) << endl;
 				mysql_close(&conn);
-				return;
+				return false;
 			}
 
 			// Close

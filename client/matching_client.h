@@ -5,18 +5,18 @@
 
 using namespace std;
 
-typedef struct SourceForMatching{
-	string nickname;
+typedef struct SourceOfMatching{
+	string myposition;
+	string duoposition;
+	string rank;
 }source_of_matching;
 
-
 // To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{
-	int data1;
-	int data2;
-	int data3;
+typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭크, 적합도 3가지이다.
+	string duonickname;
+	string duorank;
+	int conformity;
 }result_of_matching;
-
 
 class MatchingSocketClient : public SocketClient{
 	
