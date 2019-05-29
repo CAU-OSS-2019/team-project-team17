@@ -35,23 +35,7 @@ class Matching{
 			: matchingQueue(matchingQueueInput){}
 		
 		/* start matching */
-		matched_user runMatching(void){
-			cout<<"runMatching"<<endl;
-			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
-			int i = 0;
-			string userNickname[MATCHING_QUEUE_SIZE];
-			source_of_matching userInfo[MATCHING_QUEUE_SIZE];
-
-			map< string, source_of_matching_s >::iterator iter;
-			
-			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
-				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
-					 ++i, ++iter){
-				userInfo[i]=iter->first;
-			}
-			
-			return compareConformity(userInfo);
-		}
+		
 		
 
 		matched_user compareConformity(source_of_matching_s userInfo[]){
@@ -79,7 +63,23 @@ class Matching{
 			return  bestMatchedUser;
 		}
 		
-		
+		matched_user runMatching(void){
+			cout<<"runMatching"<<endl;
+			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
+			int i = 0;
+			string userNickname[MATCHING_QUEUE_SIZE];
+			source_of_matching userInfo[MATCHING_QUEUE_SIZE];
+
+			map< string, source_of_matching_s >::iterator iter;
+			
+			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
+				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
+					 ++i, ++iter){
+				userInfo[i]=iter->first;
+			}
+			
+			return compareConformity(userInfo);
+		}
 		/*
 		 source_of_matching getSourceFromDB(string userNickname){
 		 	//디비에서 그 유저의 정보 꺼내오기.
@@ -153,7 +153,7 @@ class MatchingSocketServer : public SocketServer{
 				tempsrc2.rank = tempsrc->rank;
 				tempsrc2.clnt_sock = clnt_sock;
 
-				matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2->mynickname, tempsrc2));
+				matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
 
 				matchingQueue.clnt_cnt++;
 				
@@ -188,8 +188,8 @@ class MatchingSocketServer : public SocketServer{
 			cout << "server --- sendMatchingData() run. "<<endl;
 			
 			//되는지 확인해보기 맵에서 값 접근 방법 -  a[1] 접근
-			map< string, int >::iterator matchingUserIter1;
-			map< string, int >::iterator matchingUserIter2;
+			map< string, source_of_matching_s >::iterator matchingUserIter1;
+			map< string, source_of_matching_s >::iterator matchingUserIter2;
 			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
 			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
 			int userSock1 = (matchingUserIter1->second).clnt_sock;
@@ -206,13 +206,13 @@ class MatchingSocketServer : public SocketServer{
 		void sendWaitData(bool match_success){
 			cout << "server --- sendWaitData() run."<<endl;
 			
-			map< string, int >::iterator allUserIter;
+			map< string, source_of_matching_s >::iterator allUserIter;
 
 			for(allUserIter = matchingQueue.clnt_nickname_socket_map.begin();
 				allUserIter != matchingQueue.clnt_nickname_socket_map.end();
 					++allUserIter){
 
-				int userSock = (allUserIter -> second);
+				int userSock = (allUserIter -> second).clnt_sock;
 				write(userSock, &match_success, sizeof(match_success));
 
 			}
@@ -227,8 +227,8 @@ class MatchingSocketServer : public SocketServer{
 		void removeMatchedUserFromQueue(matched_user matchedUser){
 			// nickname에 해당하는 것 있는 키 값 얻어서 그 부분 없앰. sockets에서도 그 인덱스 부분 없앰. 
 			
-			map< string, int >::iterator matchingUserIter1;
-			map< string, int >::iterator matchingUserIter2;
+			map< string, source_of_matching_s >::iterator matchingUserIter1;
+			map< string, source_of_matching_s >::iterator matchingUserIter2;
 			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
 			matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter1);
 			--matchingQueue.clnt_cnt;

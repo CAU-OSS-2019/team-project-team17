@@ -124,7 +124,12 @@ class Algorithm{
                 return iter->second;
             } else {
 		/* KKT Debug - base 캐릭터에 대한 best pick 캐릭터가 없는 경우 */
-		best_pick_map no_best_pick_character;
+		best_pick_value nullvalue;
+        nullvalue.description="";
+        nullvalue.win_rate=0;
+
+        return nullvalue;
+
 		/* KKT Debug - return 고쳐줘야 함. */
                 return 0;
             }

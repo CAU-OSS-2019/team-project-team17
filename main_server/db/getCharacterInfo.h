@@ -14,24 +14,7 @@
 
 using namespace std;
 
-typedef struct BaseCharacterKey {
-	string character_name;
-	string rank;
 
-	bool operator<(const BaseCharacterKey& k) const {
-
-		if (character_name < k.character_name)
-			return true;
-		else if (character_name > k.character_name)
-			return false;
-
-		if (rank < k.rank)
-			return true;
-		else
-			return false;
-	}
-
-}base_character_key;
 
 //bool operator<(const BaseCharacterKey& t1, const BaseCharacterKey& t2) {
 //
@@ -43,44 +26,14 @@ typedef struct BaseCharacterKey {
 //	if (t1.rank < t2.rank)
 //		return true;
 //	else
-//		return false;
+//		return false;s
 //}
 
-typedef struct BestPickKey {
-	string character_name;
-	string rank;
-	string best_character;
-
-	bool operator<(const BestPickKey& k) const {
-
-		if (character_name < k.character_name)
-			return true;
-		else if (character_name > k.character_name)
-			return false;
-
-		if (rank < k.rank)
-			return true;
-		else if (rank > k.rank)
-			return false;
-
-		if (best_character < k.best_character)
-			return true;
-		else
-			return false;
-	}
-
-}best_pick_key;
-
-typedef struct BestPickValue {
-	float win_rate;
-	string description;
-
-
-}best_pick_value;
 
 
 class GetCharacterInfo {
 	private :
+
 		
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -93,7 +46,7 @@ class GetCharacterInfo {
 
 
 	public :
-		// variables for getCharacterInfo
+			// variables for getCharacterInfo
 		static map<base_character_key, float> base_character_map;
 		static map<best_pick_key, best_pick_value> best_pick_map;
 		

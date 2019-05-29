@@ -102,7 +102,7 @@ class SignupSocketServer : public SocketServer{
 				string pwd_s(pwd_c);
 				*/
 				signup_info_p = (signup_info*)buffer;
-				SignUp signup_temp;
+				Signup signup_temp;
 				
 				bool signupSuccess = signup_temp.signup((*signup_info_p));
 			

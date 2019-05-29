@@ -27,6 +27,36 @@ typedef struct SourceOfMatchingS{ //소켓 추가
 	string duoposition;
 	string rank;
 	int clnt_sock;
+
+	bool operator<(const SourceOfMatching& k) const {
+
+		if (clnt_sock < k.clnt_sock)
+			return true;
+		else if (clnt_sock > k.clnt_sock)
+			return false;
+
+		if (mynickname < k.mynickname)
+			return true;
+		else if (mynickname > k.mynickname)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else if (rank > k.rank)
+			return false;
+
+		if (myposition < k.myposition)
+			return true;
+		else
+			return false;
+
+		if (duoposition < k.duoposition)
+			return true;
+		else
+			return false;
+	}
+
+
 }source_of_matching_s;
 
 typedef struct UserGameInfo {
@@ -83,6 +113,30 @@ typedef struct SourceOfMatching{
 	string myposition;
 	string duoposition;
 	string rank;
+
+	bool operator<(const SourceOfMatching& k) const {
+
+		if (mynickname < k.mynickname)
+			return true;
+		else if (mynickname > k.mynickname)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else if (rank > k.rank)
+			return false;
+
+		if (myposition < k.myposition)
+			return true;
+		else
+			return false;
+
+		if (duoposition < k.duoposition)
+			return true;
+		else
+			return false;
+	}
+
 }source_of_matching;
 
 
@@ -104,5 +158,55 @@ typedef struct matchedUser{
 
 }matched_user;
 
+typedef struct BestPickKey {
+	string character_name;
+	string rank;
+	string best_character;
+
+	bool operator<(const BestPickKey& k) const {
+
+		if (character_name < k.character_name)
+			return true;
+		else if (character_name > k.character_name)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else if (rank > k.rank)
+			return false;
+
+		if (best_character < k.best_character)
+			return true;
+		else
+			return false;
+	}
+
+}best_pick_key;
+
+typedef struct BestPickValue {
+	float win_rate;
+	string description;
+
+
+}best_pick_value;
+
+typedef struct BaseCharacterKey {
+	string character_name;
+	string rank;
+
+	bool operator<(const BaseCharacterKey& k) const {
+
+		if (character_name < k.character_name)
+			return true;
+		else if (character_name > k.character_name)
+			return false;
+
+		if (rank < k.rank)
+			return true;
+		else
+			return false;
+	}
+
+}base_character_key;
 
 #endif
