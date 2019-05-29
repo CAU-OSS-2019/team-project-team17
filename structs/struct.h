@@ -28,7 +28,7 @@ typedef struct SourceOfMatchingS{ //소켓 추가
 	string rank;
 	int clnt_sock;
 
-	bool operator<(const SourceOfMatching& k) const {
+	bool operator<(const SourceOfMatchingS& k) const {
 
 		if (clnt_sock < k.clnt_sock)
 			return true;

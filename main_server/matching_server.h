@@ -68,14 +68,18 @@ class Matching{
 			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
 			int i = 0;
 			string userNickname[MATCHING_QUEUE_SIZE];
-			source_of_matching userInfo[MATCHING_QUEUE_SIZE];
+			source_of_matching_s userInfo[MATCHING_QUEUE_SIZE];
 
 			map< string, source_of_matching_s >::iterator iter;
 			
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
 					 ++i, ++iter){
-				userInfo[i]=iter->first;
+				userInfo[i].mynickname = iter->first;
+				userInfo[i].myposition = (iter->second).myposition;
+				userInfo[i].duoposition = (iter->second).duoposition;
+				userInfo[i].rank = (iter->second).rank;
+				userInfo[i].clnt_sock = (iter->second).clnt_sock;
 			}
 			
 			return compareConformity(userInfo);
