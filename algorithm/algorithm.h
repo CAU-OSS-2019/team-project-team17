@@ -12,14 +12,6 @@
 
 using namespace std;
 
-
-
-
-
-
-
-
-
 class Algorithm{
 
     public:
@@ -41,9 +33,12 @@ class Algorithm{
 
             user_character_info user1;
             user_character_info user2;
+           
+	    GetAllUserInfo * getAllUserInfo_obj_p1 = new GetAllUserInfo();
+	    GetAllUserInfo * getAllUserInfo_obj_p2 = new GetAllUserInfo();
             
-            user1 = GetAllUserInfo::getUserCharacterInfo(userNickname1);
-            user2 = GetAllUserInfo::getUserCharacterInfo(userNickname2);
+	    user1 = getAllUserInfo_obj_p1->getUserCharacterInfo(usersrc1.mynickname);
+            user2 = getAllUserInfo_obj_p2->getUserCharacterInfo(usersrc2.mynickname);
 
             map<string, character_info>::iterator iter1;
             map<string, character_info>::iterator iter2;
@@ -102,48 +97,67 @@ class Algorithm{
             // 그 결과(double 적합도)를 반환.
         }
 
-        double getConformity(double interwinrate, double kdarate1, double kdarate2, double prob){
+        static double getConformity(double interwinrate, double kdarate1, double kdarate2, double prob){
 
             return ( (((interwinrate-200)/100)+1) * (( (kdarate1+kdarate2-6) / 100 ) + 1) *  ((prob/100)+1)  );
 
         }
 
-        double getKDArate(double kill, double death, double assist){
+        static double getKDArate(double kill, double death, double assist){
 
             return (kill+assist)/death;
 
         }
 
 
-        best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname){
+        static best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname){
 
             best_pick_key tempkey;
             tempkey.best_character=best_character_name;
             tempkey.rank=rankname;
             tempkey.character_name=character_name;
+		
+	    map<best_pick_key, best_pick_value >::iterator iter =
+		    GetCharacterInfo::best_pick_map.find(tempkey);
 
-            if(auto iter=GetCharacterInfo::bestPickmap.find(tempkey)!=GetCharacterInfo::bestPickmap.end()){
+            if(iter!=GetCharacterInfo::best_pick_map.end()){
                 return iter->second;
             } else {
+		/* KKT Debug - base 캐릭터에 대한 best pick 캐릭터가 없는 경우 */
+		best_pick_map no_best_pick_character;
+		/* KKT Debug - return 고쳐줘야 함. */
                 return 0;
             }
             
         }
 
-        double getBasewinrate(string character_name, string rankname){
+        static double getBasewinrate(string character_name, string rankname){
 
             base_character_key tempkey;
             tempkey.character_name = character_name;
             tempkey.rank = rankname;
+		
+	    map<base_character_key, float >::iterator iter
+		    = GetCharacterInfo::base_character_map.find(tempkey);
+		
+	
+	    return iter->second;
 
-            if(auto iter=GetCharacterInfo::baseWinratemap.find(tempkey)!=GetCharacterInfo::baseWinratemap.end()){
+	    /*
+            if(iter!=GetCharacterInfo::base_character_map.end()){
                 return iter->second;
             } else {
+		
+		 KKT Debug - base 캐릭터에 대한 best pick 캐릭터가 없는 경우
+		base_chacter_map no_base_character;
+		KKT Debug - return 고쳐줘야 함. 
+         
                 return 0;
             }
+	    */
         }
 
-        int getRanknum(string rankname){
+        static int getRanknum(string rankname){
             if(rankname.compare("iron")==0){
                 return 0;
             } else if(rankname.compare("bronze")==0){
@@ -161,7 +175,7 @@ class Algorithm{
             }
         }
 
-        string getRankstr(int ranknum){
+        static string getRankstr(int ranknum){
             if(ranknum == 0) return "iron";
             if(ranknum == 1) return "bronze";
             if(ranknum == 2) return "silver";
@@ -172,11 +186,11 @@ class Algorithm{
         }
 
 
-        int returnSmall(int a, int b){
+        static int returnSmall(int a, int b){
             if(a>b) return b;
             return a;
         }
-}
+};
 
 
 

@@ -81,9 +81,6 @@ typedef struct BestPickValue {
 
 class GetCharacterInfo {
 	private :
-		// variables for getCharacterInfo
-		map<base_character_key, float> base_character_map;
-		map<best_pick_key, best_pick_value> best_pick_map;
 		
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -96,6 +93,10 @@ class GetCharacterInfo {
 
 
 	public :
+		// variables for getCharacterInfo
+		static map<base_character_key, float> base_character_map;
+		static map<best_pick_key, best_pick_value> best_pick_map;
+		
 		// Constructor
 
 
@@ -195,6 +196,6 @@ class GetCharacterInfo {
 		}
 
 
-}
+};
 
 #endif // __GETCHARACTERINFO_H__

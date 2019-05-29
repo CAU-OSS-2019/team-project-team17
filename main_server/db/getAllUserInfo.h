@@ -112,6 +112,6 @@ class GetAllUserInfo {
 
 			return user_info;
 		}
-}
+};
 
 #endif // __GETALLUSERINFO_H__
