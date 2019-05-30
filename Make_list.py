@@ -8,6 +8,18 @@ from bs4 import BeautifulSoup
 from random import *
 import time 
 import os
+import openpyxl
+
+
+#dataPath='lol_list.xlsx'
+#wb=openpyxl.load_workbook(dataPath) 
+#엑셀파일경로
+
+
+wb=openpyxl.Workbook()
+
+sheet=wb.worksheets[0]
+sheet.append(['플레이어A','A티어','플레이어B','B티어','승','패','승률'])
 
 
 Check = False
@@ -158,7 +170,7 @@ search_name2 = driver.find_element_by_name('userName')
 search_name2.send_keys(Next_user) # 사용자 이름
 search_name2.send_keys(Keys.RETURN)
 
-while Num != 1: #  구하고 싶은 유저의 수 입력
+while Num != 5: #  구하고 싶은 유저의 수 입력###################################################
     List_Append()
 
 print(User_list)
@@ -170,6 +182,7 @@ F.close()
 
 num_won=0
 num_lost=0
+i=1#엑셀파일
 
 for user in User_list:
     need=5 #중요
@@ -182,8 +195,9 @@ for user in User_list:
     html = driver.page_source 
     soup = BeautifulSoup(html, 'html.parser')
     
+    user_tier=soup.find('div',{'class':'TierRank'}).text.strip()
     duo_prev=0
-
+    
     driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[1]/div/ul/li[2]/a').click()
     
     driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[2]/div[4]/a').click()#더보기클릭
@@ -199,7 +213,10 @@ for user in User_list:
 
     while game_prev < game_next : # 더보기 증가하면 계속 클릭
         game_prev=game_next
-        driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[2]/div['+str(need)+']/a').click()#더보기클릭
+        try:
+            driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[2]/div[2]/div/div[2]/div['+str(need)+']/a').click()#더보기클릭
+        except :
+            break#더보기가 더 없을 경우
         need+=1
         html = driver.page_source 
         soup = BeautifulSoup(html, 'html.parser')
@@ -222,5 +239,20 @@ for user in User_list:
     print('패 :',num_lost)
     percentage=num_won / (num_lost+num_won) *100
     print(percentage,'%')
-        
-                
+
+    driver.get('https://www.op.gg/')
+
+    search_name = driver.find_element_by_name('userName')
+    search_name.send_keys(duo_name) # 여기다가 사용자 이름 넣어주기
+    search_name.submit()
+
+    html = driver.page_source 
+    soup = BeautifulSoup(html, 'html.parser')
+    duo_tier=soup.find('div',{'class':'TierRank'}).text.strip()
+
+    sheet.append([user,user_tier,duo_name,duo_tier,num_won,num_lost,percentage])
+    i+=1
+
+wb.close()
+wb.save('lol_list.xlsx')
+os.remove("DuoList.txt")             
