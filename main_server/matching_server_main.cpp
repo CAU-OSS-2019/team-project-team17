@@ -2,10 +2,13 @@
 
 int main(){
 	
+	
 	GetCharacterInfo *info = new GetCharacterInfo();
+
 	
 	info->getBaseCharacterInfo();
-	info->getBestPickCharacter();
+//	info->getBestPickCharacter();
+        
 
 	MatchingSocketServer matchingSocketServer("server matching socket",9100,1000);	
 	

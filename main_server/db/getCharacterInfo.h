@@ -46,13 +46,19 @@ class GetCharacterInfo {
 
 
 	public :
-			// variables for getCharacterInfo
+
+		// variables for getCharacterInfo
 		static map<base_character_key, float> base_character_map;
 		static map<best_pick_key, best_pick_value> best_pick_map;
 		
 		// Constructor
+		GetCharacterInfo(){
+			base_character_map = getBaseCharacterInfo();
+		}	
 
-
+		
+		map<base_character_key, float> getBaseCharacterInfo();
+/*
 		map<base_character_key, float> getBaseCharacterInfo() {
 			cout << "Get Base Character Information" << endl;
 
@@ -98,7 +104,8 @@ class GetCharacterInfo {
 
 			return base_character_map;
 		}
-
+*/	
+	/*	
 		map<best_pick_key, best_pick_value> getBestPickCharacter() {
 			cout << "Get Best Pick Character Information" << endl;
 
@@ -147,7 +154,7 @@ class GetCharacterInfo {
 
 			return best_pick_map;
 		}
-
+*/
 
 };
 

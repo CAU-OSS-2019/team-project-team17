@@ -5,10 +5,8 @@
 #include "../algorithm/algorithm.h"
 #include "../structs/struct.h"
 
-using namespace std;
-
 #include <map>
-
+#include "db/getCharacterInfo.h"
 #define MATCHING_QUEUE_SIZE 2  // must be >=2
 
 using namespace std;

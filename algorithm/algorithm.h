@@ -117,19 +117,19 @@ class Algorithm{
             tempkey.rank=rankname;
             tempkey.character_name=character_name;
 		
-	    map<best_pick_key, best_pick_value >::iterator iter =
+	   /* map<best_pick_key, best_pick_value >::iterator iter =
 		    GetCharacterInfo::best_pick_map.find(tempkey);
 
             if(iter!=GetCharacterInfo::best_pick_map.end()){
                 return iter->second;
             } else {
-		/* base 캐릭터에 대한 best pick 캐릭터가 없는 경우 */
+		*/
 		best_pick_value nullvalue;
         	nullvalue.description="";
         	nullvalue.win_rate=0;
 
         	return nullvalue;
-            }
+            //}
             
         }
 
@@ -139,12 +139,12 @@ class Algorithm{
             tempkey.character_name = character_name;
             tempkey.rank = rankname;
 		
-	    map<base_character_key, float >::iterator iter
-		    = GetCharacterInfo::base_character_map.find(tempkey);
-		
+	    //map<base_character_key, float >::iterator iter
+	//	    = GetCharacterInfo::base_character_map.find(tempkey);
 	
-	    return iter->second;
-
+	
+	//    return iter->second;
+		return 0;
 	    /*
             if(iter!=GetCharacterInfo::base_character_map.end()){
                 return iter->second;

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string.h>
 #include <map>
+#include </usr/include/c++/7/bits/stl_function.h>
 
 using namespace std;
 
@@ -180,6 +181,7 @@ typedef struct BestPickKey {
 		else
 			return false;
 	}
+
 
 }best_pick_key;
 

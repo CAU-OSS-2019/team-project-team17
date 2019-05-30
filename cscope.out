@@ -1,4 +1,4 @@
-cscope 15 $HOME/kkt_debug/team-project-team17               0000188207
+cscope 15 $HOME/kkt_debug/team-project-team17               0000189890
 	@algorithm/algorithm.h
 
 1 #iâdeà
@@ -43,15 +43,15 @@ usšg
 	g¡d
 ;
 
-23 şas 
+15 şas 
 	cAlgÜ™hm
 {
 
-25 
+17 
 	mpublic
 :
 
-27 
+19 
 	$runAlgÜ™hm
 (
 sourû_of_m©chšg_s
@@ -61,7 +61,7 @@ u£r¤c1
 u£r¤c2
 ){
 
-29 if(
+21 if(
 u£r¤c1
 .
 mypos™iÚ
@@ -73,7 +73,7 @@ u£r¤c2
 duİos™iÚ
 )!=0|| usersrc1.duoposition.compare(usersrc2.myposition)!=0){
 
-33 
+25 
 u£r1¿nk
  = 
 	`g‘Rªknum
@@ -83,7 +83,7 @@ u£r¤c1
 ¿nk
 );
 
-34 
+26 
 u£r2¿nk
  = 
 	`g‘Rªknum
@@ -93,13 +93,13 @@ u£r¤c1
 ¿nk
 );
 
-36 if(
+28 if(
 u£r1¿nk
 -
 u£r2¿nk
 >=2 || user1rank-user2rank<=-2){
 
-40 
+32 
 avg¿nk
  = 
 	`»tuºSm®l
@@ -109,59 +109,63 @@ u£r1¿nk
 u£r2¿nk
 );
 
-42 
+34 
 u£r_ch¬aù”_šfo
  
 u£r1
 ;
+
+35 
+u£r_ch¬aù”_šfo
+ 
+u£r2
+;
+
+37 
+G‘AÎU£rInfo
+ * 
+g‘AÎU£rInfo_obj_p1
+ = 
+Ãw
+ 
+	`G‘AÎU£rInfo
+();
+
+38 
+G‘AÎU£rInfo
+ * 
+g‘AÎU£rInfo_obj_p2
+ = 
+Ãw
+ 
+	`G‘AÎU£rInfo
+();
+
+40 
+u£r1
+ = 
+g‘AÎU£rInfo_obj_p1
+->
+	`g‘U£rCh¬aù”Info
+(
+u£r¤c1
+.
+mynickÇme
+);
+
+41 
+u£r2
+ = 
+g‘AÎU£rInfo_obj_p2
+->
+	`g‘U£rCh¬aù”Info
+(
+u£r¤c2
+.
+mynickÇme
+);
 
 43 
-u£r_ch¬aù”_šfo
- 
-u£r2
-;
-
-45 
-G‘AÎU£rInfo
- * 
-g‘AÎU£rInfo_obj_p1
- = 
-Ãw
- 
-	`G‘AÎU£rInfo
-();
-
-46 
-G‘AÎU£rInfo
- * 
-g‘AÎU£rInfo_obj_p2
- = 
-Ãw
- 
-	`G‘AÎU£rInfo
-();
-
-48 
-u£r1
- = 
-g‘AÎU£rInfo_obj_p1
-->
-	`g‘U£rCh¬aù”Info
-(
-u£rNickÇme1
-);
-
-49 
-u£r2
- = 
-g‘AÎU£rInfo_obj_p2
-->
-	`g‘U£rCh¬aù”Info
-(
-u£rNickÇme2
-);
-
-51 
 m­
 <
 ¡ršg
@@ -173,7 +177,7 @@ ch¬aù”_šfo
 ™”1
 ;
 
-52 
+44 
 m­
 <
 ¡ršg
@@ -185,15 +189,15 @@ ch¬aù”_šfo
 ™”2
 ;
 
-54 
+46 
 com·»Num
  = 0;
 
-55 
+47 
 cÚfÜm™y
  = 0;
 
-57 
+49 
 ™”1
  = 
 u£r1
@@ -205,7 +209,7 @@ ch¬aù”
 	`’d
 (); iter1++){
 
-59 
+51 
 be¡_pick_v®ue
  
 ‹mp1
@@ -223,7 +227,7 @@ fœ¡
 avg¿nk
 ));
 
-61 
+53 
 ba£wš¿‹1
  = 
 	`g‘Ba£wš¿‹
@@ -237,7 +241,7 @@ fœ¡
 avg¿nk
 ));
 
-63 
+55 
 kd¬©e1
  = 
 	`g‘KDA¿‹
@@ -253,7 +257,7 @@ d—ths
 assi¡
 );
 
-65 
+57 
 ´ob1
  = (
 ™”1
@@ -267,7 +271,7 @@ los£s
 u£r1
 .wins+user1.losses);
 
-69 
+61 
 ™”2
  = 
 u£r2
@@ -279,7 +283,7 @@ ch¬aù”
 	`’d
 (); iter2++){
 
-71 
+63 
 be¡_pick_v®ue
  
 ‹mp2
@@ -297,7 +301,7 @@ fœ¡
 avg¿nk
 ));
 
-73 if(
+65 if(
 ‹mp1
 .
 desütiÚ
@@ -309,7 +313,7 @@ u£r¤c1
 duİos™iÚ
 )!=0){
 
-78 if(
+70 if(
 ‹mp2
 .
 desütiÚ
@@ -321,7 +325,7 @@ u£r¤c2
 duİos™iÚ
 )!=0){
 
-83 
+75 
 ba£wš¿‹2
  = 
 	`g‘Ba£wš¿‹
@@ -335,7 +339,7 @@ fœ¡
 avg¿nk
 ));
 
-85 
+77 
 kd¬©e2
  = 
 	`g‘KDA¿‹
@@ -351,7 +355,7 @@ d—ths
 assi¡
 );
 
-87 
+79 
 ´ob2
  = (
 ™”2
@@ -365,7 +369,7 @@ los£s
 u£r2
 .wins+user2.losses);
 
-89 
+81 
 wš¿‹1
  = (
 ™”1
@@ -377,7 +381,7 @@ wšs
 los£s
 );
 
-91 
+83 
 wš¿‹2
  = (
 ™”2
@@ -389,7 +393,7 @@ wšs
 los£s
 );
 
-93 
+85 
 š‹rwš¿‹
  = 
 ba£wš¿‹1
@@ -407,7 +411,7 @@ wš¿‹1
 wš¿‹2
 ;
 
-95 
+87 
 cÚfÜm™y
  +ğ
 	`g‘CÚfÜm™y
@@ -423,23 +427,21 @@ kd¬©e2
 ´ob2
 )/2);
 
-96 
+88 
 com·»Num
 ++;
 
-99 
+91 
 cÚfÜm™y
- = 
-comfÜm™y
- / 
+ = cÚfÜm™y / 
 com·»Num
 ;
 
-101  
+93  
 cÚfÜm™y
 ;
 
-108 
+100 
 	$g‘CÚfÜm™y
 (
 š‹rwš¿‹
@@ -451,7 +453,7 @@ kd¬©e2
 ´ob
 ){
 
-110  ( (((
+102  ( (((
 š‹rwš¿‹
 -200)/100)+1è* (Ğ(
 kd¬©e1
@@ -461,11 +463,11 @@ kd¬©e2
 ´ob
 /100)+1) );
 
-112 
+104 
 	}
 }
 
-114 
+106 
 	$g‘KDA¿‹
 (
 kl
@@ -475,7 +477,7 @@ d—th
 assi¡
 ){
 
-116  (
+108  (
 kl
 +
 assi¡
@@ -483,11 +485,11 @@ assi¡
 d—th
 ;
 
-118 
+110 
 	}
 }
 
-121 
+113 
 be¡_pick_v®ue
  
 	$g‘Be¡wš¿‹
@@ -501,13 +503,13 @@ be¡_ch¬aù”_Çme
 ¿nkÇme
 ){
 
-123 
+115 
 be¡_pick_key
  
 ‹mpkey
 ;
 
-124 
+116 
 ‹mpkey
 .
 be¡_ch¬aù”
@@ -515,7 +517,7 @@ be¡_ch¬aù”
 be¡_ch¬aù”_Çme
 ;
 
-125 
+117 
 ‹mpkey
 .
 ¿nk
@@ -523,37 +525,77 @@ be¡_ch¬aù”_Çme
 ¿nkÇme
 ;
 
-126 
+118 
 ‹mpkey
 .
 ch¬aù”_Çme
 =character_name;
 
-128 if×utØ
+120 
+m­
+<
+be¡_pick_key
+, 
+be¡_pick_v®ue
+ >::
+™”©Ü
+ 
 ™”
-=
+ =
+
+121 
 G‘Ch¬aù”Info
 ::
-be¡Pickm­
+be¡_pick_m­
 .
 	`fšd
 (
 ‹mpkey
-)!=G‘Ch¬aù”Info::be¡Pickm­.
+);
+
+123 if(
+™”
+!=
+G‘Ch¬aù”Info
+::
+be¡_pick_m­
+.
 	`’d
 ()){
 
-129  
+124  
 ™”
 ->
 £cÚd
+;
+
+127 
+be¡_pick_v®ue
+ 
+nuÎv®ue
+;
+
+128 
+nuÎv®ue
+.
+desütiÚ
+="";
+
+129 
+nuÎv®ue
+.
+wš_¿‹
+=0;
+
+131  
+nuÎv®ue
 ;
 
 134 
 	}
 }
 
-136 
+136 
 	$g‘Ba£wš¿‹
 (
 ¡ršg
@@ -583,31 +625,37 @@ ch¬aù”_Çme
 ¿nkÇme
 ;
 
-142 if×utØ
+142 
+m­
+<
+ba£_ch¬aù”_key
+, >::
+™”©Ü
+ 
 ™”
-=
+
+
+143 ğ
 G‘Ch¬aù”Info
 ::
-ba£Wš¿‹m­
+ba£_ch¬aù”_m­
 .
 	`fšd
 (
 ‹mpkey
-)!=G‘Ch¬aù”Info::ba£Wš¿‹m­.
-	`’d
-()){
+);
 
-143  
+146  
 ™”
 ->
 £cÚd
 ;
 
-147 
+160 
 	}
 }
 
-149 
+162 
 	$g‘Rªknum
 (
 ¡ršg
@@ -615,53 +663,53 @@ ba£Wš¿‹m­
 ¿nkÇme
 ){
 
-150 if(
+163 if(
 ¿nkÇme
 .
 	`com·»
 ("iron")==0){
 
-152 } if(
+165 } if(
 ¿nkÇme
 .
 	`com·»
 ("bronze")==0){
 
-154 } if(
+167 } if(
 ¿nkÇme
 .
 	`com·»
 ("silver")==0){
 
-156 } if(
+169 } if(
 ¿nkÇme
 .
 	`com·»
 ("gold")==0){
 
-158 } if(
+171 } if(
 ¿nkÇme
 .
 	`com·»
 ("platinum")==0){
 
-160 } if(
+173 } if(
 ¿nkÇme
 .
 	`com·»
 ("diamond")==0){
 
-162 } if(
+175 } if(
 ¿nkÇme
 .
 	`com·»
 ("master")==0){
 
-165 
+178 
 	}
 }
 
-167 
+180 
 ¡ršg
  
 	$g‘Rªk¡r
@@ -669,39 +717,39 @@ ba£Wš¿‹m­
 ¿nknum
 ){
 
-168 if(
+181 if(
 ¿nknum
  == 0)  "iron";
 
-169 if(
+182 if(
 ¿nknum
  == 1)  "bronze";
 
-170 if(
+183 if(
 ¿nknum
  == 2)  "silver";
 
-171 if(
+184 if(
 ¿nknum
  == 3)  "gold";
 
-172 if(
+185 if(
 ¿nknum
  == 4)  "platinum";
 
-173 if(
+186 if(
 ¿nknum
  == 5)  "diamond";
 
-174 if(
+187 if(
 ¿nknum
  == 6)  "master";
 
-175 
+188 
 	}
 }
 
-178 
+191 
 	$»tuºSm®l
 (
 a
@@ -709,17 +757,17 @@ a
 b
 ){
 
-179 if(
+192 if(
 a
 >
 b
 )  b;
 
-180  
+193  
 a
 ;
 
-181 
+194 
 	}
 }
 
@@ -8029,7 +8077,7 @@ u£r_šfo
 
 115 
 	}
-}
+};
 
 	@main_server/db/getCharacterInfo.h
 
@@ -8097,187 +8145,53 @@ usšg
 	g¡d
 ;
 
-17 
-	sBa£Ch¬aù”Key
- {
-
-18 
-¡ršg
- 
-	mch¬aù”_Çme
-;
-
-19 
-¡ršg
- 
-	m¿nk
-;
-
-21 
-boŞ
- 
-	mİ”©Ü
-<(cÚ¡ 
-	mBa£Ch¬aù”Key
-& 
-	mk
-) const {
-
-23 ià(
-	mch¬aù”_Çme
- < 
-	mk
-.character_name)
-
-24  
-	mŒue
-;
-
-25 ià(
-	mch¬aù”_Çme
- > 
-	mk
-.character_name)
-
-26  
-	mçl£
-;
-
-28 ià(
-	m¿nk
- < 
-	mk
-.rank)
-
-29  
-	mŒue
-;
-
-31  
-	mçl£
-;
-
-34 }
-	tba£_ch¬aù”_key
-;
-
-49 
-	sBe¡PickKey
- {
-
-50 
-¡ršg
- 
-	mch¬aù”_Çme
-;
-
-51 
-¡ršg
- 
-	m¿nk
-;
-
-52 
-¡ršg
- 
-	mbe¡_ch¬aù”
-;
-
-54 
-boŞ
- 
-	mİ”©Ü
-<(cÚ¡ 
-	mBe¡PickKey
-& 
-	mk
-) const {
-
-56 ià(
-	mch¬aù”_Çme
- < 
-	mk
-.character_name)
-
-57  
-	mŒue
-;
-
-58 ià(
-	mch¬aù”_Çme
- > 
-	mk
-.character_name)
-
-59  
-	mçl£
-;
-
-61 ià(
-	m¿nk
- < 
-	mk
-.rank)
-
-62  
-	mŒue
-;
-
-63 ià(
-	m¿nk
- > 
-	mk
-.rank)
-
-64  
-	mçl£
-;
-
-66 ià(
-	mbe¡_ch¬aù”
- < 
-	mk
-.best_character)
-
-67  
-	mŒue
-;
-
-69  
-	mçl£
-;
-
-72 }
-	tbe¡_pick_key
-;
-
-74 
-	sBe¡PickV®ue
- {
-
-75 
-	mwš_¿‹
-;
-
-76 
-¡ršg
- 
-	mdesütiÚ
-;
-
-79 }
-	tbe¡_pick_v®ue
-;
-
-82 şas 
+34 şas 
 	cG‘Ch¬aù”Info
  {
 
-83 
+35 
 	m´iv©e
  :
 
-85 
+38 
+MYSQL
+ 
+cÚn
+;
+
+39 
+MYSQL
+ *
+	mcÚÃùiÚ
+ = 
+NULL
+;
+
+40 
+	mqu”y_¡©e
+;
+
+41 
+	mqu”y
+[255];
+
+42 
+MYSQL_RES
+ *
+	msql_»suÉ
+;
+
+43 
+MYSQL_ROW
+ 
+	msql_row
+;
+
+48 
+	mpublic
+ :
+
+50 
 m­
 <
 ba£_ch¬aù”_key
@@ -8285,7 +8199,7 @@ ba£_ch¬aù”_key
 	mba£_ch¬aù”_m­
 ;
 
-86 
+51 
 	mm­
 <
 	mbe¡_pick_key
@@ -8295,65 +8209,27 @@ ba£_ch¬aù”_key
 	mbe¡_pick_m­
 ;
 
-88 
-MYSQL
- 
-	mcÚn
-;
-
-89 
-MYSQL
- *
-	mcÚÃùiÚ
- = 
-NULL
-;
-
-90 
-	mqu”y_¡©e
-;
-
-91 
-	mqu”y
-[255];
-
-92 
-MYSQL_RES
- *
-	msql_»suÉ
-;
-
-93 
-MYSQL_ROW
- 
-	msql_row
-;
-
-98 
-	mpublic
- :
-
-102 
-m­
+56 
+	mm­
 <
-ba£_ch¬aù”_key
+	mba£_ch¬aù”_key
 , > 
 	$g‘Ba£Ch¬aù”Info
 () {
 
-103 
+57 
 cout
  << "G‘ Ba£ Ch¬aù” InfÜm©iÚ" << 
 ’dl
 ;
 
-106 
+60 
 	`mysql_š™
 (&
 cÚn
 );
 
-108 
+62 
 cÚÃùiÚ
  = 
 	`mysql_»®_cÚÃù
@@ -8373,13 +8249,13 @@ PORTNUM
 NULL
 , 0);
 
-110 ià(
+64 ià(
 cÚÃùiÚ
  =ğ
 NULL
 ) {
 
-111 
+65 
 cout
  << "DB NÙ CÚÃùed : " << 
 	`mysql_”rÜ
@@ -8389,17 +8265,17 @@ cÚn
 ’dl
 ;
 
-112  
+66  
 ba£_ch¬aù”_m­
 ;
 
-116 
+70 
 	`¥rštf
 (
 qu”y
 , "SELECT * FROM baseCharacterInfo");
 
-118 
+72 
 qu”y_¡©e
  = 
 	`mysql_qu”y
@@ -8409,11 +8285,11 @@ cÚÃùiÚ
 qu”y
 );
 
-120 ià(
+74 ià(
 qu”y_¡©e
  != 0) {
 
-121 
+75 
 cout
  << "g‘tšg ch¬aù” infÜm©iÚ faed : " << 
 	`mysql_”rÜ
@@ -8423,17 +8299,17 @@ cÚn
 ’dl
 ;
 
-122 
+76 
 	`mysql_şo£
 (&
 cÚn
 );
 
-123  
+77  
 ba£_ch¬aù”_m­
 ;
 
-127 
+81 
 sql_»suÉ
  = 
 	`mysql_¡Üe_»suÉ
@@ -8441,17 +8317,17 @@ sql_»suÉ
 cÚÃùiÚ
 );
 
-129 
+83 
 ba£_ch¬aù”_key
  
 bc_key
 ;
 
-130 
+84 
 wš_¿‹
 ;
 
-132 (
+86 (
 sql_row
  = 
 	`mysql_ãtch_row
@@ -8461,7 +8337,7 @@ sql_»suÉ
 NULL
 ) {
 
-134 
+88 
 bc_key
 .
 ch¬aù”_Çme
@@ -8469,7 +8345,7 @@ ch¬aù”_Çme
 sql_row
 [0];
 
-135 
+89 
 bc_key
 .
 ¿nk
@@ -8477,7 +8353,7 @@ bc_key
 sql_row
 [1];
 
-136 
+90 
 wš_¿‹
  = 
 	`©of
@@ -8485,7 +8361,7 @@ wš_¿‹
 sql_row
 [2]);
 
-138 
+92 
 ba£_ch¬aù”_m­
 .
 	`š£¹
@@ -8499,23 +8375,23 @@ bc_key
 wš_¿‹
 ));
 
-142 
+96 
 	`mysql_ä“_»suÉ
 (
 sql_»suÉ
 );
 
-143 
+97 
 	`mysql_şo£
 (&
 cÚn
 );
 
-145  
+99  
 ba£_ch¬aù”_m­
 ;
 
-148 
+102 
 m­
 <
 be¡_pick_key
@@ -8525,19 +8401,19 @@ be¡_pick_v®ue
 	$g‘Be¡PickCh¬aù”
 () {
 
-149 
+103 
 cout
  << "G‘ Be¡ Pick Ch¬aù” InfÜm©iÚ" << 
 ’dl
 ;
 
-152 
+106 
 	`mysql_š™
 (&
 cÚn
 );
 
-153 
+107 
 	`mysql_İtiÚs
 (&
 cÚn
@@ -8545,7 +8421,7 @@ cÚn
 MYSQL_SET_CHARSET_NAME
 , "euckr");
 
-154 
+108 
 	`mysql_İtiÚs
 (&
 cÚn
@@ -8553,7 +8429,7 @@ cÚn
 MYSQL_INIT_COMMAND
 , "SET NAMESƒuckr");
 
-156 
+110 
 cÚÃùiÚ
  = 
 	`mysql_»®_cÚÃù
@@ -8573,13 +8449,13 @@ PORTNUM
 NULL
 , 0);
 
-158 ià(
+112 ià(
 cÚÃùiÚ
  =ğ
 NULL
 ) {
 
-159 
+113 
 cout
  << "DB NÙ CÚÃùed : " << 
 	`mysql_”rÜ
@@ -8589,17 +8465,17 @@ cÚn
 ’dl
 ;
 
-160  
+114  
 be¡_pick_m­
 ;
 
-164 
+118 
 	`¥rštf
 (
 qu”y
 , "SELECT * FROM bestPickCharacter");
 
-166 
+120 
 qu”y_¡©e
  = 
 	`mysql_qu”y
@@ -8609,11 +8485,11 @@ cÚÃùiÚ
 qu”y
 );
 
-168 ià(
+122 ià(
 qu”y_¡©e
  != 0) {
 
-169 
+123 
 cout
  << "g‘tšg be¡ ch¬aù” infÜm©iÚ faed : " << 
 	`mysql_”rÜ
@@ -8623,17 +8499,17 @@ cÚn
 ’dl
 ;
 
-170 
+124 
 	`mysql_şo£
 (&
 cÚn
 );
 
-171  
+125  
 be¡_pick_m­
 ;
 
-175 
+129 
 sql_»suÉ
  = 
 	`mysql_¡Üe_»suÉ
@@ -8641,19 +8517,19 @@ sql_»suÉ
 cÚÃùiÚ
 );
 
-176 
+130 
 be¡_pick_key
  
 bp_key
 ;
 
-177 
+131 
 be¡_pick_v®ue
  
 bp_v®ue
 ;
 
-179 (
+133 (
 sql_row
  = 
 	`mysql_ãtch_row
@@ -8663,7 +8539,7 @@ sql_»suÉ
 NULL
 ) {
 
-181 
+135 
 bp_key
 .
 ch¬aù”_Çme
@@ -8671,7 +8547,7 @@ ch¬aù”_Çme
 sql_row
 [0];
 
-182 
+136 
 bp_key
 .
 ¿nk
@@ -8679,7 +8555,7 @@ bp_key
 sql_row
 [1];
 
-183 
+137 
 bp_key
 .
 be¡_ch¬aù”
@@ -8687,7 +8563,7 @@ be¡_ch¬aù”
 sql_row
 [2];
 
-184 
+138 
 bp_v®ue
 .
 wš_¿‹
@@ -8697,7 +8573,7 @@ wš_¿‹
 sql_row
 [3]);
 
-185 
+139 
 bp_v®ue
 .
 desütiÚ
@@ -8705,7 +8581,7 @@ desütiÚ
 sql_row
 [4];
 
-187 
+141 
 be¡_pick_m­
 .
 	`š£¹
@@ -8721,23 +8597,23 @@ bp_key
 bp_v®ue
 ));
 
-191 
+145 
 	`mysql_ä“_»suÉ
 (
 sql_»suÉ
 );
 
-192 
+146 
 	`mysql_şo£
 (&
 cÚn
 );
 
-194  
+148  
 be¡_pick_m­
 ;
 
-195 
+149 
 	}
 }
 
@@ -10087,101 +9963,7 @@ m©chšgQueueIÅut
 m©chšgQueueIÅut
 ){}
 
-38 
-m©ched_u£r
- 
-	$runM©chšg
-(){
-
-39 
-cout
-<<"runM©chšg"<<
-’dl
-;
-
-41 
-i
- = 0;
-
-42 
-¡ršg
- 
-u£rNickÇme
-[
-MATCHING_QUEUE_SIZE
-];
-
-43 
-sourû_of_m©chšg
- 
-u£rInfo
-[
-MATCHING_QUEUE_SIZE
-];
-
-45 
-m­
-< 
-¡ršg
-, 
-sourû_of_m©chšg_s
- >::
-™”©Ü
- 
-™”
-;
-
-47 
-™”
- = (
-m©chšgQueue
-.
-şÁ_nickÇme_sock‘_m­
-).
-	`begš
-();
-
-48 
-™”
- !ğ(
-m©chšgQueue
-.
-şÁ_nickÇme_sock‘_m­
-).
-	`’d
-(è&& 
-i
- <
-MATCHING_QUEUE_SIZE
-;
-
-49 ++
-i
-, ++
-™”
-){
-
-50 
-u£rInfo
-[
-i
-]=
-™”
-->
-fœ¡
-;
-
-53  
-	`com·»CÚfÜm™y
-(
-u£rInfo
-);
-
-54 
-	}
-}
-
-57 
+41 
 m©ched_u£r
  
 	$com·»CÚfÜm™y
@@ -10191,27 +9973,27 @@ sourû_of_m©chšg_s
 u£rInfo
 []){
 
-58 
+42 
 u£rCÚfÜm™y
 [
 MATCHING_QUEUE_SIZE
 ][MATCHING_QUEUE_SIZE-1];
 
-60 
+44 
 max
  = 0;
 
-61 
+45 
 maxI
  =0, 
 maxJ
  =0;
 
-63 
+47 
 u£rCÚfÜm™y
 [0][0] = -1;
 
-64 
+48 
 max
  = 
 AlgÜ™hm
@@ -10221,13 +10003,13 @@ AlgÜ™hm
 u£rInfo
 [0], userInfo[1]);
 
-65 
+49 
 i
  = 0; i < 
 MATCHING_QUEUE_SIZE
 ; i++){
 
-66 
+50 
 j
  = 
 i
@@ -10235,7 +10017,7 @@ i
 MATCHING_QUEUE_SIZE
 ; j++){
 
-67 
+51 
 u£rCÚfÜm™y
 [
 i
@@ -10249,7 +10031,7 @@ AlgÜ™hm
 u£rInfo
 [i], userInfo[j]);
 
-69 if(
+53 if(
 max
  < 
 u£rCÚfÜm™y
@@ -10259,7 +10041,7 @@ i
 j
 ]){
 
-70 
+54 
 max
  = 
 u£rCÚfÜm™y
@@ -10269,19 +10051,19 @@ i
 j
 ];
 
-71 
+55 
 maxI
  = 
 i
 ;
 
-72 
+56 
 maxJ
  = 
 j
 ;
 
-78 
+62 
 m©ched_u£r
  
 be¡M©chedU£r
@@ -10295,15 +10077,159 @@ mynickÇme
 maxJ
 ].mynickname, 2};
 
-79  
+63  
 be¡M©chedU£r
 ;
 
-80 
+64 
 	}
 }
 
-93 şas 
+66 
+m©ched_u£r
+ 
+	$runM©chšg
+(){
+
+67 
+cout
+<<"runM©chšg"<<
+’dl
+;
+
+69 
+i
+ = 0;
+
+70 
+¡ršg
+ 
+u£rNickÇme
+[
+MATCHING_QUEUE_SIZE
+];
+
+71 
+sourû_of_m©chšg_s
+ 
+u£rInfo
+[
+MATCHING_QUEUE_SIZE
+];
+
+73 
+m­
+< 
+¡ršg
+, 
+sourû_of_m©chšg_s
+ >::
+™”©Ü
+ 
+™”
+;
+
+75 
+™”
+ = (
+m©chšgQueue
+.
+şÁ_nickÇme_sock‘_m­
+).
+	`begš
+();
+
+76 
+™”
+ !ğ(
+m©chšgQueue
+.
+şÁ_nickÇme_sock‘_m­
+).
+	`’d
+(è&& 
+i
+ <
+MATCHING_QUEUE_SIZE
+;
+
+77 ++
+i
+, ++
+™”
+){
+
+78 
+u£rInfo
+[
+i
+].
+mynickÇme
+ = 
+™”
+->
+fœ¡
+;
+
+79 
+u£rInfo
+[
+i
+].
+mypos™iÚ
+ = (
+™”
+->
+£cÚd
+).myposition;
+
+80 
+u£rInfo
+[
+i
+].
+duİos™iÚ
+ = (
+™”
+->
+£cÚd
+).duoposition;
+
+81 
+u£rInfo
+[
+i
+].
+¿nk
+ = (
+™”
+->
+£cÚd
+).rank;
+
+82 
+u£rInfo
+[
+i
+].
+şÁ_sock
+ = (
+™”
+->
+£cÚd
+).clnt_sock;
+
+85  
+	`com·»CÚfÜm™y
+(
+u£rInfo
+);
+
+86 
+	}
+}
+
+97 şas 
 	cM©chšgSock‘S”v”
  : 
 public
@@ -10311,47 +10237,47 @@ public
 Sock‘S”v”
 {
 
-96 
+100 
 public
  :
 
-97 
+101 
 »ûive_sucûss
 ;
 
-98 
+102 
 	m£nd_sucûss
 ;
 
-99 
+103 
 m©chšg_queue
  
 	mm©chšgQueue
 ;
 
-100 
+104 
 ±h»ad_t
  
 	mt_id
 ;
 
-101 
+105 
 ±h»ad_mu‹x_t
  
 	mm©chšg_mu‹x
 ;
 
-102 
+106 
 ±h»ad_mu‹x_t
  
 	mm©chšg_queue_mu‹x
 ;
 
-104 
+108 
 	mpublic
  :
 
-107 
+111 
 	$M©chšgSock‘S”v”
 (
 ¡ršg
@@ -10363,7 +10289,7 @@ sock‘_Çme
 şÁ_li¡’_út
 )
 
-108 : 
+112 : 
 	$Sock‘S”v”
 (
 sock‘_Çme
@@ -10373,63 +10299,63 @@ sock‘_Çme
 şÁ_li¡’_út
 ){
 
-110 
+114 
 this
  -> 
 	`´•¬eS”v”Sock‘
 ();
 
-111 
+115 
 cout
  << "‹¡"<<
 ’dl
 ;
 
-116 * 
+120 * 
 	$hªdËM©chšg
 (){
 
-117 
+121 
 th»ad_ü—‹_sucûss
  = -1;
 
-118 
+122 
 	`mu‹xIn™
 ();
 
-120 
+124 
 	`±h»ad_mu‹x_lock
 (&
 m©chšg_mu‹x
 );
 
-122 
+126 
 	`acû±Cl›Á
 ();
 
-123 
+127 
 cout
  << "acû±()" << 
 ’dl
 ;
 
-124 
+128 
 	`±h»ad_mu‹x_lock
 (&
 m©chšg_queue_mu‹x
 );
 
-125 
+129 
 cout
  << "cÚÃù" <<
 ’dl
 ;
 
-138 
+142 
 bufãr
 [300];
 
-141 if(
+145 if(
 	`»ad
 (
 şÁ_sock
@@ -10437,25 +10363,25 @@ bufãr
 bufãr
 , (buffer)) == -1){
 
-142 
+146 
 cout
  << "E¼Ü : s”v” --„—d(èš hªdËM©chšg()."<<
 ’dl
 ;
 
-143 
+147 
 	`şo£
 (
 şÁ_sock
 );
 
-146 
+150 
 sourû_of_m©chšg
  *
 ‹mp¤c
 ;
 
-147 
+151 
 ‹mp¤c
 =(
 sourû_of_m©chšg
@@ -10463,13 +10389,13 @@ sourû_of_m©chšg
 bufãr
 ;
 
-149 
+153 
 sourû_of_m©chšg_s
  
 ‹mp¤c2
 ;
 
-150 
+154 
 ‹mp¤c2
 .
 mynickÇme
@@ -10477,7 +10403,7 @@ mynickÇme
 ‹mp¤c
 ->mynickname;
 
-151 
+155 
 ‹mp¤c2
 .
 mypos™iÚ
@@ -10485,7 +10411,7 @@ mypos™iÚ
 ‹mp¤c
 ->myposition;
 
-152 
+156 
 ‹mp¤c2
 .
 duİos™iÚ
@@ -10493,7 +10419,7 @@ duİos™iÚ
 ‹mp¤c
 ->duoposition;
 
-153 
+157 
 ‹mp¤c2
 .
 ¿nk
@@ -10501,13 +10427,13 @@ duİos™iÚ
 ‹mp¤c
 ->rank;
 
-154 
+158 
 ‹mp¤c2
 .
 şÁ_sock
  = clnt_sock;
 
-156 
+160 
 m©chšgQueue
 .
 şÁ_nickÇme_sock‘_m­
@@ -10517,17 +10443,17 @@ m©chšgQueue
 	`make_·œ
 (
 ‹mp¤c2
-->
+.
 mynickÇme
 ,empsrc2));
 
-158 
+162 
 m©chšgQueue
 .
 şÁ_út
 ++;
 
-160 if(
+164 if(
 m©chšgQueue
 .
 şÁ_út
@@ -10535,7 +10461,7 @@ m©chšgQueue
 MATCHING_QUEUE_SIZE
 ){
 
-162 
+166 
 M©chšg
  * 
 m©chšg
@@ -10547,7 +10473,7 @@ m©chšg
 m©chšgQueue
 );
 
-163 
+167 
 m©ched_u£r
  
 m©chedU£r
@@ -10557,13 +10483,13 @@ m©chšg
 	`runM©chšg
 ();
 
-164 
+168 
 d–‘e
  
 m©chšg
 ;
 
-166 
+170 
 	`£ndM©chšgD©a
 (
 m©chedU£r
@@ -10571,61 +10497,61 @@ m©chedU£r
 Œue
 );
 
-167 
+171 
 	`»moveM©chedU£rFromQueue
 (
 m©chedU£r
 );
 
-169 
+173 
 boŞ
  
 m©ch_sucûss
  = 
 çl£
 ;
-
-170 
-	`£ndWa™D©a
-(
-m©ch_sucûss
-);
 
 174 
-boŞ
- 
-m©ch_sucûss
- = 
-çl£
-;
-
-175 
 	`£ndWa™D©a
 (
 m©ch_sucûss
 );
 
 178 
-	`±h»ad_mu‹x_uÆock
-(&
-m©chšg_queue_mu‹x
+boŞ
+ 
+m©ch_sucûss
+ = 
+çl£
+;
+
+179 
+	`£ndWa™D©a
+(
+m©ch_sucûss
 );
 
 182 
 	`±h»ad_mu‹x_uÆock
 (&
+m©chšg_queue_mu‹x
+);
+
+186 
+	`±h»ad_mu‹x_uÆock
+(&
 m©chšg_mu‹x
 );
 
-184  
+188  
 NULL
 ;
 
-185 
+189 
 	}
 }
 
-187 
+191 
 	$£ndM©chšgD©a
 (
 m©ched_u£r
@@ -10637,33 +10563,37 @@ boŞ
 m©ch_sucûss
 ){
 
-188 
+192 
 cout
  << "£rv” --- s’dM©chšgD©a(èrun. "<<
 ’dl
 ;
 
-191 
+195 
 m­
 < 
 ¡ršg
-, >::
+, 
+sourû_of_m©chšg_s
+ >::
 ™”©Ü
  
 m©chšgU£rI‹r1
 ;
 
-192 
+196 
 m­
 < 
 ¡ršg
-, >::
+, 
+sourû_of_m©chšg_s
+ >::
 ™”©Ü
  
 m©chšgU£rI‹r2
 ;
 
-193 
+197 
 m©chšgU£rI‹r1
  = 
 m©chšgQueue
@@ -10677,7 +10607,7 @@ m©chedU£r
 u£rNickÇme1
 );
 
-194 
+198 
 m©chšgU£rI‹r2
  = 
 m©chšgQueue
@@ -10691,7 +10621,7 @@ m©chedU£r
 u£rNickÇme2
 );
 
-195 
+199 
 u£rSock1
  = (
 m©chšgU£rI‹r1
@@ -10701,7 +10631,7 @@ m©chšgU£rI‹r1
 şÁ_sock
 ;
 
-196 
+200 
 u£rSock2
  = (
 m©chšgU£rI‹r2
@@ -10711,7 +10641,7 @@ m©chšgU£rI‹r2
 şÁ_sock
 ;
 
-198 
+202 
 	`wr™e
 (
 u£rSock1
@@ -10719,7 +10649,7 @@ u£rSock1
 m©ch_sucûss
 , (match_success));
 
-199 
+203 
 	`wr™e
 (
 u£rSock1
@@ -10729,7 +10659,7 @@ m©chedU£r
 u£rInfo1
 , (matchedUser.userInfo1));
 
-201 
+205 
 	`wr™e
 (
 u£rSock2
@@ -10737,7 +10667,7 @@ u£rSock2
 m©ch_sucûss
 , (match_success));
 
-202 
+206 
 	`wr™e
 (
 u£rSock2
@@ -10747,11 +10677,11 @@ m©chedU£r
 u£rInfo2
 , (matchedUser.userInfo2));
 
-204 
+208 
 	}
 }
 
-206 
+210 
 	$£ndWa™D©a
 (
 boŞ
@@ -10759,23 +10689,25 @@ boŞ
 m©ch_sucûss
 ){
 
-207 
+211 
 cout
  << "£rv” --- s’dWa™D©a(èrun."<<
 ’dl
 ;
 
-209 
+213 
 m­
 < 
 ¡ršg
-, >::
+, 
+sourû_of_m©chšg_s
+ >::
 ™”©Ü
  
 ®lU£rI‹r
 ;
 
-211 
+215 
 ®lU£rI‹r
  = 
 m©chšgQueue
@@ -10785,7 +10717,7 @@ m©chšgQueue
 	`begš
 ();
 
-212 
+216 
 ®lU£rI‹r
  !ğ
 m©chšgQueue
@@ -10795,19 +10727,21 @@ m©chšgQueue
 	`’d
 ();
 
-213 ++
+217 ++
 ®lU£rI‹r
 ){
 
-215 
+219 
 u£rSock
  = (
 ®lU£rI‹r
  -> 
 £cÚd
-);
+).
+şÁ_sock
+;
 
-216 
+220 
 	`wr™e
 (
 u£rSock
@@ -10815,15 +10749,15 @@ u£rSock
 m©ch_sucûss
 , (match_success));
 
-220 
+224 
 	}
 }
 
-222 
+226 
 	$mu‹xIn™
 (){
 
-223 
+227 
 	`±h»ad_mu‹x_š™
 (&
 m©chšg_mu‹x
@@ -10831,7 +10765,7 @@ m©chšg_mu‹x
 NULL
 );
 
-224 
+228 
 	`±h»ad_mu‹x_š™
 (&
 m©chšg_queue_mu‹x
@@ -10839,11 +10773,11 @@ m©chšg_queue_mu‹x
 NULL
 );
 
-225 
+229 
 	}
 }
 
-227 
+231 
 	$»moveM©chedU£rFromQueue
 (
 m©ched_u£r
@@ -10851,27 +10785,31 @@ m©ched_u£r
 m©chedU£r
 ){
 
-230 
+234 
 m­
 < 
 ¡ršg
-, >::
+, 
+sourû_of_m©chšg_s
+ >::
 ™”©Ü
  
 m©chšgU£rI‹r1
 ;
 
-231 
+235 
 m­
 < 
 ¡ršg
-, >::
+, 
+sourû_of_m©chšg_s
+ >::
 ™”©Ü
  
 m©chšgU£rI‹r2
 ;
 
-232 
+236 
 m©chšgU£rI‹r1
  = 
 m©chšgQueue
@@ -10885,7 +10823,7 @@ m©chedU£r
 u£rNickÇme1
 );
 
-233 
+237 
 m©chšgQueue
 .
 şÁ_nickÇme_sock‘_m­
@@ -10895,13 +10833,13 @@ m©chšgQueue
 m©chšgU£rI‹r1
 );
 
-234 --
+238 --
 m©chšgQueue
 .
 şÁ_út
 ;
 
-236 
+240 
 m©chšgU£rI‹r2
  = 
 m©chšgQueue
@@ -10915,7 +10853,7 @@ m©chedU£r
 u£rNickÇme2
 );
 
-237 
+241 
 m©chšgQueue
 .
 şÁ_nickÇme_sock‘_m­
@@ -10925,13 +10863,13 @@ m©chšgQueue
 m©chšgU£rI‹r2
 );
 
-238 --
+242 --
 m©chšgQueue
 .
 şÁ_út
 ;
 
-249 
+253 
 	}
 }
 
@@ -10945,19 +10883,41 @@ m©chšgQueue
 	$maš
 (){
 
-4 
+5 
+G‘Ch¬aù”Info
+ *
+šfo
+ = 
+Ãw
+ 
+	`G‘Ch¬aù”Info
+();
+
+7 
+šfo
+->
+	`g‘Ba£Ch¬aù”Info
+();
+
+8 
+šfo
+->
+	`g‘Be¡PickCh¬aù”
+();
+
+10 
 M©chšgSock‘S”v”
  
 	`m©chšgSock‘S”v”
 ("server matching socket",9100,1000);
 
-6 
+12 
 m©chšgSock‘S”v”
 .
 	`hªdËM©chšg
 ();
 
-7 
+13 
 	}
 }
 
@@ -11759,7 +11719,11 @@ __STRUCT__
 	~<m­
 >
 
-10 
+9 
+	~</u¤/šşude/c++/7/b™s/¡l_funùiÚ.h
+>
+
+11 
 usšg
  
 Çme¥aû
@@ -11767,215 +11731,313 @@ usšg
 	g¡d
 ;
 
-13 
+14 
 	sLogšSock‘Info
 {
 
-14 
+15 
 	mşÁ_sock‘
-;
-
-15 
-¡ršg
- 
-	mid
 ;
 
 16 
 ¡ršg
  
+	mid
+;
+
+17 
+¡ršg
+ 
 	mpwd
 ;
 
-17 }
+18 }
 	tlogš_sock‘_šfo
 ;
 
-19 
+20 
 	sLogšInfo
 {
 
-20 
+21 
 ¡ršg
  
 	mid
 ;
 
-21 
+22 
 ¡ršg
  
 	mpwd
 ;
 
-22 }
+23 }
 	tlogš_šfo
 ;
 
-24 
+25 
 	sSourûOfM©chšgS
 {
 
-25 
+26 
 ¡ršg
  
 	mmynickÇme
 ;
 
-26 
+27 
 ¡ršg
  
 	mmypos™iÚ
 ;
 
-27 
+28 
 ¡ršg
  
 	mduİos™iÚ
 ;
 
-28 
+29 
 ¡ršg
  
 	m¿nk
 ;
 
-29 
+30 
 	mşÁ_sock
 ;
 
-30 }
+32 
+boŞ
+ 
+	mİ”©Ü
+<(cÚ¡ 
+	mSourûOfM©chšgS
+& 
+	mk
+) const {
+
+34 ià(
+	mşÁ_sock
+ < 
+	mk
+.clnt_sock)
+
+35  
+	mŒue
+;
+
+36 ià(
+	mşÁ_sock
+ > 
+	mk
+.clnt_sock)
+
+37  
+	mçl£
+;
+
+39 ià(
+	mmynickÇme
+ < 
+	mk
+.mynickname)
+
+40  
+	mŒue
+;
+
+41 ià(
+	mmynickÇme
+ > 
+	mk
+.mynickname)
+
+42  
+	mçl£
+;
+
+44 ià(
+	m¿nk
+ < 
+	mk
+.rank)
+
+45  
+	mŒue
+;
+
+46 ià(
+	m¿nk
+ > 
+	mk
+.rank)
+
+47  
+	mçl£
+;
+
+49 ià(
+	mmypos™iÚ
+ < 
+	mk
+.myposition)
+
+50  
+	mŒue
+;
+
+52  
+	mçl£
+;
+
+54 ià(
+	mduİos™iÚ
+ < 
+	mk
+.duoposition)
+
+55  
+	mŒue
+;
+
+57  
+	mçl£
+;
+
+61 }
 	tsourû_of_m©chšg_s
 ;
 
-32 
+63 
 	sU£rGameInfo
  {
-
-34 
-¡ršg
- 
-	mnickÇme
-;
-
-35 
-¡ršg
- 
-	m¿nk
-;
-
-37 }
-	tu£r_game_šfo
-;
-
-40 
-	sResuÉOfM©chšg
-{
-
-41 
-¡ršg
- 
-	mduÚickÇme
-;
-
-42 
-¡ršg
- 
-	mduÜªk
-;
-
-43 
-	mcÚfÜm™y
-;
-
-44 }
-	t»suÉ_of_m©chšg
-;
-
-47 
-	ssšgupInfo
-{
-
-48 
-¡ršg
- 
-	mid
-;
-
-49 
-¡ršg
- 
-	mpwd
-;
-
-50 
-¡ršg
- 
-	mnickÇme
-;
-
-51 }
-	tsignup_šfo
-;
-
-53 
-	sCh¬aù”Info
- {
-
-54 
-	mwšs
-;
-
-55 
-	mlos£s
-;
-
-56 
-	mkls
-;
-
-57 
-	md—ths
-;
-
-58 
-	massi¡
-;
-
-59 }
-	tch¬aù”_šfo
-;
-
-61 
-	sU£rCh¬aù”Info
- {
-
-62 
-¡ršg
- 
-	m¿nk
-;
-
-63 
-	mwšs
-;
-
-64 
-	mlos£s
-;
 
 65 
 ¡ršg
  
-	mmy_´ef_pos
+	mnickÇme
 ;
 
 66 
 ¡ršg
  
+	m¿nk
+;
+
+68 }
+	tu£r_game_šfo
+;
+
+71 
+	sResuÉOfM©chšg
+{
+
+72 
+¡ršg
+ 
+	mduÚickÇme
+;
+
+73 
+¡ršg
+ 
+	mduÜªk
+;
+
+74 
+	mcÚfÜm™y
+;
+
+75 }
+	t»suÉ_of_m©chšg
+;
+
+78 
+	ssšgupInfo
+{
+
+79 
+¡ršg
+ 
+	mid
+;
+
+80 
+¡ršg
+ 
+	mpwd
+;
+
+81 
+¡ršg
+ 
+	mnickÇme
+;
+
+82 }
+	tsignup_šfo
+;
+
+84 
+	sCh¬aù”Info
+ {
+
+85 
+	mwšs
+;
+
+86 
+	mlos£s
+;
+
+87 
+	mkls
+;
+
+88 
+	md—ths
+;
+
+89 
+	massi¡
+;
+
+90 }
+	tch¬aù”_šfo
+;
+
+92 
+	sU£rCh¬aù”Info
+ {
+
+93 
+¡ršg
+ 
+	m¿nk
+;
+
+94 
+	mwšs
+;
+
+95 
+	mlos£s
+;
+
+96 
+¡ršg
+ 
+	mmy_´ef_pos
+;
+
+97 
+¡ršg
+ 
 	mduo_´ef_pos
 ;
 
-67 
+98 
 	mm­
 <
 	m¡ršg
@@ -11985,77 +12047,155 @@ usšg
 	mch¬aù”
 ;
 
-69 }
+100 }
 	tu£r_ch¬aù”_šfo
 ;
 
-72 
+103 
 	sU£rInfo
  {
 
-74 
+105 
 ¡ršg
  
 	mnickÇme
 ;
 
-75 
+106 
 ¡ršg
  
 	mid
 ;
 
-76 
+107 
 ¡ršg
  
 	mpwd
 ;
 
-78 }
+109 }
 	tu£r_šfo
 ;
 
-81 
+112 
 	sSourûOfM©chšg
 {
 
-82 
+113 
 ¡ršg
  
 	mmynickÇme
 ;
 
-83 
+114 
 ¡ršg
  
 	mmypos™iÚ
 ;
 
-84 
+115 
 ¡ršg
  
 	mduİos™iÚ
 ;
 
-85 
+116 
 ¡ršg
  
 	m¿nk
 ;
 
-86 }
+118 
+boŞ
+ 
+	mİ”©Ü
+<(cÚ¡ 
+	mSourûOfM©chšg
+& 
+	mk
+) const {
+
+120 ià(
+	mmynickÇme
+ < 
+	mk
+.mynickname)
+
+121  
+	mŒue
+;
+
+122 ià(
+	mmynickÇme
+ > 
+	mk
+.mynickname)
+
+123  
+	mçl£
+;
+
+125 ià(
+	m¿nk
+ < 
+	mk
+.rank)
+
+126  
+	mŒue
+;
+
+127 ià(
+	m¿nk
+ > 
+	mk
+.rank)
+
+128  
+	mçl£
+;
+
+130 ià(
+	mmypos™iÚ
+ < 
+	mk
+.myposition)
+
+131  
+	mŒue
+;
+
+133  
+	mçl£
+;
+
+135 ià(
+	mduİos™iÚ
+ < 
+	mk
+.duoposition)
+
+136  
+	mŒue
+;
+
+138  
+	mçl£
+;
+
+141 }
 	tsourû_of_m©chšg
 ;
 
-90 
+145 
 	sM©chšgQueue
 {
 
-91 
+146 
 	mşÁ_út
  = 0;
 
-92 
+147 
 	mm­
 < 
 	m¡ršg
@@ -12065,37 +12205,211 @@ usšg
 	mşÁ_nickÇme_sock‘_m­
 ;
 
-94 }
+149 }
 	tm©chšg_queue
 ;
 
-96 
+151 
 	sm©chedU£r
 {
 
-97 
+152 
 ¡ršg
  
 	mu£rNickÇme1
 ;
 
-99 
+154 
 	mu£rInfo1
 ;
 
-101 
+156 
 ¡ršg
  
 	mu£rNickÇme2
 ;
 
-103 
+158 
 	mu£rInfo2
 ;
 
-105 }
+160 }
 	tm©ched_u£r
 ;
+
+162 
+	sBe¡PickKey
+ {
+
+163 
+¡ršg
+ 
+	mch¬aù”_Çme
+;
+
+164 
+¡ršg
+ 
+	m¿nk
+;
+
+165 
+¡ršg
+ 
+	mbe¡_ch¬aù”
+;
+
+167 
+boŞ
+ 
+	mİ”©Ü
+<(cÚ¡ 
+	mBe¡PickKey
+& 
+	mk
+) const {
+
+169 ià(
+	mch¬aù”_Çme
+ < 
+	mk
+.character_name)
+
+170  
+	mŒue
+;
+
+171 ià(
+	mch¬aù”_Çme
+ > 
+	mk
+.character_name)
+
+172  
+	mçl£
+;
+
+174 ià(
+	m¿nk
+ < 
+	mk
+.rank)
+
+175  
+	mŒue
+;
+
+176 ià(
+	m¿nk
+ > 
+	mk
+.rank)
+
+177  
+	mçl£
+;
+
+179 ià(
+	mbe¡_ch¬aù”
+ < 
+	mk
+.best_character)
+
+180  
+	mŒue
+;
+
+182  
+	mçl£
+;
+
+186 }
+	tbe¡_pick_key
+;
+
+188 
+	sBe¡PickV®ue
+ {
+
+189 
+	mwš_¿‹
+;
+
+190 
+¡ršg
+ 
+	mdesütiÚ
+;
+
+193 }
+	tbe¡_pick_v®ue
+;
+
+195 
+	sBa£Ch¬aù”Key
+ {
+
+196 
+¡ršg
+ 
+	mch¬aù”_Çme
+;
+
+197 
+¡ršg
+ 
+	m¿nk
+;
+
+199 
+boŞ
+ 
+	mİ”©Ü
+<(cÚ¡ 
+	mBa£Ch¬aù”Key
+& 
+	mk
+) const {
+
+201 ià(
+	mch¬aù”_Çme
+ < 
+	mk
+.character_name)
+
+202  
+	mŒue
+;
+
+203 ià(
+	mch¬aù”_Çme
+ > 
+	mk
+.character_name)
+
+204  
+	mçl£
+;
+
+206 ià(
+	m¿nk
+ < 
+	mk
+.rank)
+
+207  
+	mŒue
+;
+
+209  
+	mçl£
+;
+
+212 }
+	tba£_ch¬aù”_key
+;
+
+	@structs/test.cpp
 
 	@/usr/include/arpa/inet.h
 
@@ -32966,8 +33280,8 @@ __GCC_IEC_559_COMPLEX
 .
 1
 /usr/include
-53
-1349
+54
+1366
 algorithm/algorithm.h
 client/login.h
 client/main_client.cpp
@@ -33007,6 +33321,7 @@ main_server/signup_server.h
 main_server/signup_server_main.cpp
 main_server/socket_server.h
 structs/struct.h
+structs/test.cpp
 /usr/include/arpa/inet.h
 /usr/include/pthread.h
 /usr/include/stdio.h
