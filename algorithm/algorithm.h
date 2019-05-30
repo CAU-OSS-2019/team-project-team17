@@ -16,7 +16,7 @@ class Algorithm{
 
     public:
 
-        static double runAlgorithm(source_of_matching_s usersrc1, source_of_matching_s usersrc2){
+        static double runAlgorithm(source_of_matching_s usersrc1, source_of_matching_s usersrc2, GetCharacterInfo *info){
                 
             if(usersrc1.myposition.compare(usersrc2.duoposition)!=0|| usersrc1.duoposition.compare(usersrc2.myposition)!=0){
                 return 0;//선호 포지션이 서로 맞지 않을경우 매칭 실패
@@ -48,9 +48,9 @@ class Algorithm{
 
             for(iter1 = user1.character.begin(); iter1 != user1.character.end(); iter1++){
                 
-                best_pick_value temp1 = getBestwinrate(iter1->first,iter2->first,getRankstr(avgrank));
+                best_pick_value temp1 = getBestwinrate(iter1->first,iter2->first,getRankstr(avgrank),info);
 
-                double basewinrate1 = getBasewinrate(iter1->first,getRankstr(avgrank));
+                double basewinrate1 = getBasewinrate(iter1->first,getRankstr(avgrank),info);
 
                 double kdarate1 = getKDArate(iter1->second.kills,iter1->second.deaths,iter1->second.assist);
 
@@ -60,7 +60,7 @@ class Algorithm{
 
                 for(iter2 = user2.character.begin(); iter2 != user2.character.end(); iter2++){
                     
-                    best_pick_value temp2 = getBestwinrate(iter2->first,iter1->first,getRankstr(avgrank));
+                    best_pick_value temp2 = getBestwinrate(iter2->first,iter1->first,getRankstr(avgrank),info);
 
                     if(temp1.description.compare(usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
                                                                         //   일치하지 않으면 비교 대상 범주에 들어가지 않음
@@ -72,7 +72,7 @@ class Algorithm{
                     }
 
                     
-                    double basewinrate2 = getBasewinrate(iter2->first,getRankstr(avgrank));
+                    double basewinrate2 = getBasewinrate(iter2->first,getRankstr(avgrank),info);
 
                     double kdarate2 = getKDArate(iter2->second.kills,iter2->second.deaths,iter2->second.assist);
 
@@ -110,53 +110,41 @@ class Algorithm{
         }
 
 
-        static best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname){
+        static best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname, GetCharacterInfo *info){
 
             best_pick_key tempkey;
             tempkey.best_character=best_character_name;
             tempkey.rank=rankname;
             tempkey.character_name=character_name;
 		
-	   /* map<best_pick_key, best_pick_value >::iterator iter =
-		    GetCharacterInfo::best_pick_map.find(tempkey);
+	    map<best_pick_key, best_pick_value >::iterator iter =
+		    info->best_pick_map.find(tempkey);
 
-            if(iter!=GetCharacterInfo::best_pick_map.end()){
+            if(iter!=info->best_pick_map.end()){
                 return iter->second;
             } else {
-		*/
-		best_pick_value nullvalue;
-        	nullvalue.description="";
-        	nullvalue.win_rate=0;
+		
+		        best_pick_value nullvalue;
+        	    nullvalue.description="";
+        	    nullvalue.win_rate=0;
 
-        	return nullvalue;
-            //}
+        	    return nullvalue;
+            }
             
         }
 
-        static double getBasewinrate(string character_name, string rankname){
+        static double getBasewinrate(string character_name, string rankname,GetCharacterInfo *info){
 
             base_character_key tempkey;
             tempkey.character_name = character_name;
             tempkey.rank = rankname;
 		
-	    //map<base_character_key, float >::iterator iter
-	//	    = GetCharacterInfo::base_character_map.find(tempkey);
+	    map<base_character_key, float >::iterator iter
+		    = info->base_character_map.find(tempkey);
 	
 	
-	//    return iter->second;
-		return 0;
-	    /*
-            if(iter!=GetCharacterInfo::base_character_map.end()){
-                return iter->second;
-            } else {
+	    return iter->second;
 		
-		 KKT Debug - base 캐릭터에 대한 best pick 캐릭터가 없는 경우
-		base_chacter_map no_base_character;
-		KKT Debug - return 고쳐줘야 함. 
-         
-                return 0;
-            }
-	    */
         }
 
         static int getRanknum(string rankname){

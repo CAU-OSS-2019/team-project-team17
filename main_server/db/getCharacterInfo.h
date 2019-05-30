@@ -58,6 +58,7 @@ class GetCharacterInfo {
 
 		
 		map<base_character_key, float> getBaseCharacterInfo();
+		map<best_pick_key, best_pick_value> getBestPickCharacter();
 /*
 		map<base_character_key, float> getBaseCharacterInfo() {
 			cout << "Get Base Character Information" << endl;

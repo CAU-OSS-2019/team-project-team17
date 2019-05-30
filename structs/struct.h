@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string.h>
 #include <map>
-#include </usr/include/c++/7/bits/stl_function.h>
 
 using namespace std;
 

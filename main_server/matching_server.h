@@ -36,17 +36,17 @@ class Matching{
 		
 		
 
-		matched_user compareConformity(source_of_matching_s userInfo[]){
+		matched_user compareConformity(source_of_matching_s userInfo[],GetCharacterInfo *info){
 			double userConformity[MATCHING_QUEUE_SIZE][MATCHING_QUEUE_SIZE-1];
 			
 			double max = 0;
 			int maxI =0, maxJ =0;
 			
 			userConformity[0][0] = -1;
-			max = Algorithm::runAlgorithm(userInfo[0], userInfo[1]);
+			max = Algorithm::runAlgorithm(userInfo[0], userInfo[1],info);
 			for(int i = 0; i < MATCHING_QUEUE_SIZE; i++){
 				for(int j = i+1; j < MATCHING_QUEUE_SIZE; j++){
-					userConformity[i][j] = Algorithm::runAlgorithm(userInfo[i], userInfo[j]);
+					userConformity[i][j] = Algorithm::runAlgorithm(userInfo[i], userInfo[j],info);
 					
 					if(max < userConformity[i][j]){
 						max = userConformity[i][j];
@@ -61,7 +61,7 @@ class Matching{
 			return  bestMatchedUser;
 		}
 		
-		matched_user runMatching(void){
+		matched_user runMatching(GetCharacterInfo * info){
 			cout<<"runMatching"<<endl;
 			/////////////////////////////// userConformity 유저별로 저장해놓고 나중에 매칭 속도 빠르게도 할 수 있을 듯.
 			int i = 0;
@@ -80,7 +80,7 @@ class Matching{
 				userInfo[i].clnt_sock = (iter->second).clnt_sock;
 			}
 			
-			return compareConformity(userInfo);
+			return compareConformity(userInfo,info);
 		}
 		/*
 		 source_of_matching getSourceFromDB(string userNickname){
@@ -115,7 +115,7 @@ class MatchingSocketServer : public SocketServer{
 		static void *handleMatching_helper(void *context){
 			return ((MatchingSocketServer*)context)->handleMatching();
 		}*/
-		void * handleMatching(){
+		void * handleMatching(GetCharacterInfo *info){
 			int thread_create_success = -1;
 			mutexInit();
 
@@ -162,7 +162,7 @@ class MatchingSocketServer : public SocketServer{
 				if(matchingQueue.clnt_cnt == MATCHING_QUEUE_SIZE){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
 					Matching * matching = new Matching(matchingQueue);
-					matched_user matchedUser = matching->runMatching();
+					matched_user matchedUser = matching->runMatching(info);
 					delete matching;
 					
 					sendMatchingData(matchedUser, true);
