@@ -47,7 +47,7 @@ for link in soup.select('#drop-champions> ul > li > a'):
     if characterName == '':
         continue
     for tire in tireList:
-        driver.get('https://www.leagueofgraphs.com/ko/champions/builds/'+characterName+'/'+tire)
+        driver.get('https://www.leagueofgraphs.com/champions/builds/'+characterName+'/'+tire)
         html = driver.page_source
         soup = BeautifulSoup(html, 'lxml')
 
@@ -62,7 +62,7 @@ for link in soup.select('#drop-champions> ul > li > a'):
         
         cursor.execute(sql, (characterName, tire if (tire != '') else 'platinum', base_win_rate))
 
-        driver.get('https://www.leagueofgraphs.com/ko/champions/counters/'+characterName+'/'+tire)
+        driver.get('https://www.leagueofgraphs.com/champions/counters/'+characterName+'/'+tire)
         driver.find_element_by_xpath('//*[@id="mainContent"]/div/div[1]/div/table/tbody//td/button').click()
 
         html = driver.page_source
