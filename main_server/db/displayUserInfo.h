@@ -3,7 +3,7 @@
 
 #include "socket_server.h"
 
-#include <mysql.h>
+#include </usr/include/mysql/mysql.h>
 
 #define HOST "gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com"
 #define USERNAME "gamehaeduo"
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#include "../structs/struct.h"
+#include "../../structs/struct.h"
 
 class DisplayUserInfo {
 	private :
@@ -24,7 +24,8 @@ class DisplayUserInfo {
 		MYSQL *connection = NULL;
 		int query_state;
 		char query[255];
-		
+		MYSQL_RES *sql_result;
+                MYSQL_ROW sql_row;
 		// variables for socket
 
 	public :
@@ -98,6 +99,6 @@ class DisplayUserInfo {
 
 			return user;
 		}
-}
+};
 
 #endif // __DISPLAYUSERINFO_H__

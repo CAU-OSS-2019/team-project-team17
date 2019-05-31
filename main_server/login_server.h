@@ -112,7 +112,7 @@ class LoginSocketServer : public SocketServer{
 
 				user.loginSuccess=loginSuccess;
 
-				DisplayUserInfo userdata = new DisplayUserInfo();
+				DisplayUserInfo userdata;
 				user_game_info tempinfo = userdata.displayUserInfo(loginInfo_p->id);
 
 				if(loginSuccess){

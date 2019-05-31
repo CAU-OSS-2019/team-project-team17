@@ -48,8 +48,8 @@ class GetCharacterInfo {
 	public :
 
 		// variables for getCharacterInfo
-		static map<base_character_key, float> base_character_map;
-		static map<best_pick_key, best_pick_value> best_pick_map;
+		map<base_character_key, float> base_character_map;
+		map<best_pick_key, best_pick_value> best_pick_map;
 		
 		// Constructor
 		GetCharacterInfo(){

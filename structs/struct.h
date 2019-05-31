@@ -81,9 +81,9 @@ typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭
 
 
 typedef struct singupInfo{
-	string id;
-	string pwd;
-	string nickname;
+	char id[32];
+	char pwd[32];
+	char nickname[32];
 }signup_info;
 
 typedef struct CharacterInfo {

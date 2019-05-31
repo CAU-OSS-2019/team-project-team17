@@ -77,7 +77,7 @@ class SignupSocketServer : public SocketServer{
 			int clnt_sock = *((int*)arg);
 			
 			
-			while(1){
+			//while(1){
 
 				/*
 				char id_c[31];
@@ -85,11 +85,15 @@ class SignupSocketServer : public SocketServer{
 				*/
 
 				signup_info * signup_info_p;
-				char buffer[200];
+				char buffer[sizeof(signup_info)];
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){//클라이언트로부터 로그인 데이터를 받을때까지 대기, 제대로 받았는지 체크
 					cout << "Error : server -- read() in signupClnt() thread." <<endl;
 					close(clnt_sock);
 				}
+
+				cout <<"sizeof : "<<sizeof(character_info) <<endl;
+
+				cout << "BUFFER SIZE :" <<sizeof(buffer)<<endl;
 			
 				/*
 				if(read(clnt_sock, pwd_c, sizeof(pwd_c)) == -1){
@@ -104,17 +108,23 @@ class SignupSocketServer : public SocketServer{
 				signup_info_p = (signup_info*)buffer;
 				SignUp signup_temp;
 				
+				/* for debugging */
+				cout << "id : " << signup_info_p->id
+					<< "pwd : " << signup_info_p->pwd
+				<< "nickname : " << signup_info_p->nickname << endl;
+					
 				bool signupSuccess = signup_temp.signup((*signup_info_p));
 			
 				if(signupSuccess){
 					write(clnt_sock, &signupSuccess, sizeof(signupSuccess));
-					break;
+					//break;
 				}
 				
 				else{	
 					write(clnt_sock, &signupSuccess, sizeof(signupSuccess));
+					//break;
 				}
-			}
+			//}
 			close(clnt_sock);
 			return NULL;
 		}

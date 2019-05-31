@@ -71,9 +71,11 @@ class SignUp {
 				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
 				return false;
 			}	
-		
+			
+			mysql_set_character_set(&conn,"utf8");
+
 			// Query
-			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", input.nickname.c_str(), input.id.c_str(), input.pwd.c_str());
+			sprintf(query, "INSERT INTO login VALUES ('%s', '%s', '%s')", input.nickname, input.id, input.pwd);
 
 			query_state = mysql_query(connection, query);
 	
@@ -85,6 +87,8 @@ class SignUp {
 
 			// Close
 			mysql_close(&conn);
+
+			return true;
 		}
 };
 
