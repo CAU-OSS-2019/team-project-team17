@@ -31,7 +31,7 @@ class DisplayUserInfo {
 		// Constructor
 		
 		
-		user_game_info displayUserInfo(string nickname) {
+		user_game_info displayUserInfo(string userid) {
 			cout << "Display User Info" << endl;
 
 			// Connect
@@ -45,7 +45,7 @@ class DisplayUserInfo {
 			}
 			
 			// Query
-			sprintf(query, "SELECT nickname, rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname.c_str());
+			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", userid.c_str());
 
 			query_state = mysql_query(connection, query);
 
@@ -60,8 +60,36 @@ class DisplayUserInfo {
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 				user.nickname = sql_row[0];
-				user.rank = sql_row[1];
-			}	
+			}
+
+
+
+
+
+
+			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", user.nickname.c_str());
+
+			query_state = mysql_query(connection, query);
+
+			if (query_state != 0) {
+				cout << "Display User Info failed : " << mysql_error(&conn) << endl;
+				mysql_close(&conn);
+				return user;
+			}
+
+			// Result
+			sql_result = mysql_store_result(connection);
+
+			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+				user.rank = sql_row[0];
+			}
+
+
+
+
+
+
+
 
 			// Close
 			mysql_free_result(sql_result);

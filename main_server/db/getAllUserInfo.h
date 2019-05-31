@@ -19,7 +19,7 @@ using namespace std;
 class GetAllUserInfo {
 	private :
 		// variables for getCharacterInfo
-		user_character_info user_info;
+		
 
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -33,6 +33,7 @@ class GetAllUserInfo {
 	public :
 		// Constructor
 
+		user_character_info user_info;
 		
 		user_character_info getUserCharacterInfo(string nickname) {
 			cout << "Get All Information about Game" << endl;

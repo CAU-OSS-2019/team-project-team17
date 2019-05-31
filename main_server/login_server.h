@@ -3,6 +3,7 @@
 
 #include "db/login_server_db.h"
 #include "../structs/struct.h"
+#include "db/displayUserInfo.h"
 using namespace std;
 /*
 typedef struct LoginQueue{
@@ -106,14 +107,28 @@ class LoginSocketServer : public SocketServer{
 				Login login_temp;
 				
 				bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
-			
+				
+				login_data user;
+
+				user.loginSuccess=loginSuccess;
+
+				DisplayUserInfo userdata = new DisplayUserInfo();
+				user_game_info tempinfo = userdata.displayUserInfo(loginInfo_p->id);
+
 				if(loginSuccess){
-					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
+
+					
+					user.nickname=tempinfo.nickname;
+					user.rank=tempinfo.rank;
+
+
+					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
 					break;
 				}
 				
-				else{	
-					write(clnt_sock, &loginSuccess, sizeof(loginSuccess));
+				else{
+					
+					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
 				}
 			}
 			close(clnt_sock);

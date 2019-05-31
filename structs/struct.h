@@ -10,6 +10,12 @@
 using namespace std;
 
 
+typedef struct LoginData{
+	string nickname;
+	string rank;
+	bool loginSuccess;
+}login_data;
+
 typedef struct LoginSocketInfo{
 	int clnt_socket;
 	string id;
