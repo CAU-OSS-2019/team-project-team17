@@ -18,7 +18,7 @@ using namespace std;
 class DisplayUserInfo {
 	private :
 		// variables for displayUserInfo
-		user_game_info user;
+		
 
 		MYSQL conn;
 		MYSQL *connection = NULL;
@@ -30,6 +30,7 @@ class DisplayUserInfo {
 	public :
 		// Constructor
 		
+		user_game_info user;
 		
 		user_game_info displayUserInfo(string userid) {
 			cout << "Display User Info" << endl;
