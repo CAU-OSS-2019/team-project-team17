@@ -43,15 +43,17 @@ soup = BeautifulSoup(html, 'lxml')
 
 for link in soup.select('#drop-champions> ul > li > a'):
     if 'href' in link.attrs:
-        characterName = link.attrs['href'][23:]
-    if characterName == '':
+        small_characterName = link.attrs['href'][23:]
+    if small_characterName == '':
         continue
     for tire in tireList:
-        driver.get('https://www.leagueofgraphs.com/champions/builds/'+characterName+'/'+tire)
+        driver.get('https://www.leagueofgraphs.com/champions/builds/'+small_characterName+'/'+tire)
         html = driver.page_source
         soup = BeautifulSoup(html, 'lxml')
 
         base_win_rate = float(soup.find('div', id="graphDD2").get_text().strip()[:-1])
+        big_characterName = soup.find('div', class_='txt').h2.get_text()
+        print(big_characterName)
 
         sql = """
                 INSERT IGNORE baseCharacterInfo
@@ -60,9 +62,9 @@ for link in soup.select('#drop-champions> ul > li > a'):
                     (%s, %s, %s)
         """
         
-        cursor.execute(sql, (characterName, tire if (tire != '') else 'platinum', base_win_rate))
+        cursor.execute(sql, (big_characterName, tire if (tire != '') else 'platinum', base_win_rate))
 
-        driver.get('https://www.leagueofgraphs.com/champions/counters/'+characterName+'/'+tire)
+        driver.get('https://www.leagueofgraphs.com/champions/counters/'+small_characterName+'/'+tire)
         driver.find_element_by_xpath('//*[@id="mainContent"]/div/div[1]/div/table/tbody//td/button').click()
 
         html = driver.page_source
@@ -82,7 +84,7 @@ for link in soup.select('#drop-champions> ul > li > a'):
                 VALUES
                     (%s, %s, %s, %s, %s)
             """
-            cursor.execute(sql, (characterName, tire if (tire != '') else 'platinum', bestCharacterName, winRate, des))
+            cursor.execute(sql, (big_characterName, tire if (tire != '') else 'platinum', bestCharacterName, winRate, des))
 
 db.commit()
 
