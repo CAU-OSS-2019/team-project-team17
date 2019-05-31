@@ -5,7 +5,7 @@ int main(){
 	
 	GetCharacterInfo *info = new GetCharacterInfo();
 
-	MatchingSocketServer matchingSocketServer("server matching socket",9100,1000);	
+	MatchingSocketServer matchingSocketServer("server matching socket",9000,1000);	
 	
 	matchingSocketServer.handleMatching(info);
 }
