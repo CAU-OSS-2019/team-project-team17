@@ -2,7 +2,7 @@
 #define SIGNUP_H
 
 #include <QDialog>
-#include <QMovie>
+#include <QMessageBox>
 #include "signup_socket.h"
 
 namespace Ui {

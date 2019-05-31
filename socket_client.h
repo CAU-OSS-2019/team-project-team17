@@ -12,6 +12,7 @@
 #include <string.h>
 #include <string>
 #include <stdlib.h>
+#include "struct.h"
 
 using namespace std;
 
@@ -65,7 +66,7 @@ class SocketClient{
 
             printf("Message from server:%s\n", message);
 
-            close(sock);
+            closesocket(sock);
             return 0;
 
         }

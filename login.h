@@ -3,11 +3,6 @@
 
 #include "socket_client.h"
 
-typedef struct LoginInfo{
-    string id;
-    string pwd;
-}login_info;
-
 class LoginSocketClient : public SocketClient{
     public :
         int receive_success;
@@ -21,12 +16,6 @@ class LoginSocketClient : public SocketClient{
 
         void sendData(login_info loginInfo) {
             send_success = send(sock, (char*)&loginInfo, sizeof(loginInfo), 0);
-            if(send_success == -1){
-                cout << "Fail : sendData() in login." << endl;
-            }
-            else{
-                cout << "Success : sendData() in login." << endl;
-            }
         }
 
         void sendbuf(char *buf) {

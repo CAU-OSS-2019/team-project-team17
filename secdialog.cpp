@@ -6,7 +6,6 @@ SecDialog::SecDialog(QWidget *parent) :
     ui(new Ui::SecDialog)
 {
     ui->setupUi(this);
-//    matchingSock = new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
 }
 
 SecDialog::~SecDialog()
@@ -21,6 +20,7 @@ void SecDialog::on_pushButton_clicked()
     Movie->start();
 
     running_state = true;
+//    matchingSock = new MatchingSocketClient("matching socket", "13.209.15.157", 8888);
 //    source.nickname = "뚱땡이버거";
 //    matchingSock->sendData(source);
 
@@ -34,6 +34,4 @@ void SecDialog::on_pushButton_clicked()
 }
 
 void SecDialog::displayMatchedUserInfo() {
-    cout << "data1 : " << result.data1 << "  "
-                    << " data2 :  " << result.data2 << "  " << "data3 : "<<result.data3 << "  " << endl;
 }
