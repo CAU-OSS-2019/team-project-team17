@@ -79,7 +79,7 @@ class LoginSocketServer : public SocketServer{
 			int clnt_sock = *((int*)arg);
 			
 			
-			while(1){
+			//while(1){
 
 				/*
 				char id_c[31];
@@ -122,15 +122,15 @@ class LoginSocketServer : public SocketServer{
 					user.rank=tempinfo.rank;
 
 
-					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
-					break;
+					write(clnt_sock, (char*)&user, sizeof(user));
+					//break;
 				}
 				
 				else{
 					
-					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
+					write(clnt_sock, (char*)&user, sizeof(user));
 				}
-			}
+		//	}
 			close(clnt_sock);
 			return NULL;
 		}
