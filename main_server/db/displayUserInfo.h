@@ -43,7 +43,7 @@ class DisplayUserInfo {
 			mysql_init(&conn);
 
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
-
+			mysql_set_character_set(&conn,"utf8");
 			if (connection == NULL) {
 				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
 				return user;
