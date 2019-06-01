@@ -47,7 +47,7 @@ class DisplayUserInfo {
 			}
 			
 			// Query
-			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", userid);
+			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", string(userid));
 
 			query_state = mysql_query(connection, query);
 
@@ -69,7 +69,7 @@ class DisplayUserInfo {
 
 
 
-			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", user.nickname);
+			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", string(user.nickname));
 
 			query_state = mysql_query(connection, query);
 
