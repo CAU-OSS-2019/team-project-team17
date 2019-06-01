@@ -100,7 +100,7 @@ typedef struct UserCharacterInfo {
 	float losses;
 	char my_pref_pos[32];
 	char duo_pref_pos[32];
-	map<char[], character_info> character;
+	map<char[32], character_info> character;
 	
 }user_character_info;
 
@@ -149,7 +149,7 @@ typedef struct SourceOfMatching{
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	map< char[], source_of_matching_s > clnt_nickname_socket_map;
+	map< char[32], source_of_matching_s > clnt_nickname_socket_map;
 
 }matching_queue;
 

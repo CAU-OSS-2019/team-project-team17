@@ -86,7 +86,7 @@ class Matching{
 			string userNickname[MATCHING_QUEUE_SIZE];
 			source_of_matching_s userInfo[MATCHING_QUEUE_SIZE];
 
-			map< char[], source_of_matching_s >::iterator iter;
+			map< char[32], source_of_matching_s >::iterator iter;
 			
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;

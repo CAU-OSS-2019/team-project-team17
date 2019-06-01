@@ -40,8 +40,8 @@ class Algorithm{
 	    user1 = getAllUserInfo_obj_p1->getUserCharacterInfo(usersrc1.mynickname);
             user2 = getAllUserInfo_obj_p2->getUserCharacterInfo(usersrc2.mynickname);
 
-            map<char[], character_info>::iterator iter1;
-            map<char[], character_info>::iterator iter2;
+            map<char[32], character_info>::iterator iter1;
+            map<char[32], character_info>::iterator iter2;
 
             int compareNum = 0;
             double conformity = 0;

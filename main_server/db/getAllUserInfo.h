@@ -87,7 +87,7 @@ class GetAllUserInfo {
 			// Result
 			sql_result = mysql_store_result(connection);
 
-			map<char[], character_info> character_map;
+			map<char[32], character_info> character_map;
 			char ch_key[32];
 			character_info ch_value;
 
@@ -100,7 +100,7 @@ class GetAllUserInfo {
 				ch_value.deaths = atof(sql_row[6]);
 				ch_value.assist = atof(sql_row[7]);
 
-				character_map.insert(pair<char[], character_info>(ch_key, ch_value));
+				character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
 			}
 
 			if (character_map.size() > 0) {
