@@ -123,10 +123,13 @@ class LoginSocketServer : public SocketServer{
 				user_game_info tempinfo = userdata.displayUserInfo(loginInfo_p->id);
 
 				if(loginSuccess){
-
+					
+					
 					
 					strcpy(user.nickname,tempinfo.nickname);
 					strcpy(user.rank,tempinfo.rank);
+
+					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank;
 
 					write(clnt_sock, (char*)&user, sizeof(user));
 			
