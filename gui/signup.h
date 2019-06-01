@@ -2,8 +2,9 @@
 #define SIGNUP_H
 
 #include <QDialog>
-#include <QMovie>
+#include <QMessageBox>
 #include "signup_socket.h"
+#include <string>
 
 namespace Ui {
 class SignUp;
@@ -17,8 +18,6 @@ public:
     explicit SignUp(QWidget *parent = nullptr);
     ~SignUp();
 private slots:
-    void MainPosition();
-    void SubPositon();
     void on_pushButton_OK_clicked();
 private:
     Ui::SignUp *ui;
@@ -28,8 +27,6 @@ private:
     QString id;
     QString pwd;
     QString nickname;
-    QString mainPosition;
-    QString subPosition;
 };
 
 #endif // SIGNUP_H

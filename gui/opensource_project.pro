@@ -39,7 +39,8 @@ HEADERS += \
     secdialog.h \
     signup.h \
     signup_socket.h \
-    socket_client.h
+    socket_client.h \
+    struct.h
 
 FORMS += \
     addfriend.ui \

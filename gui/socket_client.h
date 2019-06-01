@@ -12,6 +12,7 @@
 #include <string.h>
 #include <string>
 #include <stdlib.h>
+#include "struct.h"
 
 using namespace std;
 
@@ -51,9 +52,9 @@ class SocketClient{
             if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
                 cout << "connect() error" << endl;
 
-            /* 에러를 띄우고 로그파일에 기록.
-             * 예외처리를 할 errorhandling 함수
-             * 각각 다 만들어야함. */
+                /* 에러를 띄우고 로그파일에 기록.
+                 * 예외처리를 할 errorhandling 함수
+                 * 각각 다 만들어야함. */
 
         }
 
@@ -65,7 +66,7 @@ class SocketClient{
 
             printf("Message from server:%s\n", message);
 
-            close(sock);
+            closesocket(sock);
             return 0;
 
         }
