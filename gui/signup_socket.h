@@ -3,14 +3,6 @@
 
 #include "socket_client.h"
 
-typedef struct signupInfo{
-    string id;
-    string pwd;
-    string nickname;
-    string position1;
-    string position2;
-}signup_info;
-
 class SignupSocketClient : public SocketClient{
     public :
         int receive_success;
@@ -23,33 +15,21 @@ class SignupSocketClient : public SocketClient{
         }
 
         void sendData(signup_info signupInfo){
-            cout << "client -- sendData() in signup." << endl <<endl;
-
-            cout << "ID : " << signupInfo.id << endl;
-            cout << "PWD : " << signupInfo.pwd << endl;
-
-            send_success = send(sock, (char*)&signupInfo, sizeof(signupInfo), 0);
-
-            if(send_success == -1){
-                cout << "Fail : sendData() in signup." << endl;
-            }
-
-            else{
-                cout << "Success : sendData() in signup." << endl;
-            }
+            cout << signupInfo.id << " " << signupInfo.pwd << " "  << signupInfo.nickname << endl;
+            send_success = send(sock, (char*)&signupInfo, sizeof(signup_info), 0);
+            cout << sizeof(signupInfo) << " " <<  sizeof(signup_info) << endl;
         }
 
         bool receiveData(void){
             bool signupSuccess;
-            receive_success = recv(sock, (char*)&signupSuccess, sizeof(signupSuccess), 0);
+            receive_success = recv(sock, (char*)&signupSuccess, sizeof(bool), 0);
+
+            cout << receive_success << endl;
 
             if(receive_success == -1){
-                cout << "Fail : receiveData() in signup." << endl;
                 return false;
             }
-
             else{
-                cout << "Success : receiveData() in signup." << endl;
                 return signupSuccess;
             }
         }
