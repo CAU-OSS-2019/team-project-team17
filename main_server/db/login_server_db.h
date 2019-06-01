@@ -80,10 +80,16 @@ class Login {
 
 			sql_result = mysql_store_result(connection);
 
-			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+			//while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 				
-				set_user(sql_row);
-			}	
+			//	set_user(sql_row);
+			//}	
+
+			if(mysql_fetch_row(sql_result)) == NULL) {
+				mysql_free_result(sql_result);
+				mysql_close(&conn);
+				return false;
+			}
 
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
