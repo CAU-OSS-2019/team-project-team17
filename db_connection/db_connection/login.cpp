@@ -63,7 +63,7 @@ void main()
 		return;
 	}
 
-	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id.c_str(), user.pwd.c_str());
+	sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s'", user.id, user.pwd);
 
 	query_state = mysql_query(connection, query);
 

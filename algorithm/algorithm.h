@@ -18,7 +18,7 @@ class Algorithm{
 
         static double runAlgorithm(source_of_matching_s usersrc1, source_of_matching_s usersrc2, GetCharacterInfo *info){
                 
-            if(usersrc1.myposition.compare(usersrc2.duoposition)!=0|| usersrc1.duoposition.compare(usersrc2.myposition)!=0){
+            if(strcmp(usersrc1.myposition,usersrc2.duoposition)!=0|| strcmp(usersrc1.duoposition,usersrc2.myposition)!=0){
                 return 0;//선호 포지션이 서로 맞지 않을경우 매칭 실패
             }
 
@@ -62,12 +62,12 @@ class Algorithm{
                     
                     best_pick_value temp2 = getBestwinrate(iter2->first,iter1->first,getRankstr(avgrank),info);
 
-                    if(temp1.description.compare(usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
+                    if(strcmp(temp1.description,usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
                                                                         //   일치하지 않으면 비교 대상 범주에 들어가지 않음
                         continue;
                     }
 
-                    if(temp2.description.compare(usersrc2.duoposition)!=0){//마찬가지
+                    if(strcmp(temp2.description,usersrc2.duoposition)!=0){//마찬가지
                         continue;
                     }
 
@@ -148,19 +148,19 @@ class Algorithm{
         }
 
         static int getRanknum(string rankname){
-            if(rankname.compare("iron")==0){
+            if(strcmp(rankname,"iron")==0){
                 return 0;
-            } else if(rankname.compare("bronze")==0){
+            } else if(strcmp(rankname,"bronze")==0){
                 return 1;
-            } else if(rankname.compare("silver")==0){
+            } else if(strcmp(rankname,"silver")==0){
                 return 2;
-            } else if(rankname.compare("gold")==0){
+            } else if(strcmp(rankname,"gold")==0){
                 return 3;
-            } else if(rankname.compare("platinum")==0){
+            } else if(strcmp(rankname,"platinum")==0){
                 return 4;
-            } else if(rankname.compare("diamond")==0){
+            } else if(strcmp(rankname,"diamond")==0){
                 return 5;
-            } else if(rankname.compare("master")==0){
+            } else if(strcmp(rankname,"master")==0){
                 return 6;
             }
         }

@@ -66,7 +66,7 @@ void main()
 	}
 
 	// Query - userEntireInfo
-	sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname.c_str());
+	sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname);
 
 	query_state = mysql_query(connection, query);
 
@@ -89,7 +89,7 @@ void main()
 
 
 	// Query - userCharacterInfo
-	sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname.c_str());
+	sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname);
 
 	query_state = mysql_query(connection, query);
 

@@ -51,7 +51,7 @@ class GetAllUserInfo {
 			}
 		
 			// Query - userEntireInfo
-			sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname.c_str());
+			sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname);
 
 			query_state = mysql_query(connection, query);
 
@@ -74,7 +74,7 @@ class GetAllUserInfo {
 
 
 			// Query - userCharacterInfo
-			sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname.c_str());
+			sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname);
 
 			query_state = mysql_query(connection, query);
 

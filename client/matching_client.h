@@ -42,7 +42,7 @@ class MatchingSocketClient : public SocketClient{
 			
 			cout << "souce.nickname : " << source.nickname <<"   " <<endl;
 			char nickname_c[31];
-			strcpy(nickname_c, (source.nickname).c_str());
+			strcpy(nickname_c, (source.nickname));
 			
 			cout << nickname_c << endl;
 			

@@ -68,7 +68,7 @@ class Login {
 
 			connect_db();
 
-			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", input.id.c_str(), input.pwd.c_str());
+			sprintf(query, "SELECT * FROM login WHERE id='%s' AND pwd='%s' LIMIT 1", input.id, input.pwd);
 
 			query_state = mysql_query(connection, query);
 
