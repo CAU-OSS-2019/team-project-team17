@@ -2,9 +2,9 @@
 #define __STRUCT__
 
 
-#include <char>
+#include <string>
 #include <iostream>
-#include <char.h>
+#include <string.h>
 #include <map>
 
 using namespace std;
