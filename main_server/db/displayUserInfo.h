@@ -37,10 +37,10 @@ class DisplayUserInfo {
 
 			user_game_info user;
 
-			
+
 			cout << "Display User Info" << endl;
-			strcpy(user.nickname,"FAIL");
-			strcpy(user.rank,"FAIL");
+			strcpy(user->nickname,"FAIL");
+			strcpy(user->rank,"FAIL");
 			
 
 			// Connect
@@ -107,6 +107,9 @@ class DisplayUserInfo {
 			// Close
 			mysql_free_result(sql_result);
 			mysql_close(&conn);
+
+			cout << "userdata return" << endl;
+
 
 			return user;
 		}
