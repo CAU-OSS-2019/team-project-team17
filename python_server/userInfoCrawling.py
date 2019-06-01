@@ -1,19 +1,18 @@
-# HOST와 PORT를 적어주세요!!!!!!
-
-
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 import pymysql
-import socketserver
+import SocketServer as socketserver
 import threading
 
 lock = threading.Lock() # mutual exclusion을 위한 뮤텍스
 
 HOST = ''
-PORT = 9009 #호스트와 포트는 소켓 서버를 위한 것
+PORT = 9300 #호스트와 포트는 소켓 서버를 위한 것
 
 host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com' # DB 주소 세팅
 username = 'gamehaeduo'
@@ -75,8 +74,18 @@ class UserManager:
 
 
     def crawlUser(user_nickname):
+        options = webdriver.ChromeOptions()
+
+        options.add_argument('headless')
+        options.add_argument('window-size=1920x1080')
+        options.add_argument("disable-gpu")
+
+
+        driver = webdriver.Chrome(driver_path='/home/dev/chromedriver',chrome_options=options)
+
     
-        driver = webdriver.Chrome(r"C:\\Users\\songsari\\Desktop\\chromedriver.exe") 
+
+
         driver.implicitly_wait(3)
         driver.get('https://www.op.gg/') 
 
