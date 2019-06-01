@@ -66,7 +66,7 @@ class GetAllUserInfo {
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 
-				user_info.rank = sql_row[1];
+				strcpy(user_info.rank , sql_row[1]);
 				user_info.wins = atof(sql_row[2]);
 				user_info.losses = atof(sql_row[3]);
 			}
@@ -87,20 +87,20 @@ class GetAllUserInfo {
 			// Result
 			sql_result = mysql_store_result(connection);
 
-			map<string, character_info> character_map;
-			string ch_key;
+			map<char[], character_info> character_map;
+			char ch_key[32];
 			character_info ch_value;
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 
-				ch_key = sql_row[2];
+				strcpy(ch_key ,sql_row[2]);
 				ch_value.wins = atof(sql_row[3]);
 				ch_value.losses = atof(sql_row[4]);
 				ch_value.kills = atof(sql_row[5]);
 				ch_value.deaths = atof(sql_row[6]);
 				ch_value.assist = atof(sql_row[7]);
 
-				character_map.insert(pair<string, character_info>(ch_key, ch_value));
+				character_map.insert(pair<char[], character_info>(ch_key, ch_value));
 			}
 
 			if (character_map.size() > 0) {

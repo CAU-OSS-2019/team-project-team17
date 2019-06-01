@@ -86,7 +86,7 @@ class Matching{
 			string userNickname[MATCHING_QUEUE_SIZE];
 			source_of_matching_s userInfo[MATCHING_QUEUE_SIZE];
 
-			map< string, source_of_matching_s >::iterator iter;
+			map< char[], source_of_matching_s >::iterator iter;
 			
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
@@ -95,7 +95,7 @@ class Matching{
 				strcpy(userInfo[i].myposition , (iter->second).myposition);
 				strcpy(userInfo[i].duoposition , (iter->second).duoposition);
 				strcpy(userInfo[i].rank , (iter->second).rank);
-				strcpy(userInfo[i].clnt_sock , (iter->second).clnt_sock);
+				userInfo[i].clnt_sock = (iter->second).clnt_sock;
 			}
 			
 			return compareConformity(userInfo,info);
@@ -167,10 +167,10 @@ class MatchingSocketServer : public SocketServer{
 				tempsrc=(source_of_matching*)buffer;
 			
 				source_of_matching_s tempsrc2;
-				tempsrc2.mynickname = tempsrc->mynickname;
-				tempsrc2.myposition = tempsrc->myposition;
-				tempsrc2.duoposition = tempsrc->duoposition;
-				tempsrc2.rank = tempsrc->rank;
+				strcpy(tempsrc2.mynickname ,tempsrc->mynickname);
+				strcpy(tempsrc2.myposition = tempsrc->myposition);
+				strcpy(tempsrc2.duoposition = tempsrc->duoposition);
+				strcpy(tempsrc2.rank , tempsrc->rank);
 				tempsrc2.clnt_sock = clnt_sock;
 
 				matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
@@ -210,8 +210,8 @@ class MatchingSocketServer : public SocketServer{
 			//되는지 확인해보기 맵에서 값 접근 방법 -  a[1] 접근
 			map< string, source_of_matching_s >::iterator matchingUserIter1;
 			map< string, source_of_matching_s >::iterator matchingUserIter2;
-			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
-			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
+			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res2.duonickname);
+			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res1.duonickname);
 			int userSock1 = (matchingUserIter1->second).clnt_sock;
 			int userSock2 = (matchingUserIter2->second).clnt_sock;
 			
@@ -249,11 +249,11 @@ class MatchingSocketServer : public SocketServer{
 			
 			map< string, source_of_matching_s >::iterator matchingUserIter1;
 			map< string, source_of_matching_s >::iterator matchingUserIter2;
-			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname1);
+			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res2.duonickname);
 			matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter1);
 			--matchingQueue.clnt_cnt;
 			
-			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.userNickname2);
+			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res1.duonickname);
 			matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter2);
 			--matchingQueue.clnt_cnt;
 
