@@ -31,9 +31,13 @@ class DisplayUserInfo {
 	public :
 		// Constructor
 		
-		user_game_info user;
+		
 		
 		user_game_info displayUserInfo(string_key strkey) {
+
+			user_game_info user;
+
+			
 			cout << "Display User Info" << endl;
 			strcpy(user.nickname,"FAIL");
 			strcpy(user.rank,"FAIL");
