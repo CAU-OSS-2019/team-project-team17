@@ -86,75 +86,72 @@ class LoginSocketServer : public SocketServer{
 				char pwd_c[31];
 				*/
 
-				login_info * loginInfo_p;
-				char buffer[sizeof(login_info)];
-				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){//클라이언트로부터 로그인 데이터를 받을때까지 대기, 제대로 받았는지 체크
-					cout << "Error : server -- read() in loginClnt() thread." <<endl;
-					close(clnt_sock);
-				}
+			login_info * loginInfo_p;
+			char buffer[sizeof(login_info)];
+			if(read(clnt_sock, buffer, sizeof(buffer)) == -1){//클라이언트로부터 로그인 데이터를 받을때까지 대기, 제대로 받았는지 체크
+				cout << "Error : server -- read() in loginClnt() thread." <<endl;
+				close(clnt_sock);
+			}
+			
+
+			cout << "SIZE : "<<sizeof(buffer)<<endl;	
+			/*
+			if(read(clnt_sock, pwd_c, sizeof(pwd_c)) == -1){
+				cout << "Error : server -- read() in loginClnt() thread." <<endl;
+				close(clnt_sock);
+			}
+			
+
+			string id_s(id_c);
+			string pwd_s(pwd_c);
+			*/
+			loginInfo_p = (login_info*)buffer;
+
+
+			Login login_temp;
+			
+			cout<<"ID : "<<loginInfo_p->id << "PW:" <<loginInfo_p->pwd << endl;
+
+
+			bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
+			
+			cout<<"LOGINBOOL : "<<loginSuccess;
+
+			login_data user;
+
+			user.loginSuccess=loginSuccess;
+
+			DisplayUserInfo userdata;
+
+
+			string_key tempkey;
+			strcpy(tempkey.str , loginInfo_p->id);
+
+
+			user_game_info tempinfo;
+			tempinfo = userdata.displayUserInfo(tempkey);
+
+			cout <<"sendSIZE : "<<sizeof(login_data)<<endl;
+			if(loginSuccess){
 				
-
-				cout << "SIZE : "<<sizeof(buffer)<<endl;	
-				/*
-				if(read(clnt_sock, pwd_c, sizeof(pwd_c)) == -1){
-					cout << "Error : server -- read() in loginClnt() thread." <<endl;
-					close(clnt_sock);
-				}
 				
-
-				string id_s(id_c);
-				string pwd_s(pwd_c);
-				*/
-				loginInfo_p = (login_info*)buffer;
-
-
-				if(loginInfo_p->type==0){ //로그인 요청일경우
-					Login login_temp;
-					
-					cout<<"ID : "<<loginInfo_p->id << "PW:" <<loginInfo_p->pwd << endl;
-
-
-					bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
-					
-					cout<<"LOGINBOOL : "<<loginSuccess;
-
-					login_data user;
-
-					user.loginSuccess=loginSuccess;
-
-					DisplayUserInfo userdata;
-
-
-					string_key tempkey;
-					strcpy(tempkey.str , loginInfo_p->id);
-
-
-					user_game_info tempinfo;
-					tempinfo = userdata.displayUserInfo(tempkey);
-					
-					cout <<"sendSIZE : "<<sizeof(login_data)<<endl;
-					if(loginSuccess){
-						
-						
-						
-						strcpy(user.nickname,tempinfo.nickname);
-						strcpy(user.rank,tempinfo.rank);
-
-						cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
-
-						write(clnt_sock, (char*)&user, sizeof(user));
 				
-					}
-					
-					else{
-						
-						cout <<"LOGIN FAILED"<<endl;
-						cout << "FAIL NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
-						write(clnt_sock, (char*)&user, sizeof(user));
-					}
-				} else if(loginInfo_p->type==1){
+				strcpy(user.nickname,tempinfo.nickname);
+				strcpy(user.rank,tempinfo.rank);
 
-				}
+				cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
+
+				write(clnt_sock, (char*)&user, sizeof(user));
+		
+			}
+			
+			else{
+				
+				cout <<"LOGIN FAILED"<<endl;
+				cout << "FAIL NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
+				write(clnt_sock, (char*)&user, sizeof(user));
+			}
+				
 
 			close(clnt_sock);
 			return NULL;
