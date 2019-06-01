@@ -56,9 +56,27 @@ class Matching{
 				}
 			}
 			
+			result_of_matching res1;
+			result_of_matching res2;
+
+			res1.conformity = userConformity[maxI][maxJ];
+
+			strcpy(res1.duonickname,userInfo[maxJ].mynickname);
+			strcpy(res1.duorank, userInfo[maxJ].rank);
+
+
+			res2.conformity = userConformity[maxI][maxJ];
+
+			strcpy(res2.duonickname,userInfo[maxJ].mynickname);
+			strcpy(res2.duorank, userInfo[maxJ].rank);
+
 			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
-			matched_user bestMatchedUser = {userInfo[maxI].mynickname, 1, userInfo[maxJ].mynickname, 2};
-			return  bestMatchedUser;
+			matched_user bestMatchedUser;
+
+			bestMatchedUser.res1=res1;
+			bestMatchedUser.res2=res2;
+
+			return bestMatchedUser;
 		}
 		
 		matched_user runMatching(GetCharacterInfo * info){
@@ -198,10 +216,10 @@ class MatchingSocketServer : public SocketServer{
 			int userSock2 = (matchingUserIter2->second).clnt_sock;
 			
 			write(userSock1, &match_success, sizeof(match_success));
-			write(userSock1, &matchedUser.userInfo1, sizeof(matchedUser.userInfo1));
+			write(userSock1, (char*)&matchedUser.res1, sizeof(matchedUser.res1));
 			
 			write(userSock2, &match_success, sizeof(match_success));
-			write(userSock2, &matchedUser.userInfo2, sizeof(matchedUser.userInfo2));
+			write(userSock2, (char*)&matchedUser.res2, sizeof(matchedUser.res2));
 
 		}
 		

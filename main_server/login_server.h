@@ -128,16 +128,15 @@ class LoginSocketServer : public SocketServer{
 					user.nickname=tempinfo.nickname;
 					user.rank=tempinfo.rank;
 
-
-					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
-				
+					write(clnt_sock, (char*)&user, sizeof(user));
+			
 				}
 				
 				else{
 					
-					write(clnt_sock, (char*)&user, sizeof(loginSuccess));
+					write(clnt_sock, (char*)&user, sizeof(user));
 				}
-			//}
+
 			close(clnt_sock);
 			return NULL;
 		}
