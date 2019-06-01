@@ -103,7 +103,7 @@ class UserManager:
         print("username element 찾음")
         user_nick = user_nickname # 여기다가 db에서 꺼낸 사용자 이름 넣어주기
         #user_login_id = 'minhee0325' 아이디는 아마 필요없는 거 같아서 주석처리했씁니다
-
+        print("크롤링 닉네임 : ",user_nick)
         search_name.send_keys(user_nick) 
         search_name.submit()
         
@@ -120,6 +120,8 @@ class UserManager:
         TireRank= DivUserTierRankInfo[1].get_text()
         win = int(DivUserTierRankInfo[2].find('span', class_='wins').get_text()[:-1])
         loss = int(DivUserTierRankInfo[2].find('span', class_='losses').get_text()[:-1])
+        
+        print("DB에 넣을 정보",user_nick,TireRank,win,loss)
 
         try:
             sql = """
@@ -155,13 +157,22 @@ class UserManager:
                 values
                     (%s, %s, %s, %s)
                 """
+
+            print("IN TRY : ",user_nick,position1,RoleRate1,WinRatio1)
+
             cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
+
+            print("IN TRY2")
+
             cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
         except pymysql.IntegrityError:
             sql = """
                 DELETE FROM userPosition
                 WHERE nickname = %s
                 """
+
+            print("IN EXCEPT : ",user_nick,position1,RoleRate1,WinRatio1)
+
             cursor.execute(sql, user_nick)
 
             sql = """
@@ -170,8 +181,8 @@ class UserManager:
                 values
                     (%s, %s, %s, %s)
                 """
-        cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
-        cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
+            cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
+            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
 
 
         a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
