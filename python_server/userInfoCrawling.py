@@ -68,7 +68,8 @@ class UserManager:
 
     def messageHandler(self,nickname,msg):#클라이언트에게 전송받은 요청 처리
 
-        if msg.strip() == '/quit':
+        if msg.decode('euc-kr') == '/quit':
+            print("QUIT 인식됨")
             self.removeUser(nickname) #removeUser
             return -1
 
@@ -130,15 +131,20 @@ class UserManager:
                 VALUES
                     (%s, %s, %s, %s)
                 """
+            print("SEX")
             cursor.execute(sql, (user_nick, TireRank, win, loss))
+
+            print("TRY : execute",user_nick,TireRank,win,loss)
+
         except pymysql.IntegrityError:
             sql = """
                 UPDATE userEntireInfo SET rank = %s, wins = %s, losses = %s WHERE nickname = %s
                 """
             cursor.execute(sql, (TireRank, win, loss, user_nick))
 
+            print("EXCEPT : execute",TireRank,win,loss,user_nick)
 
-        UserPositionStatContent = soup.find_all('div', class_='PositionStatContent')
+        ''' UserPositionStatContent = soup.find_all('div', class_='PositionStatContent')
 
         position1 = UserPositionStatContent[0].div.get_text()
         UserPositionStatContentDetail0 = UserPositionStatContent[0].find_all('b')
@@ -182,13 +188,12 @@ class UserManager:
                     (%s, %s, %s, %s)
                 """
             cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
-            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
-
+            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))'''
 
         a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
         driver.get(a.get_attribute('href'))
         driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[3]/div/div/div[2]/div[1]/div/div[1]/div/div[2]').click()
-        time.sleep(5)
+        time.sleep(100)
 
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
@@ -212,7 +217,7 @@ class UserManager:
             Kill = float(UserChampionListRow.find(class_='Kill').get_text())
             Death = float(UserChampionListRow.find(class_='Death').get_text())
             Assist = float(UserChampionListRow.find(class_='Assist').get_text())
-
+            print("INSERT:",i,user_nick,ChampionName,wins,losses,Kill,Death,Assist)
             try:
                 sql = """
                 INSERT INTO userCharacterInfo
@@ -221,16 +226,24 @@ class UserManager:
                     (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 cursor.execute(sql, (i, user_nick, ChampionName, wins, losses, Kill, Death, Assist))
+                print("TRY execute->",i,user_nick,ChampionName,wins,losses,Kill,Death,Assist)
             except pymysql.IntegrityError:
                 sql = """
                 UPDATE userCharacterInfo SET character_name = %s, wins = %s, losses = %s, kills = %s, deaths = %s, assist = %s WHERE most_index = %s AND nickname = %s
                 """
+                
+
+
                 cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, user_nick))
+
+                print("EXCEPT execute->",ChampionName,wins,losses,Kill,Death,Assist,i,user_nick)
         
             i=i+1
-
+        print("DB COMMIT WAITING...")
         db.commit()
-
+        print("DB COMMIT SUCCESSFUL")
+        db.close()
+        print("DB CLOSED")
         return 1
 
 class TcpHandler(socketserver.BaseRequestHandler):
@@ -244,11 +257,13 @@ class TcpHandler(socketserver.BaseRequestHandler):
             print("start crawl -> ",nickname)
             if self.usermanage.crawlUser(nickname) == 1:
                 self.request.send('SUCCESS'.encode())
-
+            print("SUCCESS 보냄")
             msg = self.request.recv(1024)
+            print("요청 받음")
             while msg:
-                if self.usermanage.messageHandler(nickname,msg.decode()) == -1 :
+                if self.usermanage.messageHandler(nickname,msg) == -1 :
                     self.request.close()
+                    print("QUIT 받아서 종료시킴")
                     break
                 msg = self.request.recv(1024)
 
