@@ -133,12 +133,12 @@ class LoginSocketServer : public SocketServer{
 
 				if(loginSuccess){
 					
-					
+					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank;
 					
 					strcpy(user.nickname,tempinfo.nickname);
 					strcpy(user.rank,tempinfo.rank);
 
-					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank;
+					
 
 					write(clnt_sock, (char*)&user, sizeof(user));
 			
