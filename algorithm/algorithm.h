@@ -40,17 +40,17 @@ class Algorithm{
 	    user1 = getAllUserInfo_obj_p1->getUserCharacterInfo(usersrc1.mynickname);
             user2 = getAllUserInfo_obj_p2->getUserCharacterInfo(usersrc2.mynickname);
 
-            map<char[32], character_info>::iterator iter1;
-            map<char[32], character_info>::iterator iter2;
+            map<string_key, character_info>::iterator iter1;
+            map<string_key, character_info>::iterator iter2;
 
             int compareNum = 0;
             double conformity = 0;
 
             for(iter1 = user1.character.begin(); iter1 != user1.character.end(); iter1++){
                 
-                best_pick_value temp1 = getBestwinrate(iter1->first,iter2->first,getRankstr(avgrank),info);
+                best_pick_value temp1 = getBestwinrate((iter1->first).str,iter2->first,getRankstr(avgrank).c_str(),info);
 
-                double basewinrate1 = getBasewinrate(iter1->first,getRankstr(avgrank),info);
+                double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank).c_str(),info);
 
                 double kdarate1 = getKDArate(iter1->second.kills,iter1->second.deaths,iter1->second.assist);
 
@@ -60,7 +60,7 @@ class Algorithm{
 
                 for(iter2 = user2.character.begin(); iter2 != user2.character.end(); iter2++){
                     
-                    best_pick_value temp2 = getBestwinrate(iter2->first,iter1->first,getRankstr(avgrank),info);
+                    best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank).c_str(),info);
 
                     if(strcmp(temp1.description,usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
                                                                         //   일치하지 않으면 비교 대상 범주에 들어가지 않음
@@ -72,7 +72,7 @@ class Algorithm{
                     }
 
                     
-                    double basewinrate2 = getBasewinrate(iter2->first,getRankstr(avgrank),info);
+                    double basewinrate2 = getBasewinrate((iter2->first).str,getRankstr(avgrank).c_str(),info);
 
                     double kdarate2 = getKDArate(iter2->second.kills,iter2->second.deaths,iter2->second.assist);
 
@@ -147,7 +147,7 @@ class Algorithm{
 		
         }
 
-        static int getRanknum(string rankname){
+        static int getRanknum(char rankname[32]){
             if(strcmp(rankname,"iron")==0){
                 return 0;
             } else if(strcmp(rankname,"bronze")==0){

@@ -10,6 +10,17 @@
 using namespace std;
 
 
+typedef struct StringKey{
+	char str[32];
+	bool operator<(const StringKey& k) const {
+		if(strcmp(str,k.str)<0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+}string_key;
+
 typedef struct LoginData{
 	char nickname[32];
 	char rank[32];
@@ -100,7 +111,7 @@ typedef struct UserCharacterInfo {
 	float losses;
 	char my_pref_pos[32];
 	char duo_pref_pos[32];
-	map<char[32], character_info> character;
+	map<string_key, character_info> character;
 	
 }user_character_info;
 
@@ -149,7 +160,7 @@ typedef struct SourceOfMatching{
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	map< char[32], source_of_matching_s > clnt_nickname_socket_map;
+	map< string_key, source_of_matching_s > clnt_nickname_socket_map;
 
 }matching_queue;
 
