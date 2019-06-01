@@ -79,7 +79,7 @@ class DisplayUserInfo {
 
 
 
-		/*	cout<<"running QUERY get rank"<<endl;
+			cout<<"running QUERY get rank"<<endl;
 			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", user.nickname);
 
 			query_state = mysql_query(connection, query);
@@ -93,15 +93,13 @@ class DisplayUserInfo {
 			// Result
 			sql_result = mysql_store_result(connection);
 
-			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
+			if ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 				strcpy(user.rank, sql_row[0]);
+				cout<<"get rank SUCCESS: "<<user.rank<<endl;
+			} else {
+				cout<<"get rank failed"<<endl;
 			}
 
-
-
-			cout<<"get rank SUCCESS: "<<user.rank<<endl;
-
-*/
 
 
 			// Close

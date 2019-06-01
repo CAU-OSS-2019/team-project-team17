@@ -106,54 +106,54 @@ class LoginSocketServer : public SocketServer{
 				string pwd_s(pwd_c);
 				*/
 				loginInfo_p = (login_info*)buffer;
-				Login login_temp;
+
+
+				if(loginInfo_p->type==0){ //로그인 요청일경우
+					Login login_temp;
+					
+					cout<<"ID : "<<loginInfo_p->id << "PW:" <<loginInfo_p->pwd << endl;
+
+
+					bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
+					
+					cout<<"LOGINBOOL : "<<loginSuccess;
+
+					login_data user;
+
+					user.loginSuccess=loginSuccess;
+
+					DisplayUserInfo userdata;
+
+
+					string_key tempkey;
+					strcpy(tempkey.str , loginInfo_p->id);
+
+
+					user_game_info tempinfo;
+					tempinfo = userdata.displayUserInfo(tempkey);
+					
+					cout <<"sendSIZE : "<<sizeof(login_data)<<endl;
+					if(loginSuccess){
+						
+						
+						
+						strcpy(user.nickname,tempinfo.nickname);
+						strcpy(user.rank,tempinfo.rank);
+
+						cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
+
+						write(clnt_sock, (char*)&user, sizeof(user));
 				
-				cout<<"ID : "<<loginInfo_p->id << "PW:" <<loginInfo_p->pwd << endl;
-
-
-				bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
-				
-				cout<<"LOGINBOOL : "<<loginSuccess;
-
-				login_data user;
-
-				user.loginSuccess=loginSuccess;
-
-				DisplayUserInfo userdata;
-
-
-				string_key tempkey;
-				strcpy(tempkey.str , loginInfo_p->id);
-
-
-				user_game_info tempinfo;
-				tempinfo = userdata.displayUserInfo(tempkey);
-
-				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
-				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
-				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
-				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
-				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
-
-				cout <<"sendSIZE : "<<sizeof(login_data)<<endl;
-				if(loginSuccess){
+					}
 					
-					
-					
-					strcpy(user.nickname,tempinfo.nickname);
-					strcpy(user.rank,tempinfo.rank);
+					else{
+						
+						cout <<"LOGIN FAILED"<<endl;
+						cout << "FAIL NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
+						write(clnt_sock, (char*)&user, sizeof(user));
+					}
+				} else if(loginInfo_p->type==1){
 
-					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
-
-					write(clnt_sock, (char*)&user, sizeof(user));
-			
-				}
-				
-				else{
-					
-					cout <<"LOGIN FAILED"<<endl;
-					cout << "FAIL NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
-					write(clnt_sock, (char*)&user, sizeof(user));
 				}
 
 			close(clnt_sock);
