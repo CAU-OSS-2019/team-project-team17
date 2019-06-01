@@ -110,7 +110,7 @@ class Algorithm{
         }
 
 
-        static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], string ranknames, GetCharacterInfo *info){
+        static best_pick_value getBestwinrate(const char character_name[32], const char best_character_name[32], string ranknames, GetCharacterInfo *info){
             char rankname[32];
 
             strcpy(rankname,ranknames.c_str());
@@ -136,7 +136,7 @@ class Algorithm{
             
         }
 
-        static double getBasewinrate(char character_name[32], string ranknames,GetCharacterInfo *info){
+        static double getBasewinrate(const char character_name[32], string ranknames,GetCharacterInfo *info){
 
             char rankname[32];
 
