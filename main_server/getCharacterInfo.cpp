@@ -80,9 +80,9 @@ map<best_pick_key, best_pick_value> GetCharacterInfo::getBestPickCharacter() {
 
 	while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
 		//set_base_character_info(sql_row);
-		strcpy(bp_key.character_name , sql_row[0];
-		strcpy(bp_key.rank , sql_row[1];
-		strcpy(bp_key.best_character , sql_row[2];
+		strcpy(bp_key.character_name , sql_row[0]);
+		strcpy(bp_key.rank , sql_row[1]);
+		strcpy(bp_key.best_character , sql_row[2]);
 		bp_value.win_rate = atof(sql_row[3]);
 		strcpy(bp_value.description , sql_row[4]);
 
