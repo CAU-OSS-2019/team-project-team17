@@ -143,7 +143,7 @@ class LoginSocketServer : public SocketServer{
 					strcpy(user.nickname,tempinfo.nickname);
 					strcpy(user.rank,tempinfo.rank);
 
-					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank;
+					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
 
 					write(clnt_sock, (char*)&user, sizeof(user));
 			
@@ -152,6 +152,7 @@ class LoginSocketServer : public SocketServer{
 				else{
 					
 					cout <<"LOGIN FAILED"<<endl;
+					cout << "FAIL NICKNAME: " <<user.nickname<<"RANK : "<<user.rank<<"BOOL: "<<user.loginSuccess<<endl;
 					write(clnt_sock, (char*)&user, sizeof(user));
 				}
 
