@@ -39,8 +39,8 @@ class DisplayUserInfo {
 
 
 			cout << "Display User Info" << endl;
-			strcpy(user->nickname,"FAIL");
-			strcpy(user->rank,"FAIL");
+			strcpy(user.nickname,"FAIL");
+			strcpy(user.rank,"FAIL");
 			
 
 			// Connect
