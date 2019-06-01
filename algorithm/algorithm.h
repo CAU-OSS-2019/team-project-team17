@@ -48,7 +48,7 @@ class Algorithm{
 
             for(iter1 = user1.character.begin(); iter1 != user1.character.end(); iter1++){
                 
-                best_pick_value temp1 = getBestwinrate((iter1->first).str,iter2->first,getRankstr(avgrank),info);
+                best_pick_value temp1 = getBestwinrate((iter1->first).str,(iter2->first).str,getRankstr(avgrank),info);
 
                 double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank),info);
 
@@ -137,7 +137,7 @@ class Algorithm{
         }
 
         static double getBasewinrate(char character_name[32], string ranknames,GetCharacterInfo *info){
-            
+
             char rankname[32];
 
             strcpy(rankname,ranknames.c_str());
