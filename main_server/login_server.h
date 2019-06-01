@@ -126,9 +126,10 @@ class LoginSocketServer : public SocketServer{
 				strcpy(tempkey.str , loginInfo_p->id);
 
 
-				user_game_info tempinfo = userdata.displayUserInfo(tempkey);
+				user_game_info tempinfo;
+				tempinfo = userdata.displayUserInfo(tempkey);
 
-				cout<<"LOGINBOOL : "<<user.loginSuccess;
+				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
 
 				if(loginSuccess){
 					
