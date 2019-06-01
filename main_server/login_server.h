@@ -123,7 +123,7 @@ class LoginSocketServer : public SocketServer{
 
 
 				string_key tempkey;
-				tempkey.str = loginInfo_p->id;
+				strcpy(tempkey.str , loginInfo_p->id);
 
 
 				user_game_info tempinfo = userdata.displayUserInfo(tempkey);

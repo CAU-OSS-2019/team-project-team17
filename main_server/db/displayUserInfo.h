@@ -36,7 +36,7 @@ class DisplayUserInfo {
 		user_game_info displayUserInfo(string_key strkey) {
 			cout << "Display User Info" << endl;
 			strcpy(user.nickname,"FAIL");
-			strcpy(user.rank,"FAIL")
+			strcpy(user.rank,"FAIL");
 			
 
 			// Connect
