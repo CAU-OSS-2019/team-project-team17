@@ -110,7 +110,7 @@ class Algorithm{
         }
 
 
-        static best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname, GetCharacterInfo *info){
+        static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
 
             best_pick_key tempkey;
             strcpy(tempkey.best_character,best_character_name);
@@ -133,7 +133,7 @@ class Algorithm{
             
         }
 
-        static double getBasewinrate(string character_name, string rankname,GetCharacterInfo *info){
+        static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
 
             base_character_key tempkey;
             strcpy(tempkey.character_name, character_name);
