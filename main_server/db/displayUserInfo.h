@@ -50,6 +50,7 @@ class DisplayUserInfo {
 			}
 			
 			// Query
+			cout<<"running QUERY get nickname"<<endl;
 			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", strkey.str);
 
 			query_state = mysql_query(connection, query);
@@ -71,8 +72,8 @@ class DisplayUserInfo {
 
 
 
-
-			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", strkey.str);
+			cout<<"running QUERY get rank"<<endl;
+			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", user.nickname);
 
 			query_state = mysql_query(connection, query);
 
