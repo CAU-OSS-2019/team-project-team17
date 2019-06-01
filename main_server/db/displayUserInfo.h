@@ -41,8 +41,8 @@ class DisplayUserInfo {
 
 			// Connect
 			mysql_init(&conn);
-			mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "euckr");		//euckr
-			mysql_options(&conn, MYSQL_INIT_COMMAND, "SET NAMES euckr");
+			mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "utf8");		//euckr
+			mysql_options(&conn, MYSQL_INIT_COMMAND, "SET NAMES utf8");
 
 
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
