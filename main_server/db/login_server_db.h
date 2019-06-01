@@ -55,8 +55,8 @@ class Login {
 		}
 
 		void set_user(MYSQL_ROW input) {
-			user.id = input[0];
-			user.pwd = input[1];
+			strcpy(user.id , input[0]);
+			strcpy(user.pwd , input[1]);
 		}
 
 		// Constructor

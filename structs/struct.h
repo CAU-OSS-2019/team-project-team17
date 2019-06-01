@@ -41,23 +41,23 @@ typedef struct SourceOfMatchingS{ //소켓 추가
 		else if (clnt_sock > k.clnt_sock)
 			return false;
 
-		if (mynickname < k.mynickname)
-			return true;
-		else if (mynickname > k.mynickname)
-			return false;
-
-		if (rank < k.rank)
-			return true;
-		else if (rank > k.rank)
-			return false;
-
-		if (myposition < k.myposition)
+		if (strcmp(mynickname, k.mynickname)<0)
 			return true;
 		else
 			return false;
 
-		if (duoposition < k.duoposition)
-			return true
+		if (strcmp(rank , k.rank)<0)
+			return true;
+		else
+			return false;
+
+		if (strcmp(myposition , k.myposition)<0)
+			return true;
+		else
+			return false;
+
+		if (strcmp(duoposition , k.duoposition)<0)
+			return true;
 		else
 			return false;
 	}
@@ -100,7 +100,7 @@ typedef struct UserCharacterInfo {
 	float losses;
 	char my_pref_pos[32];
 	char duo_pref_pos[32];
-	map<char, character_info> character;
+	map<char[], character_info> character;
 	
 }user_character_info;
 
@@ -122,22 +122,22 @@ typedef struct SourceOfMatching{
 
 	bool operator<(const SourceOfMatching& k) const {
 
-		if (mynickname < k.mynickname)
-			return true;
-		else if (mynickname > k.mynickname)
-			return false;
-
-		if (rank < k.rank)
-			return true;
-		else if (rank > k.rank)
-			return false;
-
-		if (myposition < k.myposition)
+		if (strcmp(mynickname, k.mynickname)<0)
 			return true;
 		else
 			return false;
 
-		if (duoposition < k.duoposition)
+		if (strcmp(rank , k.rank)<0)
+			return true;
+		else
+			return false;
+
+		if (strcmp(myposition , k.myposition)<0)
+			return true;
+		else
+			return false;
+
+		if (strcmp(duoposition , k.duoposition)<0)
 			return true;
 		else
 			return false;
@@ -149,7 +149,7 @@ typedef struct SourceOfMatching{
 
 typedef struct MatchingQueue{
 	int clnt_cnt = 0;
-	map< char, source_of_matching_s > clnt_nickname_socket_map;
+	map< char[], source_of_matching_s > clnt_nickname_socket_map;
 
 }matching_queue;
 
@@ -166,17 +166,17 @@ typedef struct BestPickKey {
 
 	bool operator<(const BestPickKey& k) const {
 
-		if (character_name < k.character_name)
+		if (strcmp(character_name , k.character_name)<0)
 			return true;
-		else if (character_name > k.character_name)
+		else
 			return false;
 
-		if (rank < k.rank)
+		if (strcmp(rank , k.rank)<0)
 			return true;
-		else if (rank > k.rank)
+		else
 			return false;
 
-		if (best_character < k.best_character)
+		if (strcmp(best_character, k.best_character)<0)
 			return true;
 		else
 			return false;
@@ -198,12 +198,12 @@ typedef struct BaseCharacterKey {
 
 	bool operator<(const BaseCharacterKey& k) const {
 
-		if (character_name < k.character_name)
+		if (strcmp(character_name , k.character_name)<0)
 			return true;
-		else if (character_name > k.character_name)
+		else
 			return false;
 
-		if (rank < k.rank)
+		if (strcmp(rank , k.rank)<0)
 			return true;
 		else
 			return false;

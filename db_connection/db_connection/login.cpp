@@ -26,9 +26,9 @@ struct UserInfo {
 };
 
 UserInfo set_user(MYSQL_ROW input, UserInfo user) {
-	user.nickname = input[0];
-	user.id = input[1];
-	user.pwd = input[2];
+	strcpy(user.nickname , input[0]);
+	strcpy(user.id , input[1]);
+	strcpy(user.pwd , input[2]);
 	
 
 	return user;

@@ -91,11 +91,11 @@ class Matching{
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
 					 ++i, ++iter){
-				userInfo[i].mynickname = iter->first;
-				userInfo[i].myposition = (iter->second).myposition;
-				userInfo[i].duoposition = (iter->second).duoposition;
-				userInfo[i].rank = (iter->second).rank;
-				userInfo[i].clnt_sock = (iter->second).clnt_sock;
+				strcpy(userInfo[i].mynickname , iter->first);
+				strcpy(userInfo[i].myposition , (iter->second).myposition);
+				strcpy(userInfo[i].duoposition , (iter->second).duoposition);
+				strcpy(userInfo[i].rank , (iter->second).rank);
+				strcpy(userInfo[i].clnt_sock , (iter->second).clnt_sock);
 			}
 			
 			return compareConformity(userInfo,info);

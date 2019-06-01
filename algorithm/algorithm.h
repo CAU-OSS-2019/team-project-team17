@@ -40,8 +40,8 @@ class Algorithm{
 	    user1 = getAllUserInfo_obj_p1->getUserCharacterInfo(usersrc1.mynickname);
             user2 = getAllUserInfo_obj_p2->getUserCharacterInfo(usersrc2.mynickname);
 
-            map<string, character_info>::iterator iter1;
-            map<string, character_info>::iterator iter2;
+            map<char[], character_info>::iterator iter1;
+            map<char[], character_info>::iterator iter2;
 
             int compareNum = 0;
             double conformity = 0;
@@ -113,9 +113,9 @@ class Algorithm{
         static best_pick_value getBestwinrate(string character_name, string best_character_name, string rankname, GetCharacterInfo *info){
 
             best_pick_key tempkey;
-            tempkey.best_character=best_character_name;
-            tempkey.rank=rankname;
-            tempkey.character_name=character_name;
+            strcpy(tempkey.best_character,best_character_name);
+            strcpy(tempkey.rank,rankname);
+            strcpy(tempkey.character_name,character_name);
 		
 	    map<best_pick_key, best_pick_value >::iterator iter =
 		    info->best_pick_map.find(tempkey);
@@ -125,7 +125,7 @@ class Algorithm{
             } else {
 		
 		        best_pick_value nullvalue;
-        	    nullvalue.description="";
+        	    strcpy(nullvalue.description,"");
         	    nullvalue.win_rate=0;
 
         	    return nullvalue;
@@ -136,8 +136,8 @@ class Algorithm{
         static double getBasewinrate(string character_name, string rankname,GetCharacterInfo *info){
 
             base_character_key tempkey;
-            tempkey.character_name = character_name;
-            tempkey.rank = rankname;
+            strcpy(tempkey.character_name, character_name);
+            strcpy(tempkey.rank, rankname);
 		
 	    map<base_character_key, float >::iterator iter
 		    = info->base_character_map.find(tempkey);

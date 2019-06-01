@@ -61,7 +61,7 @@ class DisplayUserInfo {
 			sql_result = mysql_store_result(connection);
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				user.nickname = sql_row[0];
+				strcpy(user.nickname, sql_row[0]);
 			}
 
 
@@ -83,7 +83,7 @@ class DisplayUserInfo {
 			sql_result = mysql_store_result(connection);
 
 			while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-				user.rank = sql_row[0];
+				strcpy(user.rank, sql_row[0]);
 			}
 
 

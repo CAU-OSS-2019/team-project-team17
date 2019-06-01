@@ -125,8 +125,8 @@ class LoginSocketServer : public SocketServer{
 				if(loginSuccess){
 
 					
-					user.nickname=tempinfo.nickname;
-					user.rank=tempinfo.rank;
+					strcpy(user.nickname,tempinfo.nickname);
+					strcpy(user.rank,tempinfo.rank);
 
 					write(clnt_sock, (char*)&user, sizeof(user));
 			
