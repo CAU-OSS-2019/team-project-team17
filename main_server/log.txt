@@ -1,0 +1,843 @@
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h: In member function ‘user_character_info GetAllUserInfo::getUserCharacterInfo(std::__cxx11::string)’:
+../algorithm/../main_server/db/getAllUserInfo.h:54:87: warning: format ‘%s’ expects argument of type ‘char*’, but argument 3 has type ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ [-Wformat=]
+    sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname);
+                                                                                       ^
+../algorithm/../main_server/db/getAllUserInfo.h:77:82: warning: format ‘%s’ expects argument of type ‘char*’, but argument 3 has type ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ [-Wformat=]
+    sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname);
+                                                                                  ^
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: error: no matching function for call to ‘std::pair<char [32], CharacterInfo>::pair(char [32], character_info&)’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:436:9: note: candidate: template<class ... _Args1, long unsigned int ..._Indexes1, class ... _Args2, long unsigned int ..._Indexes2> std::pair<_T1, _T2>::pair(std::tuple<_Args1 ...>&, std::tuple<_Args2 ...>&, std::_Index_tuple<_Indexes1 ...>, std::_Index_tuple<_Indexes2 ...>)
+         pair(tuple<_Args1...>&, tuple<_Args2...>&,
+         ^~~~
+/usr/include/c++/7/bits/stl_pair.h:436:9: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   mismatched types ‘std::tuple<_Tps ...>’ and ‘char [32]’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:375:9: note: candidate: template<class ... _Args1, class ... _Args2> std::pair<_T1, _T2>::pair(std::piecewise_construct_t, std::tuple<_Args1 ...>, std::tuple<_Args2 ...>)
+         pair(piecewise_construct_t, tuple<_Args1...>, tuple<_Args2...>);
+         ^~~~
+/usr/include/c++/7/bits/stl_pair.h:375:9: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   ‘CharacterInfo’ is not derived from ‘std::tuple<_Tps ...>’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:370:21: note: candidate: template<class _U1, class _U2, typename std::enable_if<(std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_MoveConstructiblePair<_U1, _U2>() && (! std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ImplicitlyMoveConvertiblePair<_U1, _U2>())), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(std::pair<_U1, _U2>&&)
+  explicit constexpr pair(pair<_U1, _U2>&& __p)
+                     ^~~~
+/usr/include/c++/7/bits/stl_pair.h:370:21: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   mismatched types ‘std::pair<_T1, _T2>’ and ‘char [32]’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:360:12: note: candidate: template<class _U1, class _U2, typename std::enable_if<(std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_MoveConstructiblePair<_U1, _U2>() && std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ImplicitlyMoveConvertiblePair<_U1, _U2>()), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(std::pair<_U1, _U2>&&)
+  constexpr pair(pair<_U1, _U2>&& __p)
+            ^~~~
+/usr/include/c++/7/bits/stl_pair.h:360:12: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   mismatched types ‘std::pair<_T1, _T2>’ and ‘char [32]’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:350:21: note: candidate: template<class _U1, class _U2, typename std::enable_if<(_MoveConstructiblePair<_U1, _U2>() && (! _ImplicitlyMoveConvertiblePair<_U1, _U2>())), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(_U1&&, _U2&&)
+  explicit constexpr pair(_U1&& __x, _U2&& __y)
+                     ^~~~
+/usr/include/c++/7/bits/stl_pair.h:350:21: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:349:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=false>
+                                      ^~~~~
+/usr/include/c++/7/bits/stl_pair.h:349:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:341:12: note: candidate: template<class _U1, class _U2, typename std::enable_if<(_MoveConstructiblePair<_U1, _U2>() && _ImplicitlyMoveConvertiblePair<_U1, _U2>()), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(_U1&&, _U2&&)
+  constexpr pair(_U1&& __x, _U2&& __y)
+            ^~~~
+/usr/include/c++/7/bits/stl_pair.h:341:12: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:340:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=true>
+                                      ^~~~
+/usr/include/c++/7/bits/stl_pair.h:340:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:332:17: note: candidate: template<class _U2, typename std::enable_if<_CopyMovePair<false, char [32], _U2>(), bool>::type <anonymous> > std::pair<_T1, _T2>::pair(const _T1&, _U2&&)
+        explicit pair(const _T1& __x, _U2&& __y)
+                 ^~~~
+/usr/include/c++/7/bits/stl_pair.h:332:17: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:331:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=false>
+                                      ^~~~~
+/usr/include/c++/7/bits/stl_pair.h:331:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:325:18: note: candidate: template<class _U2, typename std::enable_if<_CopyMovePair<true, char [32], _U2>(), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(const _T1&, _U2&&)
+        constexpr pair(const _T1& __x, _U2&& __y)
+                  ^~~~
+/usr/include/c++/7/bits/stl_pair.h:325:18: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:324:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=true>
+                                      ^~~~
+/usr/include/c++/7/bits/stl_pair.h:324:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:318:27: note: candidate: template<class _U1, typename std::enable_if<_MoveCopyPair<false, _U1, CharacterInfo>(), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(_U1&&, const _T2&)
+        explicit constexpr pair(_U1&& __x, const _T2& __y)
+                           ^~~~
+/usr/include/c++/7/bits/stl_pair.h:318:27: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:317:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=false>
+                                      ^~~~~
+/usr/include/c++/7/bits/stl_pair.h:317:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:311:18: note: candidate: template<class _U1, typename std::enable_if<_MoveCopyPair<true, _U1, CharacterInfo>(), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(_U1&&, const _T2&)
+        constexpr pair(_U1&& __x, const _T2& __y)
+                  ^~~~
+/usr/include/c++/7/bits/stl_pair.h:311:18: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:310:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=true>
+                                      ^~~~
+/usr/include/c++/7/bits/stl_pair.h:310:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:304:17: note: candidate: constexpr std::pair<_T1, _T2>::pair(std::pair<_T1, _T2>&&) [with _T1 = char [32]; _T2 = CharacterInfo]
+       constexpr pair(pair&&) = default;
+                 ^~~~
+/usr/include/c++/7/bits/stl_pair.h:304:17: note:   candidate expects 1 argument, 2 provided
+/usr/include/c++/7/bits/stl_pair.h:303:17: note: candidate: constexpr std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = char [32]; _T2 = CharacterInfo]
+       constexpr pair(const pair&) = default;
+                 ^~~~
+/usr/include/c++/7/bits/stl_pair.h:303:17: note:   candidate expects 1 argument, 2 provided
+/usr/include/c++/7/bits/stl_pair.h:300:21: note: candidate: template<class _U1, class _U2, typename std::enable_if<(std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ConstructiblePair<_U1, _U2>() && (! std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ImplicitlyConvertiblePair<_U1, _U2>())), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(const std::pair<_U1, _U2>&)
+  explicit constexpr pair(const pair<_U1, _U2>& __p)
+                     ^~~~
+/usr/include/c++/7/bits/stl_pair.h:300:21: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   mismatched types ‘const std::pair<_T1, _T2>’ and ‘char [32]’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:291:19: note: candidate: template<class _U1, class _U2, typename std::enable_if<(std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ConstructiblePair<_U1, _U2>() && std::_PCC<((! std::is_same<char [32], _U1>::value) || (! std::is_same<CharacterInfo, _U2>::value)), char [32], CharacterInfo>::_ImplicitlyConvertiblePair<_U1, _U2>()), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(const std::pair<_U1, _U2>&)
+         constexpr pair(const pair<_U1, _U2>& __p)
+                   ^~~~
+/usr/include/c++/7/bits/stl_pair.h:291:19: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   mismatched types ‘const std::pair<_T1, _T2>’ and ‘char [32]’
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:269:26: note: candidate: template<class _U1, class _U2, typename std::enable_if<(_ConstructiblePair<_U1, _U2>() && (! _ImplicitlyConvertiblePair<_U1, _U2>())), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(const _T1&, const _T2&)
+       explicit constexpr pair(const _T1& __a, const _T2& __b)
+                          ^~~~
+/usr/include/c++/7/bits/stl_pair.h:269:26: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:268:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=false>
+                                      ^~~~~
+/usr/include/c++/7/bits/stl_pair.h:268:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:260:17: note: candidate: template<class _U1, class _U2, typename std::enable_if<(_ConstructiblePair<_U1, _U2>() && _ImplicitlyConvertiblePair<_U1, _U2>()), bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair(const _T1&, const _T2&)
+       constexpr pair(const _T1& __a, const _T2& __b)
+                 ^~~~
+/usr/include/c++/7/bits/stl_pair.h:260:17: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_pair.h:259:38: error: no type named ‘type’ in ‘struct std::enable_if<false, bool>’
+                          bool>::type=true>
+                                      ^~~~
+/usr/include/c++/7/bits/stl_pair.h:259:38: note: invalid template non-type parameter
+/usr/include/c++/7/bits/stl_pair.h:242:26: note: candidate: template<class _U1, class _U2, typename std::enable_if<std::__and_<std::is_default_constructible<_Tp>, std::is_default_constructible<_U2>, std::__not_<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> > > >::value, bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair()
+       explicit constexpr pair()
+                          ^~~~
+/usr/include/c++/7/bits/stl_pair.h:242:26: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   candidate expects 0 arguments, 2 provided
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:229:26: note: candidate: template<class _U1, class _U2, typename std::enable_if<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> >::value, bool>::type <anonymous> > constexpr std::pair<_T1, _T2>::pair()
+       _GLIBCXX_CONSTEXPR pair()
+                          ^~~~
+/usr/include/c++/7/bits/stl_pair.h:229:26: note:   template argument deduction/substitution failed:
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h:103:73: note:   candidate expects 0 arguments, 2 provided
+     character_map.insert(pair<char[32], character_info>(ch_key, ch_value));
+                                                                         ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h: In static member function ‘static double Algorithm::runAlgorithm(source_of_matching_s, source_of_matching_s, GetCharacterInfo*)’:
+../algorithm/algorithm.h:51:106: error: no matching function for call to ‘Algorithm::getBestwinrate(const char [32], const char [32], std::__cxx11::string, GetCharacterInfo*&)’
+                 best_pick_value temp1 = getBestwinrate(iter1->first,iter2->first,getRankstr(avgrank),info);
+                                                                                                          ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note: candidate: static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:113:32: note:   no known conversion for argument 3 from ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘char*’
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:53:91: error: no matching function for call to ‘Algorithm::getBasewinrate(const char [32], std::__cxx11::string, GetCharacterInfo*&)’
+                 double basewinrate1 = getBasewinrate(iter1->first,getRankstr(avgrank),info);
+                                                                                           ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:136:23: note: candidate: static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:136:23: note:   no known conversion for argument 2 from ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘char*’
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:63:110: error: no matching function for call to ‘Algorithm::getBestwinrate(const char [32], const char [32], std::__cxx11::string, GetCharacterInfo*&)’
+                     best_pick_value temp2 = getBestwinrate(iter2->first,iter1->first,getRankstr(avgrank),info);
+                                                                                                              ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note: candidate: static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:113:32: note:   no known conversion for argument 3 from ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘char*’
+../algorithm/algorithm.h:75:95: error: no matching function for call to ‘Algorithm::getBasewinrate(const char [32], std::__cxx11::string, GetCharacterInfo*&)’
+                     double basewinrate2 = getBasewinrate(iter2->first,getRankstr(avgrank),info);
+                                                                                               ^
+../algorithm/algorithm.h:136:23: note: candidate: static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:136:23: note:   no known conversion for argument 2 from ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘char*’
+../algorithm/algorithm.h: In static member function ‘static int Algorithm::getRanknum(std::__cxx11::string)’:
+../algorithm/algorithm.h:151:38: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             if(strcmp(rankname,"iron")==0){
+                                      ^
+../algorithm/algorithm.h:153:47: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"bronze")==0){
+                                               ^
+../algorithm/algorithm.h:155:47: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"silver")==0){
+                                               ^
+../algorithm/algorithm.h:157:45: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"gold")==0){
+                                             ^
+../algorithm/algorithm.h:159:49: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"platinum")==0){
+                                                 ^
+../algorithm/algorithm.h:161:48: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"diamond")==0){
+                                                ^
+../algorithm/algorithm.h:163:47: error: cannot convert ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ to ‘const char*’ for argument ‘1’ to ‘int strcmp(const char*, const char*)’
+             } else if(strcmp(rankname,"master")==0){
+                                               ^
+In file included from matching_server_main.cpp:1:0:
+matching_server.h: In member function ‘void* MatchingSocketServer::handleMatching(GetCharacterInfo*)’:
+matching_server.h:171:43: error: invalid array assignment
+     strcpy(tempsrc2.myposition = tempsrc->myposition);
+                                           ^~~~~~~~~~
+matching_server.h:172:44: error: invalid array assignment
+     strcpy(tempsrc2.duoposition = tempsrc->duoposition);
+                                            ^~~~~~~~~~~
+matching_server.h:176:91: error: no matching function for call to ‘std::map<char [32], SourceOfMatchingS>::insert(std::pair<char*, SourceOfMatchingS>)’
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:795:7: note: candidate: std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> std::map<_Key, _Tp, _Compare, _Alloc>::insert(const value_type&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const char [32], SourceOfMatchingS>]
+       insert(const value_type& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:795:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘const value_type& {aka const std::pair<const char [32], SourceOfMatchingS>&}’
+/usr/include/c++/7/bits/stl_map.h:802:7: note: candidate: std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::value_type&&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const char [32], SourceOfMatchingS>]
+       insert(value_type&& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:802:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘std::map<char [32], SourceOfMatchingS>::value_type&& {aka std::pair<const char [32], SourceOfMatchingS>&&}’
+/usr/include/c++/7/bits/stl_map.h:808:2: note: candidate: template<class _Pair> std::__enable_if_t<std::is_constructible<std::pair<const _Key, _Tp>, _Pair>::value, std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> > std::map<_Key, _Tp, _Compare, _Alloc>::insert(_Pair&&) [with _Pair = _Pair; _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >]
+  insert(_Pair&& __x)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:808:2: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_map.h:822:7: note: candidate: void std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::initializer_list<std::pair<const _Key, _Tp> >) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >]
+       insert(std::initializer_list<value_type> __list)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:822:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘std::initializer_list<std::pair<const char [32], SourceOfMatchingS> >’
+/usr/include/c++/7/bits/stl_map.h:852:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, const value_type&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const char [32], SourceOfMatchingS>]
+       insert(const_iterator __position, const value_type& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:852:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/7/bits/stl_map.h:862:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, std::map<_Key, _Tp, _Compare, _Alloc>::value_type&&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const char [32], SourceOfMatchingS>]
+       insert(const_iterator __position, value_type&& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:862:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/7/bits/stl_map.h:867:2: note: candidate: template<class _Pair> std::__enable_if_t<std::is_constructible<std::pair<const _Key, _Tp>, _Pair>::value, typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator> std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, _Pair&&) [with _Pair = _Pair; _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >]
+  insert(const_iterator __position, _Pair&& __x)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:867:2: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:176:91: note:   candidate expects 2 arguments, 1 provided
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:885:2: note: candidate: template<class _InputIterator> void std::map<_Key, _Tp, _Compare, _Alloc>::insert(_InputIterator, _InputIterator) [with _InputIterator = _InputIterator; _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >]
+  insert(_InputIterator __first, _InputIterator __last)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:885:2: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:176:91: note:   candidate expects 2 arguments, 1 provided
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^
+matching_server.h: In member function ‘void MatchingSocketServer::sendMatchingData(matched_user, bool)’:
+matching_server.h:213:96: error: no match for ‘operator=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+    matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res2.duonickname);
+                                                                                                ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&)
+     struct _Rb_tree_iterator
+            ^~~~~~~~~~~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&’
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&)
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&’
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:214:96: error: no match for ‘operator=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+    matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res1.duonickname);
+                                                                                                ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&)
+     struct _Rb_tree_iterator
+            ^~~~~~~~~~~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&’
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&)
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&’
+In file included from matching_server_main.cpp:1:0:
+matching_server.h: In member function ‘void MatchingSocketServer::sendWaitData(bool)’:
+matching_server.h:231:67: error: no match for ‘operator=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+    for(allUserIter = matchingQueue.clnt_nickname_socket_map.begin();
+                                                                   ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&)
+     struct _Rb_tree_iterator
+            ^~~~~~~~~~~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&’
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&)
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&’
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:17: error: no match for ‘operator!=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+     ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:319:7: note: candidate: bool std::_Rb_tree_iterator<_Tp>::operator!=(const _Self&) const [with _Tp = std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS>; std::_Rb_tree_iterator<_Tp>::_Self = std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >]
+       operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+       ^~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:319:7: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const _Self& {aka const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&}’
+In file included from /usr/include/c++/7/iosfwd:40:0,
+                 from /usr/include/c++/7/ios:38,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/postypes.h:221:5: note: candidate: template<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)
+     operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+     ^~~~~~~~
+/usr/include/c++/7/bits/postypes.h:221:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::fpos<_StateT>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_pair.h:461:5: note: candidate: template<class _T1, class _T2> constexpr bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_pair.h:461:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::pair<_T1, _T2>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:314:5: note: candidate: template<class _Iterator> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator!=(const reverse_iterator<_Iterator>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:314:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:352:5: note: candidate: template<class _IteratorL, class _IteratorR> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator!=(const reverse_iterator<_IteratorL>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:352:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:1133:5: note: candidate: template<class _IteratorL, class _IteratorR> bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorR>&)
+     operator!=(const move_iterator<_IteratorL>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:1133:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::move_iterator<_IteratorL>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:1139:5: note: candidate: template<class _Iterator> bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorL>&)
+     operator!=(const move_iterator<_Iterator>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:1139:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::move_iterator<_IteratorL>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/string:41:0,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/allocator.h:158:5: note: candidate: template<class _T1, class _T2> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_T2>&)
+     operator!=(const allocator<_T1>&, const allocator<_T2>&)
+     ^~~~~~~~
+/usr/include/c++/7/bits/allocator.h:158:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::allocator<_CharT>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/string:41:0,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/allocator.h:164:5: note: candidate: template<class _Tp> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_CharT>&)
+     operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+     ^~~~~~~~
+/usr/include/c++/7/bits/allocator.h:164:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::allocator<_CharT>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/string:52:0,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/basic_string.h:6056:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^~~~~~~~
+/usr/include/c++/7/bits/basic_string.h:6056:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/string:52:0,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/basic_string.h:6069:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const _CharT* __lhs,
+     ^~~~~~~~
+/usr/include/c++/7/bits/basic_string.h:6069:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   mismatched types ‘const _CharT*’ and ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/string:52:0,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/basic_string.h:6081:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^~~~~~~~
+/usr/include/c++/7/bits/basic_string.h:6081:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/ios_base.h:46:0,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/system_error:319:3: note: candidate: bool std::operator!=(const std::error_code&, const std::error_code&)
+   operator!=(const error_code& __lhs, const error_code& __rhs) noexcept
+   ^~~~~~~~
+/usr/include/c++/7/system_error:319:3: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const std::error_code&’
+/usr/include/c++/7/system_error:323:3: note: candidate: bool std::operator!=(const std::error_code&, const std::error_condition&)
+   operator!=(const error_code& __lhs, const error_condition& __rhs) noexcept
+   ^~~~~~~~
+/usr/include/c++/7/system_error:323:3: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const std::error_code&’
+/usr/include/c++/7/system_error:327:3: note: candidate: bool std::operator!=(const std::error_condition&, const std::error_code&)
+   operator!=(const error_condition& __lhs, const error_code& __rhs) noexcept
+   ^~~~~~~~
+/usr/include/c++/7/system_error:327:3: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const std::error_condition&’
+/usr/include/c++/7/system_error:331:3: note: candidate: bool std::operator!=(const std::error_condition&, const std::error_condition&)
+   operator!=(const error_condition& __lhs,
+   ^~~~~~~~
+/usr/include/c++/7/system_error:331:3: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const std::error_condition&’
+In file included from /usr/include/c++/7/bits/locale_facets.h:48:0,
+                 from /usr/include/c++/7/bits/basic_ios.h:37,
+                 from /usr/include/c++/7/ios:44,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/streambuf_iterator.h:210:5: note: candidate: template<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)
+     operator!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+     ^~~~~~~~
+/usr/include/c++/7/bits/streambuf_iterator.h:210:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::istreambuf_iterator<_CharT, _Traits>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:412:5: note: candidate: template<class _Val> bool std::operator!=(const std::_Rb_tree_iterator<_Tp>&, const std::_Rb_tree_const_iterator<_Val>&)
+     operator!=(const _Rb_tree_iterator<_Val>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:412:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ is not derived from ‘const std::_Rb_tree_const_iterator<_Val>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:1553:5: note: candidate: template<class _Key, class _Val, class _KeyOfValue, class _Compare, class _Alloc> bool std::operator!=(const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&, const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&)
+     operator!=(const _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:1553:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/tuple:39:0,
+                 from /usr/include/c++/7/bits/stl_map.h:63,
+                 from /usr/include/c++/7/map:61,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/array:257:5: note: candidate: template<class _Tp, long unsigned int _Nm> bool std::operator!=(const std::array<_Tp, _Nm>&, const std::array<_Tp, _Nm>&)
+     operator!=(const array<_Tp, _Nm>& __one, const array<_Tp, _Nm>& __two)
+     ^~~~~~~~
+/usr/include/c++/7/array:257:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::array<_Tp, _Nm>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_map.h:63:0,
+                 from /usr/include/c++/7/map:61,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/tuple:1423:5: note: candidate: template<class ... _TElements, class ... _UElements> constexpr bool std::operator!=(const std::tuple<_Tps ...>&, const std::tuple<_Args2 ...>&)
+     operator!=(const tuple<_TElements...>& __t,
+     ^~~~~~~~
+/usr/include/c++/7/tuple:1423:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::tuple<_Tps ...>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:1418:5: note: candidate: template<class _Key, class _Tp, class _Compare, class _Alloc> bool std::operator!=(const std::map<_Key, _Tp, _Compare, _Alloc>&, const std::map<_Key, _Tp, _Compare, _Alloc>&)
+     operator!=(const map<_Key, _Tp, _Compare, _Alloc>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_map.h:1418:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::map<_Key, _Tp, _Compare, _Alloc>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/map:62:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_multimap.h:1083:5: note: candidate: template<class _Key, class _Tp, class _Compare, class _Alloc> bool std::operator!=(const std::multimap<_Key, _Tp, _Compare, _Alloc>&, const std::multimap<_Key, _Tp, _Compare, _Alloc>&)
+     operator!=(const multimap<_Key, _Tp, _Compare, _Alloc>& __x,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_multimap.h:1083:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const std::multimap<_Key, _Tp, _Compare, _Alloc>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/x86_64-linux-gnu/c++/7/bits/c++allocator.h:33:0,
+                 from /usr/include/c++/7/bits/allocator.h:46,
+                 from /usr/include/c++/7/string:41,
+                 from /usr/include/c++/7/bits/locale_classes.h:40,
+                 from /usr/include/c++/7/bits/ios_base.h:41,
+                 from /usr/include/c++/7/ios:42,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/ext/new_allocator.h:160:5: note: candidate: template<class _Tp> bool __gnu_cxx::operator!=(const __gnu_cxx::new_allocator<_Tp>&, const __gnu_cxx::new_allocator<_Tp>&)
+     operator!=(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+     ^~~~~~~~
+/usr/include/c++/7/ext/new_allocator.h:160:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const __gnu_cxx::new_allocator<_Tp>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:883:5: note: candidate: template<class _Iterator, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:883:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+In file included from /usr/include/c++/7/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/7/bits/char_traits.h:39,
+                 from /usr/include/c++/7/ios:40,
+                 from /usr/include/c++/7/ostream:38,
+                 from /usr/include/c++/7/iostream:39,
+                 from socket_server.h:4,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_iterator.h:876:5: note: candidate: template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator!=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^~~~~~~~
+/usr/include/c++/7/bits/stl_iterator.h:876:5: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:232:63: note:   ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+     allUserIter != matchingQueue.clnt_nickname_socket_map.end();
+                                                               ^
+matching_server.h: In member function ‘void MatchingSocketServer::removeMatchedUserFromQueue(matched_user)’:
+matching_server.h:252:96: error: no match for ‘operator=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+    matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res2.duonickname);
+                                                                                                ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&)
+     struct _Rb_tree_iterator
+            ^~~~~~~~~~~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&’
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&)
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&’
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:253:66: error: no matching function for call to ‘std::map<char [32], SourceOfMatchingS>::erase(std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator&)’
+    matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter1);
+                                                                  ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:1024:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(const_iterator __position)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1024:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘std::map<char [32], SourceOfMatchingS>::const_iterator {aka std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >}’
+/usr/include/c++/7/bits/stl_map.h:1030:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(iterator __position)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1030:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’
+/usr/include/c++/7/bits/stl_map.h:1061:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::size_type std::map<_Key, _Tp, _Compare, _Alloc>::erase(const key_type&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::size_type = long unsigned int; std::map<_Key, _Tp, _Compare, _Alloc>::key_type = char [32]]
+       erase(const key_type& __x)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1061:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const char (&)[32]’
+/usr/include/c++/7/bits/stl_map.h:1081:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(const_iterator __first, const_iterator __last)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1081:7: note:   candidate expects 2 arguments, 1 provided
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:256:96: error: no match for ‘operator=’ (operand types are ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ and ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’)
+    matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(matchedUser.res1.duonickname);
+                                                                                                ^
+In file included from /usr/include/c++/7/map:60:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&)
+     struct _Rb_tree_iterator
+            ^~~~~~~~~~~~~~~~~
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘const std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&’
+/usr/include/c++/7/bits/stl_tree.h:256:12: note: candidate: constexpr std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >& std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >::operator=(std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&)
+/usr/include/c++/7/bits/stl_tree.h:256:12: note:   no known conversion for argument 1 from ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’ to ‘std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >&&’
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:257:66: error: no matching function for call to ‘std::map<char [32], SourceOfMatchingS>::erase(std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator&)’
+    matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter2);
+                                                                  ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:1024:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(const_iterator __position)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1024:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘std::map<char [32], SourceOfMatchingS>::const_iterator {aka std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >}’
+/usr/include/c++/7/bits/stl_map.h:1030:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(iterator __position)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1030:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘std::map<char [32], SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >}’
+/usr/include/c++/7/bits/stl_map.h:1061:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::size_type std::map<_Key, _Tp, _Compare, _Alloc>::erase(const key_type&) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::size_type = long unsigned int; std::map<_Key, _Tp, _Compare, _Alloc>::key_type = char [32]]
+       erase(const key_type& __x)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1061:7: note:   no known conversion for argument 1 from ‘std::map<std::__cxx11::basic_string<char>, SourceOfMatchingS>::iterator {aka std::_Rb_tree_iterator<std::pair<const std::__cxx11::basic_string<char>, SourceOfMatchingS> >}’ to ‘const char (&)[32]’
+/usr/include/c++/7/bits/stl_map.h:1081:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::erase(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator) [with _Key = char [32]; _Tp = SourceOfMatchingS; _Compare = std::less<char [32]>; _Alloc = std::allocator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const char [32], SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const char [32], SourceOfMatchingS> >]
+       erase(const_iterator __first, const_iterator __last)
+       ^~~~~
+/usr/include/c++/7/bits/stl_map.h:1081:7: note:   candidate expects 2 arguments, 1 provided

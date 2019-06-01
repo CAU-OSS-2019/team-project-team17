@@ -6,12 +6,12 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 import pymysql
-import SocketServer as socketserver
+import socketserver
 import threading
 
 lock = threading.Lock() # mutual exclusion을 위한 뮤텍스
 
-HOST = '127.0.0.1'
+HOST = ''
 PORT = 9300 #호스트와 포트는 소켓 서버를 위한 것
 
 host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com' # DB 주소 세팅
@@ -49,6 +49,10 @@ class UserManager:
 
 
         print('connected client [%d]' %len(self.users))
+        
+        return nickname
+
+
 
     def removeUser(self, nickname):#유저 연결 해제
         if nickname not in self.users:
@@ -73,32 +77,42 @@ class UserManager:
         conn.send(msg.encode())
 
 
-    def crawlUser(user_nickname):
+    def crawlUser(self,user_nickname):
+        print("user crawling....",user_nickname)
         options = webdriver.ChromeOptions()
 
         options.add_argument('headless')
-        options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
 
+        options.add_argument('no-sandbox')
+        options.add_argument('disable-dev-shm-usage')
 
-        driver = webdriver.Chrome(driver_path='/home/dev/chromedriver',chrome_options=options)
+        driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=options)
+
+        print("드라이버 경로 잡힘")
 
     
 
 
         driver.implicitly_wait(3)
         driver.get('https://www.op.gg/') 
+        
+        print("op.gg 연결")
 
         search_name = driver.find_element_by_name('userName')
-
+        print("username element 찾음")
         user_nick = user_nickname # 여기다가 db에서 꺼낸 사용자 이름 넣어주기
         #user_login_id = 'minhee0325' 아이디는 아마 필요없는 거 같아서 주석처리했씁니다
 
         search_name.send_keys(user_nick) 
         search_name.submit()
+        
+        print("닉네임 검색완료")
 
         html = driver.page_source
-        soup = BeautifulSoup(html, 'lxml')
+        soup = BeautifulSoup(html, 'html.parser')
+        
+        print("사이트 정보 가져옴")
 
         UserTierRankInfo = soup.find('div', class_='TierRankInfo')
 
@@ -166,7 +180,7 @@ class UserManager:
         time.sleep(5)
 
         html = driver.page_source
-        soup = BeautifulSoup(html, 'lxml')
+        soup = BeautifulSoup(html, 'html.parser')
 
         UserChampionList = soup.find('tbody', class_='Body')
         UserChampionListRows = UserChampionList.find_all('tr')
@@ -216,7 +230,7 @@ class TcpHandler(socketserver.BaseRequestHandler):
 
         try:
             nickname = self.registerNickname()
-
+            print("start crawl -> ",nickname)
             if self.usermanage.crawlUser(nickname) == 1:
                 self.request.send('SUCCESS'.encode())
 
@@ -238,7 +252,21 @@ class TcpHandler(socketserver.BaseRequestHandler):
         while True:
             self.request.send('you are connected to server'.encode())
             nickname = self.request.recv(1024)
-            nickname = nickname.decode().strip()
+            print("original : ",nickname)
+
+            #nickname = nickname.rstrip('\x00')
+
+            #print("rstriped : ",nickname)
+            
+            nickname = nickname.decode('euc-kr')
+
+            print("decoded : ",nickname)
+            
+           # nickname = nickname.encode('euc-kr')
+
+            print("encoded : ",nickname)
+
+            print("CONNECTED NICKNAME : ",nickname)
             if self.usermanage.addUser(nickname,self.request,self.client_address):
                 return nickname
 
