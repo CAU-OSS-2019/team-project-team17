@@ -11,7 +11,7 @@ import threading
 
 lock = threading.Lock() # mutual exclusion을 위한 뮤텍스
 
-HOST = '127.0.0.1'
+HOST = 'localhost'
 PORT = 9300 #호스트와 포트는 소켓 서버를 위한 것
 
 host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com' # DB 주소 세팅
@@ -42,10 +42,6 @@ class UserManager:
         lock.release()
 
         print(nickname,'is Connected')
-
-
-
-
 
 
         print('connected client [%d]' %len(self.users))
@@ -249,7 +245,7 @@ def runServer():
     print('Crawling Server Initialized')
     
     try:
-        server = CrawlingServer((HOST,PORT),TcpHandler)#
+        server = CrawlingServer((HOST,PORT),TcpHandler)
         server.serve_forever()
 
     except KeyboardInterrupt:
