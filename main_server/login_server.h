@@ -122,6 +122,8 @@ class LoginSocketServer : public SocketServer{
 				DisplayUserInfo userdata;
 				user_game_info tempinfo = userdata.displayUserInfo(loginInfo_p->id);
 
+				cout<<"LOGINBOOL : "<<user.loginSuccess;
+
 				if(loginSuccess){
 					
 					
