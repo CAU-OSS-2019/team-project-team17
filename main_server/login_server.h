@@ -126,7 +126,7 @@ class LoginSocketServer : public SocketServer{
 				strcpy(tempkey.str , loginInfo_p->id);
 
 
-				user_game_info *tempinfo = userdata.displayUserInfo(tempkey);
+				user_game_info tempinfo = userdata.displayUserInfo(tempkey);
 
 				cout<<"LOGINBOOL : "<<user.loginSuccess;
 
@@ -134,8 +134,8 @@ class LoginSocketServer : public SocketServer{
 					
 					
 					
-					strcpy(user.nickname,tempinfo->nickname);
-					strcpy(user.rank,tempinfo->rank);
+					strcpy(user.nickname,tempinfo.nickname);
+					strcpy(user.rank,tempinfo.rank);
 
 					cout << "SEND NICKNAME: " <<user.nickname<<"RANK : "<<user.rank;
 
