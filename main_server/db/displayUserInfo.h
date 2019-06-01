@@ -68,7 +68,7 @@ class DisplayUserInfo {
 				strcpy(user.nickname, sql_row[0]);
 			}
 
-
+			cout<<"getnickname SUCCESS : "<<user.nickname<<endl;
 
 
 
@@ -92,7 +92,7 @@ class DisplayUserInfo {
 
 
 
-
+			cout<<"get rank SUCCESS: "<<user.rank<<endl;
 
 
 
