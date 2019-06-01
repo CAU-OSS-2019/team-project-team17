@@ -2,6 +2,7 @@
 #define ADDFRIEND_H
 
 #include <QDialog>
+#include "matching_client.h"
 
 namespace Ui {
 class AddFriend;
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::AddFriend *ui;
+    result_of_matching result;
 };
 
 #endif // ADDFRIEND_H

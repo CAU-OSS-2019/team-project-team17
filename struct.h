@@ -8,22 +8,29 @@
 
 using namespace std;
 
+
+typedef struct LoginData{
+    char nickname[32];
+    char rank[32];
+    bool loginSuccess;
+}login_data;
+
 typedef struct LoginSocketInfo{
     int clnt_socket;
-    string id;
-    string pwd;
+    char id[32];
+    char pwd[32];
 }login_socket_info;
 
 typedef struct LoginInfo{
-    string id;
-    string pwd;
+    char id[32];
+    char pwd[32];
 }login_info;
 
 typedef struct SourceOfMatchingS{ //소켓 추가
-    string mynickname;
-    string myposition;
-    string duoposition;
-    string rank;
+    char mynickname[32];
+    char myposition[32];
+    char duoposition[32];
+    char rank[32];
     int clnt_sock;
 
     bool operator<(const SourceOfMatchingS& k) const {
@@ -59,23 +66,23 @@ typedef struct SourceOfMatchingS{ //소켓 추가
 
 typedef struct UserGameInfo {
 
-    string nickname;
-    string rank;
+    char nickname[32];
+    char rank[32];
 
 }user_game_info;
 
-// To do : data를 string으로 했을 때 다루는 것 해보기.
+// To do : data를 char으로 했을 때 다루는 것 해보기.
 typedef struct ResultOfMatching{// 매칭 결과는 상대 닉네임, 상대 랭크, 적합도 3가지이다.
-    string duonickname;
-    string duorank;
-    int conformity;
+    char duonickname[32];
+    char duorank[32];
+    double conformity;
 }result_of_matching;
 
 
 typedef struct singupInfo{
-    string id;
-    string pwd;
-    string nickname;
+    char id[32];
+    char pwd[32];
+    char nickname[32];
 }signup_info;
 
 typedef struct CharacterInfo {
@@ -87,30 +94,30 @@ typedef struct CharacterInfo {
 }character_info;
 
 typedef struct UserCharacterInfo {
-    string rank;
+    char rank[32];
     float wins;
     float losses;
-    string my_pref_pos;
-    string duo_pref_pos;
-    map<string, character_info> character;
+    char my_pref_pos[32];
+    char duo_pref_pos[32];
+    map<char, character_info> character;
 
 }user_character_info;
 
 
 typedef struct UserInfo {
 
-    string nickname;
-    string id;
-    string pwd;
+    char nickname[32];
+    char id[32];
+    char pwd[32];
 
 }user_info;
 
 
 typedef struct SourceOfMatching{
-    string mynickname;
-    string myposition;
-    string duoposition;
-    string rank;
+    char mynickname[32];
+    char myposition[32];
+    char duoposition[32];
+    char rank[32];
 
     bool operator<(const SourceOfMatching& k) const {
 
@@ -141,25 +148,20 @@ typedef struct SourceOfMatching{
 
 typedef struct MatchingQueue{
     int clnt_cnt = 0;
-    map< string, source_of_matching_s > clnt_nickname_socket_map;
+    map< char, source_of_matching_s > clnt_nickname_socket_map;
 
 }matching_queue;
 
 typedef struct matchedUser{
-    string userNickname1;
-    //result_of_matching userInfo1;
-    int userInfo1;
-
-    string userNickname2;
-    //result_of_matching userInfo2;
-    int userInfo2;
+    result_of_matching res1;
+    result_of_matching res2;
 
 }matched_user;
 
 typedef struct BestPickKey {
-    string character_name;
-    string rank;
-    string best_character;
+    char character_name[32];
+    char rank[32];
+    char best_character[32];
 
     bool operator<(const BestPickKey& k) const {
 
@@ -184,14 +186,14 @@ typedef struct BestPickKey {
 
 typedef struct BestPickValue {
     float win_rate;
-    string description;
+    char description[32];
 
 
 }best_pick_value;
 
 typedef struct BaseCharacterKey {
-    string character_name;
-    string rank;
+    char character_name[32];
+    char rank[32];
 
     bool operator<(const BaseCharacterKey& k) const {
 
@@ -205,6 +207,7 @@ typedef struct BaseCharacterKey {
         else
             return false;
     }
+
 }base_character_key;
 
 #endif // STRUCT_H

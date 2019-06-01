@@ -35,12 +35,18 @@ class MatchingSocketClient : public SocketClient{
         /* send data needed for a matching to server.
            return : if sending is succeeded, true. else, false */
         void sendData(source_of_matching source){
-            send_success = send(sock, (char *)&source, sizeof(source), 0);
+            char nickname_c[31];
+            strcpy(nickname_c, source.mynickname);
 
-            if(send_success == -1) {
+            //send_success = send(sock, (char*) &source.nickname, sizeof(source.nickname), 0);
+
+            send_success = send(sock, (char*) &nickname_c, sizeof(nickname_c), 0);
+
+            if(send_success == -1){
                 cout<< "Fail : sendData()" <<endl;
             }
-            else {
+
+            else{
                 cout << "Success : sendData()" <<endl;
             }
         }
@@ -49,10 +55,11 @@ class MatchingSocketClient : public SocketClient{
          * If the matching is succeeded, return a string,
          * that is an information of user matched
          * else, return NULL */
-        result_of_matching receiveData(void){
+        result_of_matching receiveMatchingData(void){
 
             result_of_matching result;
-            receive_success = recv(sock, (char *)&result, sizeof(result), 0);
+
+            receive_success = recv(sock, (char*)&result, sizeof(result), 0);
 
             if(receive_success == -1){
                 cout<< "Fail : receiveData()" <<endl;

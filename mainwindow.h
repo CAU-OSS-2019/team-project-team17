@@ -29,8 +29,8 @@ private:
     SecDialog *secDialog;
     SignUp *signUp;
     login_info loginInfo;
+    login_data userData;
     LoginSocketClient *loginSock;
-    bool loginSuccess = false;
     char *buf;
     QString ID;
     QString PW;

@@ -15,12 +15,16 @@ class SignupSocketClient : public SocketClient{
         }
 
         void sendData(signup_info signupInfo){
-            send_success = send(sock, (char*)&signupInfo, sizeof(signupInfo), 0);
+            cout << signupInfo.id << " " << signupInfo.pwd << " "  << signupInfo.nickname << endl;
+            send_success = send(sock, (char*)&signupInfo, sizeof(signup_info), 0);
+            cout << sizeof(signupInfo) << " " <<  sizeof(signup_info) << endl;
         }
 
         bool receiveData(void){
             bool signupSuccess;
-            receive_success = recv(sock, (char*)&signupSuccess, sizeof(signupSuccess), 0);
+            receive_success = recv(sock, (char*)&signupSuccess, sizeof(bool), 0);
+
+            cout << receive_success << endl;
 
             if(receive_success == -1){
                 return false;
