@@ -25,7 +25,7 @@ db = pymysql.connect( # DB 연결
     user= username,
     passwd= password,
     db= database_name,
-    charset='utf8')
+    charset='utf8',init_command='SET NAMES UTF8')
 cursor = db.cursor()
 
 class UserManager:
@@ -63,8 +63,8 @@ class UserManager:
         print('connected client [%d]' %len(self.users))
 
     def messageHandler(self,nickname,msg):#클라이언트에게 전송받은 요청 처리
-
-        if msg.decode('euc-kr') == '/quit':
+        print("MESSAGEHANDLER:",msg)
+        if msg:
             print("QUIT 인식됨")
             self.removeUser(nickname) #removeUser
             return -1
@@ -78,13 +78,14 @@ class UserManager:
         print("user crawling....",user_nickname)
         options = webdriver.ChromeOptions()
 
+
         options.add_argument('headless')
         options.add_argument("disable-gpu")
-
-        options.add_argument('no-sandbox')
         options.add_argument('disable-dev-shm-usage')
+        options.add_argument('no-sandbox')
 
-        driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=options)
+
+        driver = webdriver.Chrome('/Users/Administrator/Desktop/chromedriver')
 
         print("드라이버 경로 잡힘")
 
@@ -109,6 +110,11 @@ class UserManager:
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         
+
+        resultnick=soup.select('head > meta:nth-child(1)')
+        resultnick=str(resultnick).split('content="')[1];
+        resultnick=str(resultnick).split(' - 게임')[0];
+        print(resultnick)
         print("사이트 정보 가져옴")
 
         UserTierRankInfo = soup.find('div', class_='TierRankInfo')
@@ -128,7 +134,7 @@ class UserManager:
                     (%s, %s, %s, %s)
                 """
             print("SEX")
-            cursor.execute(sql, (user_nick, TireRank, win, loss))
+            cursor.execute(sql, (resultnick, TireRank, win, loss))
 
             print("TRY : execute",user_nick,TireRank,win,loss)
 
@@ -136,7 +142,7 @@ class UserManager:
             sql = """
                 UPDATE userEntireInfo SET rank = %s, wins = %s, losses = %s WHERE nickname = %s
                 """
-            cursor.execute(sql, (TireRank, win, loss, user_nick))
+            cursor.execute(sql, (TireRank, win, loss, user_nick.encode('utf-8')))
 
             print("EXCEPT : execute",TireRank,win,loss,user_nick)
 
@@ -189,7 +195,7 @@ class UserManager:
         a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
         driver.get(a.get_attribute('href'))
         driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[3]/div/div/div[2]/div[1]/div/div[1]/div/div[2]').click()
-        time.sleep(100)
+        time.sleep(3)
 
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
@@ -221,7 +227,7 @@ class UserManager:
                 values
                     (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
-                cursor.execute(sql, (i, user_nick, ChampionName, wins, losses, Kill, Death, Assist))
+                cursor.execute(sql, (i, resultnick, ChampionName, wins, losses, Kill, Death, Assist))
                 print("TRY execute->",i,user_nick,ChampionName,wins,losses,Kill,Death,Assist)
             except pymysql.IntegrityError:
                 sql = """
@@ -230,7 +236,7 @@ class UserManager:
                 
 
 
-                cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, user_nick))
+                cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, resultnick))
 
                 print("EXCEPT execute->",ChampionName,wins,losses,Kill,Death,Assist,i,user_nick)
         
@@ -257,7 +263,7 @@ class TcpHandler(socketserver.BaseRequestHandler):
             msg = self.request.recv(1024)
             print("요청 받음")
             while msg:
-                if self.usermanage.messageHandler(nickname,msg) == -1 :
+                if self.usermanage.messageHandler(nickname,msg.decode('euc-kr')) == -1 :
                     self.request.close()
                     print("QUIT 받아서 종료시킴")
                     break
