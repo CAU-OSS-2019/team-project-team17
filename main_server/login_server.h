@@ -146,6 +146,7 @@ class LoginSocketServer : public SocketServer{
 				
 				else{
 					
+					cout <<"LOGIN FAILED"<<endl;
 					write(clnt_sock, (char*)&user, sizeof(user));
 				}
 
