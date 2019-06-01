@@ -168,12 +168,13 @@ class MatchingSocketServer : public SocketServer{
 			
 				source_of_matching_s tempsrc2;
 				strcpy(tempsrc2.mynickname ,tempsrc->mynickname);
-				strcpy(tempsrc2.myposition = tempsrc->myposition);
-				strcpy(tempsrc2.duoposition = tempsrc->duoposition);
+				strcpy(tempsrc2.myposition , tempsrc->myposition);
+				strcpy(tempsrc2.duoposition , tempsrc->duoposition);
 				strcpy(tempsrc2.rank , tempsrc->rank);
 				tempsrc2.clnt_sock = clnt_sock;
-
-				matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+				string_key temp;
+				strcpy(temp.str,tempsrc2.mynickname);
+				matchingQueue.clnt_nickname_socket_map.insert(make_pair(temp, tempsrc2));
 
 				matchingQueue.clnt_cnt++;
 				

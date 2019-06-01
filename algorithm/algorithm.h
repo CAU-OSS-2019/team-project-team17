@@ -48,9 +48,9 @@ class Algorithm{
 
             for(iter1 = user1.character.begin(); iter1 != user1.character.end(); iter1++){
                 
-                best_pick_value temp1 = getBestwinrate((iter1->first).str,iter2->first,getRankstr(avgrank).c_str(),info);
+                best_pick_value temp1 = getBestwinrate((iter1->first).str,iter2->first,getRankstr(avgrank),info);
 
-                double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank).c_str(),info);
+                double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank),info);
 
                 double kdarate1 = getKDArate(iter1->second.kills,iter1->second.deaths,iter1->second.assist);
 
@@ -60,7 +60,7 @@ class Algorithm{
 
                 for(iter2 = user2.character.begin(); iter2 != user2.character.end(); iter2++){
                     
-                    best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank).c_str(),info);
+                    best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank),info);
 
                     if(strcmp(temp1.description,usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
                                                                         //   일치하지 않으면 비교 대상 범주에 들어가지 않음
@@ -72,7 +72,7 @@ class Algorithm{
                     }
 
                     
-                    double basewinrate2 = getBasewinrate((iter2->first).str,getRankstr(avgrank).c_str(),info);
+                    double basewinrate2 = getBasewinrate((iter2->first).str,getRankstr(avgrank),info);
 
                     double kdarate2 = getKDArate(iter2->second.kills,iter2->second.deaths,iter2->second.assist);
 
@@ -110,7 +110,10 @@ class Algorithm{
         }
 
 
-        static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+        static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], string ranknames, GetCharacterInfo *info){
+            char rankname[32];
+
+            strcpy(rankname,ranknames.c_str());
 
             best_pick_key tempkey;
             strcpy(tempkey.best_character,best_character_name);
@@ -133,7 +136,12 @@ class Algorithm{
             
         }
 
-        static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+        static double getBasewinrate(char character_name[32], string ranknames,GetCharacterInfo *info){
+            
+            char rankname[32];
+
+            strcpy(rankname,ranknames.c_str());
+
 
             base_character_key tempkey;
             strcpy(tempkey.character_name, character_name);
