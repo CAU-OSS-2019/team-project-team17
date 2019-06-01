@@ -5,19 +5,6 @@
 
 using namespace std;
 
-typedef struct SourceForMatching{
-    string nickname;
-}source_of_matching;
-
-
-// To do : data를 string으로 했을 때 다루는 것 해보기.
-typedef struct ResultOfMatching{
-    int data1;
-    int data2;
-    int data3;
-}result_of_matching;
-
-
 class MatchingSocketClient : public SocketClient{
 
     /* google style */
@@ -36,6 +23,9 @@ class MatchingSocketClient : public SocketClient{
 
         }
 
+        ~MatchingSocketClient(){
+                    closesocket(sock);
+        }
         /*
         int getSocket(){
             return sock;
@@ -45,11 +35,12 @@ class MatchingSocketClient : public SocketClient{
         /* send data needed for a matching to server.
            return : if sending is succeeded, true. else, false */
         void sendData(source_of_matching source){
-            cout << "sendData() run. "<<endl <<endl;
+            char nickname_c[31];
+            strcpy(nickname_c, source.mynickname);
 
-            cout << "souce.data1 : " << source.nickname << "   " <<endl;
+            //send_success = send(sock, (char*) &source.nickname, sizeof(source.nickname), 0);
 
-            send_success = send(sock, (char *)&source, sizeof(source), 0);
+            send_success = send(sock, (char*) &nickname_c, sizeof(nickname_c), 0);
 
             if(send_success == -1){
                 cout<< "Fail : sendData()" <<endl;
@@ -64,10 +55,11 @@ class MatchingSocketClient : public SocketClient{
          * If the matching is succeeded, return a string,
          * that is an information of user matched
          * else, return NULL */
-        result_of_matching receiveData(void){
+        result_of_matching receiveMatchingData(void){
 
             result_of_matching result;
-            receive_success = recv(sock, (char *)&result, sizeof(result), 0);
+
+            receive_success = recv(sock, (char*)&result, sizeof(result), 0);
 
             if(receive_success == -1){
                 cout<< "Fail : receiveData()" <<endl;
@@ -79,6 +71,23 @@ class MatchingSocketClient : public SocketClient{
                 return result;
             }
 
+        }
+
+        bool receiveWaitData(void){
+            bool match_success;
+            receive_success = recv(sock, (char*)&match_success, sizeof(match_success), 0);
+
+            if(receive_success == -1){
+                cout<< "------Fail : receiveData()---------" <<endl;
+                return match_success;
+            }
+
+            else{
+                cout << "Success : receiveData()" <<endl;
+                return match_success;
+            }
+
+            return match_success;
         }
 };
 

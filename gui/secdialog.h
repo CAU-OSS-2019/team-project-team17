@@ -18,6 +18,7 @@ class SecDialog : public QDialog
 
 public:
     explicit SecDialog(QWidget *parent = nullptr);
+    void setData(login_data user);
     ~SecDialog();
 
 private slots:
@@ -30,6 +31,8 @@ private:
     MatchingSocketClient *matchingSock;
     source_of_matching source;
     result_of_matching result;
+    login_data userData;
+    bool match_success;
     bool running_state = false;
 };
 
