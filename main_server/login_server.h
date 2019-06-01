@@ -113,7 +113,7 @@ class LoginSocketServer : public SocketServer{
 
 				bool loginSuccess = login_temp.login((*loginInfo_p));//이 부분 자체가 verifyLogin함수를 대신함
 				
-				cout<<"LOGINBOOL : "<<user.loginSuccess;
+				cout<<"LOGINBOOL : "<<loginSuccess;
 
 				login_data user;
 
