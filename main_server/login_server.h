@@ -129,27 +129,12 @@ class LoginSocketServer : public SocketServer{
 				user_game_info tempinfo;
 				tempinfo = userdata.displayUserInfo(tempkey);
 
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
-				cout<<"SIBALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"<<endl;
+				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
+				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
+				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
+				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
+				cout<<"@@@@@@@"<<tempinfo.nickname<<"@@###"<<tempinfo.nickname<<endl;
+				
 
 				if(loginSuccess){
 					
