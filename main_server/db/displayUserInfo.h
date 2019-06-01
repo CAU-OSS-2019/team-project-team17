@@ -33,7 +33,7 @@ class DisplayUserInfo {
 		
 		user_game_info user;
 		
-		user_game_info displayUserInfo(string userid) {
+		user_game_info displayUserInfo(char userid[32]) {
 			cout << "Display User Info" << endl;
 
 			// Connect
