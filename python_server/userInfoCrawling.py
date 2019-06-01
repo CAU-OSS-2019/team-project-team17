@@ -11,7 +11,7 @@ import threading
 
 lock = threading.Lock() # mutual exclusion을 위한 뮤텍스
 
-HOST = ''
+HOST = '13.209.7.127'
 PORT = 9300 #호스트와 포트는 소켓 서버를 위한 것
 
 host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com' # DB 주소 세팅
