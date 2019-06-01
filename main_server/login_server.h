@@ -120,7 +120,13 @@ class LoginSocketServer : public SocketServer{
 				user.loginSuccess=loginSuccess;
 
 				DisplayUserInfo userdata;
-				user_game_info tempinfo = userdata.displayUserInfo(loginInfo_p->id);
+
+
+				string_key tempkey;
+				tempkey.str = loginInfo_p->id;
+
+
+				user_game_info tempinfo = userdata.displayUserInfo(tempkey);
 
 				cout<<"LOGINBOOL : "<<user.loginSuccess;
 

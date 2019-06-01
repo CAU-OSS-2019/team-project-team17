@@ -25,7 +25,7 @@ class DisplayUserInfo {
 		int query_state;
 		char query[255];
 		MYSQL_RES *sql_result;
-                MYSQL_ROW sql_row;
+        MYSQL_ROW sql_row;
 		// variables for socket
 
 	public :
@@ -33,8 +33,11 @@ class DisplayUserInfo {
 		
 		user_game_info user;
 		
-		user_game_info displayUserInfo(char userid[32]) {
+		user_game_info displayUserInfo(string_key strkey) {
 			cout << "Display User Info" << endl;
+			strcpy(user.nickname,"FAIL");
+			strcpy(user.rank,"FAIL")
+			
 
 			// Connect
 			mysql_init(&conn);
@@ -47,7 +50,7 @@ class DisplayUserInfo {
 			}
 			
 			// Query
-			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", string(userid));
+			sprintf(query, "SELECT nickname FROM login WHERE id='%s' LIMIT 1", strkey.str);
 
 			query_state = mysql_query(connection, query);
 
@@ -69,7 +72,7 @@ class DisplayUserInfo {
 
 
 
-			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", string(user.nickname));
+			sprintf(query, "SELECT rank FROM userEntireInfo WHERE nickname='%s' LIMIT 1", strkey.str);
 
 			query_state = mysql_query(connection, query);
 
