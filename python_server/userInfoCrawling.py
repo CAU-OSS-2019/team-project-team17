@@ -10,8 +10,8 @@ import socketserver
 import threading
 
 lock = threading.Lock() # mutual exclusion을 위한 뮤텍스
-
 HOST = ''
+
 PORT = 9300 #호스트와 포트는 소켓 서버를 위한 것
 
 host_name = 'gamehaeduo-db.c8xdbny5rkis.ap-northeast-2.rds.amazonaws.com' # DB 주소 세팅
@@ -25,7 +25,7 @@ db = pymysql.connect( # DB 연결
     user= username,
     passwd= password,
     db= database_name,
-    charset='utf8')
+    charset='utf8',init_command='SET NAMES UTF8')
 cursor = db.cursor()
 
 class UserManager:
@@ -42,10 +42,6 @@ class UserManager:
         lock.release()
 
         print(nickname,'is Connected')
-
-
-
-
 
 
         print('connected client [%d]' %len(self.users))
@@ -67,8 +63,9 @@ class UserManager:
         print('connected client [%d]' %len(self.users))
 
     def messageHandler(self,nickname,msg):#클라이언트에게 전송받은 요청 처리
-
-        if msg.strip() == '/quit':
+        print("MESSAGEHANDLER:",msg)
+        if msg:
+            print("QUIT 인식됨")
             self.removeUser(nickname) #removeUser
             return -1
 
@@ -81,13 +78,14 @@ class UserManager:
         print("user crawling....",user_nickname)
         options = webdriver.ChromeOptions()
 
+
         options.add_argument('headless')
         options.add_argument("disable-gpu")
-
-        options.add_argument('no-sandbox')
         options.add_argument('disable-dev-shm-usage')
+        options.add_argument('no-sandbox')
 
-        driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=options)
+
+        driver = webdriver.Chrome('/Users/Administrator/Desktop/chromedriver')
 
         print("드라이버 경로 잡힘")
 
@@ -103,7 +101,7 @@ class UserManager:
         print("username element 찾음")
         user_nick = user_nickname # 여기다가 db에서 꺼낸 사용자 이름 넣어주기
         #user_login_id = 'minhee0325' 아이디는 아마 필요없는 거 같아서 주석처리했씁니다
-
+        print("크롤링 닉네임 : ",user_nick)
         search_name.send_keys(user_nick) 
         search_name.submit()
         
@@ -112,6 +110,11 @@ class UserManager:
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         
+
+        resultnick=soup.select('head > meta:nth-child(1)')
+        resultnick=str(resultnick).split('content="')[1];
+        resultnick=str(resultnick).split(' - 게임')[0];
+        print(resultnick)
         print("사이트 정보 가져옴")
 
         UserTierRankInfo = soup.find('div', class_='TierRankInfo')
@@ -120,6 +123,8 @@ class UserManager:
         TireRank= DivUserTierRankInfo[1].get_text()
         win = int(DivUserTierRankInfo[2].find('span', class_='wins').get_text()[:-1])
         loss = int(DivUserTierRankInfo[2].find('span', class_='losses').get_text()[:-1])
+        
+        print("DB에 넣을 정보",user_nick,TireRank,win,loss)
 
         try:
             sql = """
@@ -128,15 +133,20 @@ class UserManager:
                 VALUES
                     (%s, %s, %s, %s)
                 """
-            cursor.execute(sql, (user_nick, TireRank, win, loss))
+            print("SEX")
+            cursor.execute(sql, (resultnick, TireRank, win, loss))
+
+            print("TRY : execute",user_nick,TireRank,win,loss)
+
         except pymysql.IntegrityError:
             sql = """
                 UPDATE userEntireInfo SET rank = %s, wins = %s, losses = %s WHERE nickname = %s
                 """
-            cursor.execute(sql, (TireRank, win, loss, user_nick))
+            cursor.execute(sql, (TireRank, win, loss, user_nick.encode('utf-8')))
 
+            print("EXCEPT : execute",TireRank,win,loss,user_nick)
 
-        UserPositionStatContent = soup.find_all('div', class_='PositionStatContent')
+        ''' UserPositionStatContent = soup.find_all('div', class_='PositionStatContent')
 
         position1 = UserPositionStatContent[0].div.get_text()
         UserPositionStatContentDetail0 = UserPositionStatContent[0].find_all('b')
@@ -155,13 +165,22 @@ class UserManager:
                 values
                     (%s, %s, %s, %s)
                 """
+
+            print("IN TRY : ",user_nick,position1,RoleRate1,WinRatio1)
+
             cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
+
+            print("IN TRY2")
+
             cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
         except pymysql.IntegrityError:
             sql = """
                 DELETE FROM userPosition
                 WHERE nickname = %s
                 """
+
+            print("IN EXCEPT : ",user_nick,position1,RoleRate1,WinRatio1)
+
             cursor.execute(sql, user_nick)
 
             sql = """
@@ -170,14 +189,13 @@ class UserManager:
                 values
                     (%s, %s, %s, %s)
                 """
-        cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
-        cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
-
+            cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
+            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))'''
 
         a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
         driver.get(a.get_attribute('href'))
         driver.find_element_by_xpath('//*[@id="SummonerLayoutContent"]/div[3]/div/div/div[2]/div[1]/div/div[1]/div/div[2]').click()
-        time.sleep(5)
+        time.sleep(3)
 
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
@@ -201,7 +219,7 @@ class UserManager:
             Kill = float(UserChampionListRow.find(class_='Kill').get_text())
             Death = float(UserChampionListRow.find(class_='Death').get_text())
             Assist = float(UserChampionListRow.find(class_='Assist').get_text())
-
+            print("INSERT:",i,user_nick,ChampionName,wins,losses,Kill,Death,Assist)
             try:
                 sql = """
                 INSERT INTO userCharacterInfo
@@ -209,17 +227,25 @@ class UserManager:
                 values
                     (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
-                cursor.execute(sql, (i, user_nick, ChampionName, wins, losses, Kill, Death, Assist))
+                cursor.execute(sql, (i, resultnick, ChampionName, wins, losses, Kill, Death, Assist))
+                print("TRY execute->",i,user_nick,ChampionName,wins,losses,Kill,Death,Assist)
             except pymysql.IntegrityError:
                 sql = """
                 UPDATE userCharacterInfo SET character_name = %s, wins = %s, losses = %s, kills = %s, deaths = %s, assist = %s WHERE most_index = %s AND nickname = %s
                 """
-                cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, user_nick))
+                
+
+
+                cursor.execute(sql, (ChampionName, wins, losses, Kill, Death, Assist, i, resultnick))
+
+                print("EXCEPT execute->",ChampionName,wins,losses,Kill,Death,Assist,i,user_nick)
         
             i=i+1
-
+        print("DB COMMIT WAITING...")
         db.commit()
-
+        print("DB COMMIT SUCCESSFUL")
+        db.close()
+        print("DB CLOSED")
         return 1
 
 class TcpHandler(socketserver.BaseRequestHandler):
@@ -233,11 +259,13 @@ class TcpHandler(socketserver.BaseRequestHandler):
             print("start crawl -> ",nickname)
             if self.usermanage.crawlUser(nickname) == 1:
                 self.request.send('SUCCESS'.encode())
-
+            print("SUCCESS 보냄")
             msg = self.request.recv(1024)
+            print("요청 받음")
             while msg:
-                if self.usermanage.messageHandler(nickname,msg.decode()) == -1 :
+                if self.usermanage.messageHandler(nickname,msg.decode('euc-kr')) == -1 :
                     self.request.close()
+                    print("QUIT 받아서 종료시킴")
                     break
                 msg = self.request.recv(1024)
 
@@ -277,7 +305,7 @@ def runServer():
     print('Crawling Server Initialized')
     
     try:
-        server = CrawlingServer((HOST,PORT),TcpHandler)#
+        server = CrawlingServer((HOST,PORT),TcpHandler)
         server.serve_forever()
 
     except KeyboardInterrupt:
