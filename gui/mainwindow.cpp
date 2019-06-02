@@ -58,15 +58,14 @@ void MainWindow::on_pushButton_Login_clicked()
                         strcpy(buf, userData.nickname);
                         loginSock->sendbuf(buf);
                         cout << buf << endl;
+                        ZeroMemory(buf, 1024);
                         loginSock->recvbuf(buf);
                         cout << buf << endl;
                         if (strcmp(buf, "SUCCESS") == 0) {
-                            cout << buf << endl;
                             ZeroMemory(buf, 1024);
-                            strcpy(buf, "/quit");
+                            strcpy(buf, "quit");
+                            cout << buf << endl;
                             loginSock->sendbuf(buf);
-
-                            delete loginSock;
 
                             hide();
 

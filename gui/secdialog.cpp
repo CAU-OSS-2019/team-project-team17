@@ -47,7 +47,7 @@ void SecDialog::on_pushButton_clicked()
 void SecDialog::displayMatchedUserInfo()
 {
     addf = new AddFriend();
-
+    addf->show();
 }
 
 void SecDialog::setData(login_data user) {
