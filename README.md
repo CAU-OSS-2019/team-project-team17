@@ -1,12 +1,18 @@
-﻿# GameHaeDuo
-Find your **BEST DUO** from GameHaeDuo and **Win** in ‘League Of Legend’
+# GameHaeDuo
+Find your **BEST DUO** from GameHaeDuo and **WIN** in ‘League Of Legend’
 
 
 ## About GameHaeDuo
-You can find best reliable duo easily in real time by GameHaeDuo!
 * Find appropriate duo using Matching Algorithm
 * Tear Authentication
 * Add duo as friend Automatically
+
+### Necessity
+* Need for this kind of duo matching in LOL
+* No commercialized services yet
+* No opensource for duo matching
+* Reliable, Easy, Real Time
+
 
 ### Support Websites
 * [op.gg](https://www.op.gg/)  
@@ -23,6 +29,9 @@ You can find best reliable duo easily in real time by GameHaeDuo!
 
 
 ## Other Repositories of GameHaeDuo
+### Client
+https://github.com/CAU-OSS-2019/team-project-team17_client
+
 ### Server
 https://github.com/CAU-OSS-2019/team-project-team17_server
 
