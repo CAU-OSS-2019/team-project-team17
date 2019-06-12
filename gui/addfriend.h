@@ -14,11 +14,12 @@ class AddFriend : public QDialog
 
 public:
     explicit AddFriend(QWidget *parent = nullptr);
+    void SetUser(matched_user user);
     ~AddFriend();
 
 private:
     Ui::AddFriend *ui;
-    result_of_matching result;
+    matched_user userData;
 };
 
 #endif // ADDFRIEND_H
