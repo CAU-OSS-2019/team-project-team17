@@ -154,9 +154,10 @@ class UserManager:
         WinRatio1 = float(UserPositionStatContentDetail0[1].get_text())
 
         position2 = UserPositionStatContent[1].div.get_text()
-        UserPositionStatContentDetail1 = UserPositionStatContent[1].find_all('b')
-        RoleRate2 = float(UserPositionStatContentDetail1[0].get_text())
-        WinRatio2 = float(UserPositionStatContentDetail1[1].get_text())
+        if position2 != "?" :
+            UserPositionStatContentDetail1 = UserPositionStatContent[1].find_all('b')
+            RoleRate2 = float(UserPositionStatContentDetail1[0].get_text())
+            WinRatio2 = float(UserPositionStatContentDetail1[1].get_text())
 
         try:
             sql = """
@@ -169,10 +170,9 @@ class UserManager:
             print("IN TRY : ",user_nick,position1,RoleRate1,WinRatio1)
 
             cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
-
-            print("IN TRY2")
-
-            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
+            if position2 != "?" :
+                print("IN TRY2")
+                cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))
         except pymysql.IntegrityError:
             sql = """
                 DELETE FROM userPosition
@@ -190,7 +190,8 @@ class UserManager:
                     (%s, %s, %s, %s)
                 """
             cursor.execute(sql, (user_nick, position1, RoleRate1, WinRatio1))
-            cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))'''
+            if position2 != "?" :
+                cursor.execute(sql, (user_nick, position2, RoleRate2, WinRatio2))'''
 
         a = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[3]/dl/dd[2]/a')
         driver.get(a.get_attribute('href'))
