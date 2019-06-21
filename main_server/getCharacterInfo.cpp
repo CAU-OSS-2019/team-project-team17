@@ -36,7 +36,7 @@ map<base_character_key, float> GetCharacterInfo::getBaseCharacterInfo() {
 		strcpy(bc_key.character_name , sql_row[0]);
 		strcpy(bc_key.rank , sql_row[1]);
 		win_rate = atof(sql_row[2]);
-
+		//cout<<bc_key.character_name<<" "<<bc_key.rank<<" "<<win_rate<<endl;
 		base_character_map.insert(pair<base_character_key, float>(bc_key, win_rate));
 	}	
 
@@ -77,15 +77,16 @@ map<best_pick_key, best_pick_value> GetCharacterInfo::getBestPickCharacter() {
 	sql_result = mysql_store_result(connection);
 	best_pick_key bp_key;
 	best_pick_value bp_value;
-
+	int countd=0;
 	while ((sql_row = mysql_fetch_row(sql_result)) != NULL) {
-		//set_base_character_info(sql_row);
+
+cout<<++countd<<endl;		//set_base_character_info(sql_row);
 		strcpy(bp_key.character_name , sql_row[0]);
 		strcpy(bp_key.rank , sql_row[1]);
 		strcpy(bp_key.best_character , sql_row[2]);
 		bp_value.win_rate = atof(sql_row[3]);
 		strcpy(bp_value.description , sql_row[4]);
-
+		cout<<sql_row[0]<<" "<<sql_row[1]<<" "<<sql_row[2]<<" "<<sql_row[3]<<" "<<sql_row[4]<<endl;
 		best_pick_map.insert(pair<best_pick_key, best_pick_value>(bp_key, bp_value));
 	}
 

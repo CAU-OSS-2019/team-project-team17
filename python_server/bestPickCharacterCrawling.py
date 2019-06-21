@@ -19,7 +19,7 @@ db = pymysql.connect(
 
 cursor = db.cursor()
 
-driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe")
+driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=options)
 
 
 sql = """

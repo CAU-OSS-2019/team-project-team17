@@ -177,20 +177,15 @@ typedef struct BestPickKey {
 
 	bool operator<(const BestPickKey& k) const {
 
-		if (strcmp(character_name , k.character_name)<0)
+		if (strcmp(character_name , k.character_name)<0){
 			return true;
-		else
-			return false;
-
-		if (strcmp(rank , k.rank)<0)
+		}else if (strcmp(rank , k.rank)<0){
 			return true;
-		else
-			return false;
-
-		if (strcmp(best_character, k.best_character)<0)
+		}else if (strcmp(best_character, k.best_character)<0){
 			return true;
-		else
+		}else{
 			return false;
+		}
 	}
 
 
@@ -209,15 +204,13 @@ typedef struct BaseCharacterKey {
 
 	bool operator<(const BaseCharacterKey& k) const {
 
-		if (strcmp(character_name , k.character_name)<0)
+		if (strcmp(character_name , k.character_name)<0){
 			return true;
-		else
-			return false;
-
-		if (strcmp(rank , k.rank)<0)
+		} else if (strcmp(rank , k.rank)<0){
 			return true;
-		else
+		} else{
 			return false;
+		}
 	}
 
 }base_character_key;

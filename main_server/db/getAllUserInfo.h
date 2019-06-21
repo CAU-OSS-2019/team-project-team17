@@ -35,13 +35,15 @@ class GetAllUserInfo {
 
 		user_character_info user_info;
 		
-		user_character_info getUserCharacterInfo(string nickname) {
+		user_character_info getUserCharacterInfo(string nicknames) {
+			char nickname[30];
+			strcpy(nickname,nicknames.c_str());
 			cout << "Get All Information about Game" << endl;
-
+			cout << "Get NICK: "<<nickname<<endl;
 			// Connect
 			mysql_init(&conn);
-			mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "euckr");		//euckr
-			mysql_options(&conn, MYSQL_INIT_COMMAND, "SET NAMES euckr");
+			//mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "euckr");		//euckr
+			//mysql_options(&conn, MYSQL_INIT_COMMAND, "SET NAMES euckr");
 
 			connection = mysql_real_connect(&conn, HOST, USERNAME, PASSWORD, DBNAME, PORTNUM, NULL, 0);
 
@@ -49,7 +51,7 @@ class GetAllUserInfo {
 				cout << "DB Not Connected : " << mysql_error(&conn) << endl;
 				return user_info;
 			}
-		
+			mysql_set_character_set(&conn,"utf8");
 			// Query - userEntireInfo
 			sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname);
 
@@ -69,6 +71,8 @@ class GetAllUserInfo {
 				strcpy(user_info.rank , sql_row[1]);
 				user_info.wins = atof(sql_row[2]);
 				user_info.losses = atof(sql_row[3]);
+
+				cout<<"@@@@@@@@@@@@@"<<user_info.rank<< " "<<user_info.wins<<" "<<user_info.losses<<endl;
 			}
 			mysql_free_result(sql_result);
 
@@ -101,6 +105,8 @@ class GetAllUserInfo {
 				ch_value.kills = atof(sql_row[5]);
 				ch_value.deaths = atof(sql_row[6]);
 				ch_value.assist = atof(sql_row[7]);
+
+				cout << ch_key.str << " "<<ch_value.wins<<" "<<ch_value.losses<<" "<<ch_value.kills<<" "<<ch_value.deaths<< " "<<ch_value.assist<<endl;
 
 				character_map.insert(pair<string_key, character_info>(ch_key, ch_value));
 			}

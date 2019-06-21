@@ -155,14 +155,14 @@ class MatchingSocketServer : public SocketServer{
 				*/
 
 				
-				char buffer[300];
+				char buffer[sizeof(source_of_matching)];
 				
 				// sizeof(buffer) 크기 측정해보기. 4byte로 나오면 안됨.
 				if(read(clnt_sock, buffer, sizeof(buffer)) == -1){
 					cout << "Error : server -- read() in handleMatching()."<<endl;
 					close(clnt_sock);
 				}
-
+				cout << "read complete" <<endl;
 				source_of_matching *tempsrc;
 				tempsrc=(source_of_matching*)buffer;
 			
@@ -179,7 +179,9 @@ class MatchingSocketServer : public SocketServer{
 				matchingQueue.clnt_cnt++;
 				
 				cout << "NICK "<<tempsrc2.mynickname<<"is connected"<<endl;
-				
+				cout <<tempsrc2.myposition<<" "<<tempsrc2.duoposition<<endl;
+				cout <<"RANK = "<<tempsrc2.rank<<endl;
+
 				if(matchingQueue.clnt_cnt == MATCHING_QUEUE_SIZE){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
 					Matching * matching = new Matching(matchingQueue);

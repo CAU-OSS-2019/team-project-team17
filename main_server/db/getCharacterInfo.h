@@ -54,6 +54,7 @@ class GetCharacterInfo {
 		// Constructor
 		GetCharacterInfo(){
 			base_character_map = getBaseCharacterInfo();
+			best_pick_map = getBestPickCharacter();
 		}	
 
 		

@@ -85,7 +85,7 @@ class UserManager:
         options.add_argument('no-sandbox')
 
 
-        driver = webdriver.Chrome('/Users/Administrator/Desktop/chromedriver')
+        driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=options)
 
         print("드라이버 경로 잡힘")
 
@@ -113,7 +113,7 @@ class UserManager:
 
         resultnick=soup.select('head > meta:nth-child(1)')
         resultnick=str(resultnick).split('content="')[1];
-        resultnick=str(resultnick).split(' - 게임')[0];
+        resultnick=str(resultnick).split(' - ')[0];
         print(resultnick)
         print("사이트 정보 가져옴")
 
@@ -312,5 +312,7 @@ def runServer():
         print('Crawling Server Exited.')
         server.shutdown()
         server.server_close()
-
+        
 runServer()
+
+driver.close()
