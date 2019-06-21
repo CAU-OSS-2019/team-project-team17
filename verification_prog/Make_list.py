@@ -13,6 +13,7 @@ import os
 Check = False
 Num = 0
 Count = 0
+Done = False
 User_name = '뚱땡이버거' # 처음 검색할 사용자
 Next_user = ''
 User_list = []
@@ -27,6 +28,7 @@ def List_Append():
     global User_name
     global Next_user
     global Num
+    global Done
 
     Check_list.append(User_name)
 
