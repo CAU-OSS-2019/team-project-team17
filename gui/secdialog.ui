@@ -186,7 +186,7 @@
      <item>
       <widget class="QRadioButton" name="Suppot1">
        <property name="text">
-        <string>서폿</string>
+        <string>서포터</string>
        </property>
       </widget>
      </item>
@@ -246,7 +246,7 @@
      <item>
       <widget class="QRadioButton" name="Suppot2">
        <property name="text">
-        <string>서폿</string>
+        <string>서포터</string>
        </property>
       </widget>
      </item>

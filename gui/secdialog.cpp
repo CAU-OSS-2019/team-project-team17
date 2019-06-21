@@ -16,6 +16,12 @@ SecDialog::SecDialog(QWidget *parent) :
     QObject::connect(ui->AD2, SIGNAL(clicked()), this, SLOT(ProperPosition()));
     QObject::connect(ui->Suppot1, SIGNAL(clicked()), this, SLOT(MyPosition()));
     QObject::connect(ui->Suppot2, SIGNAL(clicked()), this, SLOT(ProperPosition()));
+    /*strcpy(userData.nickname, "Dont Stop Me XD");
+    strcpy(userData.rank, "Challenger");
+    ui->label->clear();
+    ui->label->setText(userData.nickname);
+    ui->label_3->clear();
+    ui->label_3->setText(userData.rank);*/
 }
 
 SecDialog::~SecDialog()

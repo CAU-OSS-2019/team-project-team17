@@ -19,6 +19,8 @@ public:
     ~SignUp();
 private slots:
     void on_pushButton_OK_clicked();
+    void on_pushButton_3_clicked();
+
 private:
     Ui::SignUp *ui;
     SignupSocketClient *signupSock;

@@ -55,3 +55,8 @@ void SignUp::on_pushButton_OK_clicked()
         }
     }
 }
+
+void SignUp::on_pushButton_3_clicked()
+{
+
+}
