@@ -8,9 +8,11 @@
     pToken := Gdip_Startup()
     pBitmap := Gdip_BitmapFromHWND(hwnd)
     
-    pBitmap2 := Gdip_CloneBitmapArea(pBitmap,1122,23,150,56)
+    pBitmap2 := Gdip_CloneBitmapArea(pBitmap,1122,23,140,26)
 
-    MsgBox % OCR(pBitmap2,"eng+kor")
+    string := OCR(pBitmap2,"eng+kor")
+    FileDelete,%A_ScriptDir%\nick.txt
+    FileAppend,%string%,%A_ScriptDir%\nick.txt
 
     Gdip_SaveBitmapToFile(pBitmap2,file)
     Gdip_DisposeImage(pBitmap)
