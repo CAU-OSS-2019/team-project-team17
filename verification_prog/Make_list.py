@@ -72,6 +72,10 @@ def List_Append():
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         Search_user = soup.select('div.SummonerName')
+
+        if soup.select('div.Message')[0].text.strip() != "기록된 전적이 없습니다.":
+            Done = True
+            return 0
         
         Random_num = randint(1, 10)
         Next_user = Search_user[Random_num].text.strip()
@@ -162,6 +166,8 @@ search_name2.send_keys(Keys.RETURN)
 
 while Num != 1: #  구하고 싶은 유저의 수 입력
     List_Append()
+    if Done == True:
+        break
 
 print(User_list)
 
