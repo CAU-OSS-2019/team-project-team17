@@ -178,6 +178,8 @@ class MatchingSocketServer : public SocketServer{
 
 				matchingQueue.clnt_cnt++;
 				
+				cout << "NICK "<<tempsrc2.mynickname<<"is connected"<<endl;
+				
 				if(matchingQueue.clnt_cnt == MATCHING_QUEUE_SIZE){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
 					Matching * matching = new Matching(matchingQueue);
