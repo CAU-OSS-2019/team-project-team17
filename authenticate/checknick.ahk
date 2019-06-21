@@ -19,6 +19,6 @@
     Gdip_DisposeImage(pBitmap2)
     Gdip_Shutdown(pToken)
 
-
+exitapp
 Return
 
