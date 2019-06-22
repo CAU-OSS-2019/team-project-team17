@@ -102,7 +102,10 @@ def List_Append():
     search_name2.send_keys(Next_user)
     search_name2.send_keys(Keys.RETURN)
 
-driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
+driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe")) 
+#만약 여기서 오류나면 자기 컴퓨터 절대경로로 바꿔주세용ㅎㅎ 
+#예시)driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
+
 driver.implicitly_wait(3)
 driver.get('https://www.op.gg/')
 search_name = driver.find_element_by_name('userName')
