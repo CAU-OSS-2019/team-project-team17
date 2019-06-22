@@ -17,10 +17,9 @@
 * We recommend that you **first create an issue and discuss** about it before modifying the code.
 * Please include the **issue number** in commit message when you are doing a pull request.
 
+* Steps for Pull Request
 0. Please open issue first and check the maintainter's comment.
 1. Fork to your account and make your branch.
-2. Modify changes and push your commits.
-```
-ex) $ git push origin [your branch]
-```
+2. Modify changes and push your commits.  ex) git push origin [your_branch]
+
 3. Please [pull request](https://github.com/CAU-OSS-2019/team-project-team17/pulls) to corresponding branch.
