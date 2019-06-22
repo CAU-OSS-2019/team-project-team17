@@ -1,0 +1,145 @@
+In file included from ../algorithm/algorithm.h:7:0,
+                 from matching_server.h:5,
+                 from matching_server_main.cpp:1:
+../algorithm/../main_server/db/getAllUserInfo.h: In member function ‘user_character_info GetAllUserInfo::getUserCharacterInfo(std::__cxx11::string)’:
+../algorithm/../main_server/db/getAllUserInfo.h:54:87: warning: format ‘%s’ expects argument of type ‘char*’, but argument 3 has type ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ [-Wformat=]
+    sprintf(query, "SELECT * FROM userEntireInfo WHERE nickname='%s' LIMIT 1", nickname);
+                                                                                       ^
+../algorithm/../main_server/db/getAllUserInfo.h:77:82: warning: format ‘%s’ expects argument of type ‘char*’, but argument 3 has type ‘std::__cxx11::string {aka std::__cxx11::basic_string<char>}’ [-Wformat=]
+    sprintf(query, "SELECT * FROM userCharacterInfo WHERE nickname='%s'", nickname);
+                                                                                  ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h: In static member function ‘static double Algorithm::runAlgorithm(source_of_matching_s, source_of_matching_s, GetCharacterInfo*)’:
+../algorithm/algorithm.h:51:120: error: no matching function for call to ‘Algorithm::getBestwinrate(const char [32], const StringKey&, const char*, GetCharacterInfo*&)’
+                 best_pick_value temp1 = getBestwinrate((iter1->first).str,iter2->first,getRankstr(avgrank).c_str(),info);
+                                                                                                                        ^
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note: candidate: static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:113:32: note:   no known conversion for argument 2 from ‘const StringKey’ to ‘char*’
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:53:69: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                 double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank).c_str(),info);
+                                                      ~~~~~~~~~~~~~~~^~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:136:23: note:   initializing argument 1 of ‘static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)’
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:53:98: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                 double basewinrate1 = getBasewinrate((iter1->first).str,getRankstr(avgrank).c_str(),info);
+                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:136:23: note:   initializing argument 2 of ‘static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)’
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:63:75: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                     best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank).c_str(),info);
+                                                            ~~~~~~~~~~~~~~~^~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note:   initializing argument 1 of ‘static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)’
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:63:94: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                     best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank).c_str(),info);
+                                                                               ~~~~~~~~~~~~~~~^~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note:   initializing argument 2 of ‘static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)’
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:63:123: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                     best_pick_value temp2 = getBestwinrate((iter2->first).str,(iter1->first).str,getRankstr(avgrank).c_str(),info);
+                                                                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from matching_server.h:5:0,
+                 from matching_server_main.cpp:1:
+../algorithm/algorithm.h:113:32: note:   initializing argument 3 of ‘static best_pick_value Algorithm::getBestwinrate(char*, char*, char*, GetCharacterInfo*)’
+         static best_pick_value getBestwinrate(char character_name[32], char best_character_name[32], char rankname[32], GetCharacterInfo *info){
+                                ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:75:73: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                     double basewinrate2 = getBasewinrate((iter2->first).str,getRankstr(avgrank).c_str(),info);
+                                                          ~~~~~~~~~~~~~~~^~~
+../algorithm/algorithm.h:136:23: note:   initializing argument 1 of ‘static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)’
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+../algorithm/algorithm.h:75:102: error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
+                     double basewinrate2 = getBasewinrate((iter2->first).str,getRankstr(avgrank).c_str(),info);
+                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+../algorithm/algorithm.h:136:23: note:   initializing argument 2 of ‘static double Algorithm::getBasewinrate(char*, char*, GetCharacterInfo*)’
+         static double getBasewinrate(char character_name[32], char rankname[32],GetCharacterInfo *info){
+                       ^~~~~~~~~~~~~~
+In file included from matching_server_main.cpp:1:0:
+matching_server.h: In member function ‘void* MatchingSocketServer::handleMatching(GetCharacterInfo*)’:
+matching_server.h:171:43: error: invalid array assignment
+     strcpy(tempsrc2.myposition = tempsrc->myposition);
+                                           ^~~~~~~~~~
+matching_server.h:172:44: error: invalid array assignment
+     strcpy(tempsrc2.duoposition = tempsrc->duoposition);
+                                            ^~~~~~~~~~~
+matching_server.h:176:91: error: no matching function for call to ‘std::map<StringKey, SourceOfMatchingS>::insert(std::pair<char*, SourceOfMatchingS>)’
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:795:7: note: candidate: std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> std::map<_Key, _Tp, _Compare, _Alloc>::insert(const value_type&) [with _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >; typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator = std::_Rb_tree_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const StringKey, SourceOfMatchingS>]
+       insert(const value_type& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:795:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘const value_type& {aka const std::pair<const StringKey, SourceOfMatchingS>&}’
+/usr/include/c++/7/bits/stl_map.h:802:7: note: candidate: std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::value_type&&) [with _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >; typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator = std::_Rb_tree_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const StringKey, SourceOfMatchingS>]
+       insert(value_type&& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:802:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘std::map<StringKey, SourceOfMatchingS>::value_type&& {aka std::pair<const StringKey, SourceOfMatchingS>&&}’
+/usr/include/c++/7/bits/stl_map.h:808:2: note: candidate: template<class _Pair> std::__enable_if_t<std::is_constructible<std::pair<const _Key, _Tp>, _Pair>::value, std::pair<typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator, bool> > std::map<_Key, _Tp, _Compare, _Alloc>::insert(_Pair&&) [with _Pair = _Pair; _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >]
+  insert(_Pair&& __x)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:808:2: note:   template argument deduction/substitution failed:
+/usr/include/c++/7/bits/stl_map.h:822:7: note: candidate: void std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::initializer_list<std::pair<const _Key, _Tp> >) [with _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >]
+       insert(std::initializer_list<value_type> __list)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:822:7: note:   no known conversion for argument 1 from ‘std::pair<char*, SourceOfMatchingS>’ to ‘std::initializer_list<std::pair<const StringKey, SourceOfMatchingS> >’
+/usr/include/c++/7/bits/stl_map.h:852:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, const value_type&) [with _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const StringKey, SourceOfMatchingS>]
+       insert(const_iterator __position, const value_type& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:852:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/7/bits/stl_map.h:862:7: note: candidate: std::map<_Key, _Tp, _Compare, _Alloc>::iterator std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, std::map<_Key, _Tp, _Compare, _Alloc>::value_type&&) [with _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::iterator = std::_Rb_tree_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator = std::_Rb_tree_const_iterator<std::pair<const StringKey, SourceOfMatchingS> >; std::map<_Key, _Tp, _Compare, _Alloc>::value_type = std::pair<const StringKey, SourceOfMatchingS>]
+       insert(const_iterator __position, value_type&& __x)
+       ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:862:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/7/bits/stl_map.h:867:2: note: candidate: template<class _Pair> std::__enable_if_t<std::is_constructible<std::pair<const _Key, _Tp>, _Pair>::value, typename std::_Rb_tree<_Key, std::pair<const _Key, _Tp>, std::_Select1st<std::pair<const _Key, _Tp> >, _Compare, typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<std::pair<const _Key, _Tp> >::other>::iterator> std::map<_Key, _Tp, _Compare, _Alloc>::insert(std::map<_Key, _Tp, _Compare, _Alloc>::const_iterator, _Pair&&) [with _Pair = _Pair; _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >]
+  insert(const_iterator __position, _Pair&& __x)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:867:2: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:176:91: note:   candidate expects 2 arguments, 1 provided
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^
+In file included from /usr/include/c++/7/map:61:0,
+                 from ../structs/struct.h:8,
+                 from socket_server.h:13,
+                 from matching_server.h:4,
+                 from matching_server_main.cpp:1:
+/usr/include/c++/7/bits/stl_map.h:885:2: note: candidate: template<class _InputIterator> void std::map<_Key, _Tp, _Compare, _Alloc>::insert(_InputIterator, _InputIterator) [with _InputIterator = _InputIterator; _Key = StringKey; _Tp = SourceOfMatchingS; _Compare = std::less<StringKey>; _Alloc = std::allocator<std::pair<const StringKey, SourceOfMatchingS> >]
+  insert(_InputIterator __first, _InputIterator __last)
+  ^~~~~~
+/usr/include/c++/7/bits/stl_map.h:885:2: note:   template argument deduction/substitution failed:
+In file included from matching_server_main.cpp:1:0:
+matching_server.h:176:91: note:   candidate expects 2 arguments, 1 provided
+     matchingQueue.clnt_nickname_socket_map.insert(make_pair(tempsrc2.mynickname, tempsrc2));
+                                                                                           ^

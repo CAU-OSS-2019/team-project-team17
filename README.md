@@ -1,4 +1,4 @@
-﻿# GameHaeDuo
+# GameHaeDuo
 Find your **BEST DUO** from GameHaeDuo and **WIN** in ‘League Of Legend’
   
 
@@ -50,8 +50,3 @@ When you have issue, please register your issue [here](https://github.com/CAU-OS
 We are developing in ‘develop’ branch and functions are divided into topic branches.
 1. Fork to your account and modify your changes.
 2. Please [pull request](https://github.com/CAU-OSS-2019/team-project-team17/pulls) to corresponding branch.
-
-  
-  
-## License
-Apache 2.0
