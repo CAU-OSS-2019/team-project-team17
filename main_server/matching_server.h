@@ -7,7 +7,7 @@
 
 #include <map>
 #include "db/getCharacterInfo.h"
-#define MATCHING_QUEUE_SIZE 2  // must be >=2
+#define MATCHING_QUEUE_SIZE 10  // must be >=2
 
 using namespace std;
 
@@ -40,35 +40,47 @@ class Matching{
 			double userConformity[MATCHING_QUEUE_SIZE][MATCHING_QUEUE_SIZE-1];
 			
 			double max = 0;
-			int maxI =0, maxJ =0;
+			int maxI =0, maxJ =1;
 			
-			userConformity[0][0] = -1;
+			userConformity[0][0] = 0;
 			max = Algorithm::runAlgorithm(userInfo[0], userInfo[1],info);
 			for(int i = 0; i < MATCHING_QUEUE_SIZE; i++){
 				for(int j = i+1; j < MATCHING_QUEUE_SIZE; j++){
 					userConformity[i][j] = Algorithm::runAlgorithm(userInfo[i], userInfo[j],info);
-					
+					//userInfo[i].mynickname<<" "<<userInfo[j].mynickname<<"의 적합도 ";
+					//cout<<"userConformity["<<i<<"]["<<j<<"] = "<<userConformity[i][j]<<endl;
 					if(max < userConformity[i][j]){
 						max = userConformity[i][j];
 						maxI = i;
 						maxJ = j;
 					}
 				}
+			
 			}
+			for(int i = 0; i < MATCHING_QUEUE_SIZE; i++){
+				for(int j = i+1; j < MATCHING_QUEUE_SIZE; j++){
+					
+					cout<<userInfo[i].mynickname<<" "<<userInfo[j].mynickname<<"의 적합도 ";
+					cout<<"userConformity["<<i<<"]["<<j<<"] = "<<userConformity[i][j]<<endl;
+					
+				}
+			
+			}
+			cout<<"선택된 I값 : "<<maxI<<" 선택된 J값 : "<<maxJ<<endl;
 			
 			result_of_matching res1;
 			result_of_matching res2;
 
-			res1.conformity = userConformity[maxI][maxJ];
+			res1.conformity = max;
 
 			strcpy(res1.duonickname,userInfo[maxJ].mynickname);
 			strcpy(res1.duorank, userInfo[maxJ].rank);
 
 
-			res2.conformity = userConformity[maxI][maxJ];
+			res2.conformity = max;
 
-			strcpy(res2.duonickname,userInfo[maxJ].mynickname);
-			strcpy(res2.duorank, userInfo[maxJ].rank);
+			strcpy(res2.duonickname,userInfo[maxI].mynickname);
+			strcpy(res2.duorank, userInfo[maxI].rank);
 
 			// matched_user bestMatchedUser(userNickname[maxI], ,userNickname[maxJ], )
 			matched_user bestMatchedUser;
@@ -91,6 +103,10 @@ class Matching{
 			for(iter = (matchingQueue.clnt_nickname_socket_map).begin();
 				iter != (matchingQueue.clnt_nickname_socket_map).end() && i <MATCHING_QUEUE_SIZE;
 					 ++i, ++iter){
+				
+				cout<<"매칭이 시작되어 리스트에 복사합니다"<<endl;
+				cout<<(iter->first).str<<" "<<(iter->second).myposition<< " "<<iter->second.duoposition<<" "<<iter->second.rank<<" "<<iter->second.rank<<endl;
+
 				strcpy(userInfo[i].mynickname , (iter->first).str);
 				strcpy(userInfo[i].myposition , (iter->second).myposition);
 				strcpy(userInfo[i].duoposition , (iter->second).duoposition);
@@ -182,11 +198,21 @@ class MatchingSocketServer : public SocketServer{
 				cout <<tempsrc2.myposition<<" "<<tempsrc2.duoposition<<endl;
 				cout <<"RANK = "<<tempsrc2.rank<<endl;
 
+
+				map<string_key, source_of_matching_s>::iterator queueiter;
+				cout<<"현재 매칭 큐에 있는 유저"<<endl;
+				for(queueiter=matchingQueue.clnt_nickname_socket_map.begin();queueiter!=matchingQueue.clnt_nickname_socket_map.end();queueiter++){
+					
+					cout<<queueiter->second.mynickname<<" "<<queueiter->second.myposition<<" "<<queueiter->second.duoposition<< " "<<queueiter->second.rank<<" "<<queueiter->second.clnt_sock<<endl;
+				}
+
+
+
 				if(matchingQueue.clnt_cnt == MATCHING_QUEUE_SIZE){
 					// memory 낭비 없애려면 동적 할당으로 구현해도 될 듯.
 					Matching * matching = new Matching(matchingQueue);
 					matched_user matchedUser = matching->runMatching(info);
-					delete matching;
+				//	delete matching;
 					
 					sendMatchingData(matchedUser, true);
 					removeMatchedUserFromQueue(matchedUser);
@@ -230,6 +256,10 @@ class MatchingSocketServer : public SocketServer{
 			int userSock1 = (matchingUserIter1->second).clnt_sock;
 			int userSock2 = (matchingUserIter2->second).clnt_sock;
 			
+			cout<<"매칭된 유저 2명"<<endl;
+			cout<<userSock1<<" "<<matchedUser.res1.duonickname<<" "<<matchedUser.res1.conformity<<endl;
+			cout<<userSock2<<" "<<matchedUser.res2.duonickname<<" "<<matchedUser.res2.conformity<<endl;
+
 			write(userSock1, &match_success, sizeof(match_success));
 			write(userSock1, (char*)&matchedUser.res1, sizeof(matchedUser.res1));
 			
@@ -271,14 +301,20 @@ class MatchingSocketServer : public SocketServer{
 
 
 			matchingUserIter1 = matchingQueue.clnt_nickname_socket_map.find(temp);
+			
+			cout<<"매칭이 완료되어 큐에서 제거합니다"<<endl;
+			cout<<"제거 유저 1"<<matchingUserIter1->first.str<<endl;
+			
 			matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter1);
 			--matchingQueue.clnt_cnt;
-			
+				
 
 			strcpy(temp.str,matchedUser.res1.duonickname);
 
 
 			matchingUserIter2 = matchingQueue.clnt_nickname_socket_map.find(temp);
+			
+			cout<<"제거 유저 2"<<matchingUserIter2->first.str<<endl;
 			matchingQueue.clnt_nickname_socket_map.erase(matchingUserIter2);
 			--matchingQueue.clnt_cnt;
 
