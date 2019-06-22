@@ -118,7 +118,7 @@ class Algorithm{
                     double winrate1 = (iter1->second.wins)/(iter1->second.wins+iter1->second.losses);
 
                     double winrate2 = (iter2->second.wins)/(iter2->second.wins+iter2->second.losses);
-                    
+                   //cout<<"base win rate = "<<basewinrate1<< " "<<basewinrate2<< " "<<temp1.win_rate<< " "<<temp2.win_rate<<" "<<winrate1<<" "<<winrate2<<endl; 
                     double interwinrate = basewinrate1+basewinrate2+temp1.win_rate+temp2.win_rate+winrate1+winrate2;
 			double tempconform;
 			tempconform = getConformity(interwinrate,kdarate1,kdarate2,(prob1+prob2)/2);
@@ -140,7 +140,12 @@ class Algorithm{
 
         static double getConformity(double interwinrate, double kdarate1, double kdarate2, double prob){
 		//cout <<"interrate : "<<interwinrate<<" kdasum : "<<kdarate1+kdarate2-6<<" prob : "<<(prob/100)+1<<endl;
-            return ( (((interwinrate-200)/100)+1) * (( (kdarate1+kdarate2-6) / 100 ) + 1) *  ((prob/100)+1)  );
+		double result= ( (((interwinrate-100)/100)+1) * (( (kdarate1+kdarate2) / 100 ) + 1) *  ((prob/100)+1)  );
+            //cout<<"result="<<result<<endl;
+		if(result >= 999999){
+		    result=0;
+	    }
+	    return result;
 
         }
 
@@ -164,13 +169,41 @@ class Algorithm{
             strcpy(tempkey.rank,rankname);
 	    //cout<<"strcpy tempkey.rank"<<endl;
             strcpy(tempkey.character_name,character_name);
-		//cout<<"GET READY TO FINDING MAP"<<endl;	
-	    map<best_pick_key, best_pick_value >::iterator iter = info->best_pick_map.find(tempkey);
-		for(iter = info->best_pick_map.begin();iter!=info->best_pick_map.end();iter++){
-		cout <<iter->first.rank<< " / "<<tempkey.rank<<endl;
+		//cout<<"GET READY TO FINDING MAP"<<endl;
+		//
+	//	cout<<"tempkey = "<<tempkey.best_character<<" "<<tempkey.character_name<<" "<<tempkey.rank<<endl;
+		if(strcmp(tempkey.rank,"Iron")==0){
+	    		strcpy(tempkey.rank,"iron");
+		}
+		if(strcmp(tempkey.rank,"Bronze")==0){
+	    		strcpy(tempkey.rank,"bronze");
+		}
+		if(strcmp(tempkey.rank,"Silver")==0){
+	    		strcpy(tempkey.rank,"silver");
+		}
+		if(strcmp(tempkey.rank,"Gold")==0){
+	    		strcpy(tempkey.rank,"gold");
+		}
+		if(strcmp(tempkey.rank,"Platinum")==0){
+	    		strcpy(tempkey.rank,"platinum");
+		}
+		if(strcmp(tempkey.rank,"Diamond")==0){
+	    		strcpy(tempkey.rank,"diamond");
+		}		
+		if(strcmp(tempkey.rank,"Master")==0){
+	    		strcpy(tempkey.rank,"master");
+		}
+	    map<best_pick_key, best_pick_value >::iterator iter; //= info->best_pick_map.find(tempkey);
+		
+	    iter = info->best_pick_map.begin();
+
+//		cout<<"map = "<<iter->first.best_character<<" "<<iter->first.character_name<<" "<<iter->first.rank<<endl;    
+	    for(iter = info->best_pick_map.begin();iter!=info->best_pick_map.end();iter++){
+	//	cout <<iter->first.rank<< " / "<<tempkey.rank<<endl;
 			//cout << "MAP 탐색중 "<<iter->first.character_name<<" "<<iter->first.best_character<<" "<<iter->first.rank<<endl;
+			
 			if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0&&strcmp(iter->first.best_character,tempkey.best_character)==0){
-		    cout<<"찾았습니다"<<endl;
+		   // cout<<"찾았습니다"<<endl;
 		//   findc++;
 		    //
 		    //
@@ -202,13 +235,38 @@ class Algorithm{
             strcpy(tempkey.character_name, character_name);
             strcpy(tempkey.rank, rankname);
 		
-	    map<base_character_key, float >::iterator iter = info->base_character_map.find(tempkey);
-		for(iter = info->base_character_map.begin();iter!=info->base_character_map.end();iter++){
+    		if(strcmp(tempkey.rank,"Iron")==0){
+	    		strcpy(tempkey.rank,"iron");
+		}
+		if(strcmp(tempkey.rank,"Bronze")==0){
+	    		strcpy(tempkey.rank,"bronze");
+		}
+		if(strcmp(tempkey.rank,"Silver")==0){
+	    		strcpy(tempkey.rank,"silver");
+		}
+		if(strcmp(tempkey.rank,"Gold")==0){
+	    		strcpy(tempkey.rank,"gold");
+		}
+		if(strcmp(tempkey.rank,"Platinum")==0){
+	    		strcpy(tempkey.rank,"platinum");
+		}
+		if(strcmp(tempkey.rank,"Diamond")==0){
+	    		strcpy(tempkey.rank,"diamond");
+		}		
+		if(strcmp(tempkey.rank,"Master")==0){
+	    		strcpy(tempkey.rank,"master");
+		}
+
+	    map<base_character_key, float >::iterator iter;// = info->base_character_map.find(tempkey);
+	
+		//cout<<"tempkey="<<tempkey.character_name<<" "<<tempkey.rank<<" "<<iter->second<<endl;    
+	    for(iter = info->base_character_map.begin();iter!=info->base_character_map.end();iter++){
 			if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0){	
-		return iter->second;
+//			cout<<"FIND"<<endl;
+				return iter->second;
 			}
 		}	
-	  //  return iter->second;
+	    return iter->second;
 		
         }
 
