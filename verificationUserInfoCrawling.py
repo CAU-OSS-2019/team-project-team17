@@ -147,8 +147,10 @@ db = pymysql.connect( # DB 연결
     charset='utf8')
 cursor = db.cursor()
 
-#driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
-driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
+driverpath = os.path.join(os.path.dirname(os.path.abspath(__file__)),"chromedriver.exe")
+driver = webdriver.Chrome(executable_path=driverpath)
+#만약 여기서 오류나면 자기 컴퓨터 절대경로로 바꿔주세용ㅎㅎ 
+#예시)driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
 
 count = 0
 for col in load_ws.columns:

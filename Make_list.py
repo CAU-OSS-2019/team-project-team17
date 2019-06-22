@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from random import *
 import time 
-import os
+import os 
 import openpyxl
 
 
@@ -102,11 +102,17 @@ def List_Append():
     search_name2.send_keys(Next_user)
     search_name2.send_keys(Keys.RETURN)
 
-driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe")) 
+#driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe")) 
+
+#driver= os.path.join(os.path.abspath(os.path.abspath(__file__)),"chromedriver.exe")
+driverpath = os.path.join(os.path.dirname(os.path.abspath(__file__)),"chromedriver.exe")
+driver = webdriver.Chrome(executable_path=driverpath)
 #만약 여기서 오류나면 자기 컴퓨터 절대경로로 바꿔주세용ㅎㅎ 
 #예시)driver = webdriver.Chrome(r"C:\\Users\\이민희\\Downloads\\chromedriver.exe") 
-
-driver.implicitly_wait(3)
+#chromedriver = "\\team-project-team17"
+#driver = webdriver.Chrome(chromedriver)
+#driver = webdriver.Chrome(r"\\chromedriver.exe")
+#driver.implicitly_wait(3)
 driver.get('https://www.op.gg/')
 search_name = driver.find_element_by_name('userName')
 search_name.send_keys(User_name)
@@ -173,7 +179,8 @@ search_name2 = driver.find_element_by_name('userName')
 search_name2.send_keys(Next_user) # 사용자 이름
 search_name2.send_keys(Keys.RETURN)
 
-while Num != 5: #  구하고 싶은 유저의 수 입력###################################################
+usernumberss=input('구하고 싶은 유저의 숫자 입력 :')
+while Num != usernumberss: #  구하고 싶은 유저의 수 입력###################################################
     List_Append()
 
 print(User_list)
