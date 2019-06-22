@@ -4,6 +4,7 @@
 #include <QPixmap>
 #include <QSplashScreen>
 #include <QTimer>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -30,7 +31,7 @@ void MainWindow::on_pushButton_Login_clicked()
         Msgbox.setText("Write ID & PASSWORD");
         Msgbox.exec();
     } else {
-        char buf[1024] = "13.209.7.127";
+        char buf[1024] = "13.125.138.196";
         loginSock = new LoginSocketClient("login socket", buf, 9100);
         loginSock->sendData(loginInfo);
         if (loginSock->send_success == -1) {
@@ -49,7 +50,7 @@ void MainWindow::on_pushButton_Login_clicked()
                 if(userData.loginSuccess) {
                     delete loginSock;
 
-                    char buf[1024] = "13.209.7.127";
+                    char buf[1024] = "165.194.17.238";
                     loginSock = new LoginSocketClient("login socket", buf, 9300);
                     loginSock->recvbuf(buf);
                     if (strcmp(buf, "you are connected to server") == 0){

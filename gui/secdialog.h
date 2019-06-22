@@ -8,6 +8,7 @@
 #include <QPropertyAnimation>
 #include "addfriend.h"
 #include "matching_client.h"
+#include <sstream>
 
 namespace Ui {
 class SecDialog;

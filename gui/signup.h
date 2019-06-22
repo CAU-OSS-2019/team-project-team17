@@ -5,6 +5,11 @@
 #include <QMessageBox>
 #include "signup_socket.h"
 #include <string>
+#include <string.h>
+#include <Windows.h>
+#include <ShlObj.h>
+#include <tchar.h>
+#include <fstream>
 
 namespace Ui {
 class SignUp;

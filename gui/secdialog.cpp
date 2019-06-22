@@ -16,12 +16,14 @@ SecDialog::SecDialog(QWidget *parent) :
     QObject::connect(ui->AD2, SIGNAL(clicked()), this, SLOT(ProperPosition()));
     QObject::connect(ui->Suppot1, SIGNAL(clicked()), this, SLOT(MyPosition()));
     QObject::connect(ui->Suppot2, SIGNAL(clicked()), this, SLOT(ProperPosition()));
-    /*strcpy(userData.nickname, "Dont Stop Me XD");
-    strcpy(userData.rank, "Challenger");
+    /*strcpy(userData.nickname, "NOEL INSTA");
+    strcpy(userData.rank, "Platinum");
     ui->label->clear();
     ui->label->setText(userData.nickname);
     ui->label_3->clear();
-    ui->label_3->setText(userData.rank);*/
+    ui->label_3->setText(userData.rank);
+    strcpy(source.rank, userData.rank);
+    strcpy(source.mynickname, userData.nickname);*/
 }
 
 SecDialog::~SecDialog()
@@ -39,10 +41,16 @@ void SecDialog::on_pushButton_clicked()
         Msgbox.setText("Please Check Position");
         Msgbox.exec();
     } else {
-        char buf[1024] = "13.209.7.127";
+        char buf[1024] = "13.125.138.196";
         running_state = true;
         matchingSock = new MatchingSocketClient("matching socket", buf, 9000);
+        //char *str = strtok(source.rank, " ");
+        //strcpy(source.rank, str);
         matchingSock->sendData(source);
+        cout << source.mynickname << endl;
+        cout << source.rank << endl;
+        cout << source.myposition << endl;
+        cout << source.duoposition << endl;
         if (matchingSock->send_success) {
             match_success = matchingSock->receiveWaitData();
             while(!match_success){
@@ -51,7 +59,11 @@ void SecDialog::on_pushButton_clicked()
                 match_success = matchingSock->receiveWaitData();
             }
 
-            user = matchingSock->receiveMatchedUser();
+            result = matchingSock->receiveMatchingData();
+
+            cout << result.duonickname << endl;
+            cout << result.duorank << endl;
+            cout << result.conformity << endl;
 
             if((matchingSock->receive_success) == -1) {
                 Msgbox.setText("Receive Failed");
@@ -73,8 +85,8 @@ void SecDialog::on_pushButton_clicked()
 void SecDialog::displayMatchedUserInfo()
 {
     addf = new AddFriend();
-    addf->SetUser(user);
-    addf->show();
+    addf->SetUser(result);
+    addf->exec();
 }
 
 void SecDialog::setData(login_data user) {
@@ -83,6 +95,8 @@ void SecDialog::setData(login_data user) {
     ui->label->setText(userData.nickname);
     ui->label_3->clear();
     ui->label_3->setText(userData.rank);
+    strcpy(source.mynickname, userData.nickname);
+    strcpy(source.rank, userData.rank);
 }
 
 void SecDialog::MyPosition() {
@@ -97,7 +111,7 @@ void SecDialog::MyPosition() {
     if (ui->Suppot1->isChecked())
         mypos = ui->Suppot1->text();
 
-    strcpy(source.myposition, mypos.toLocal8Bit().constData());
+    strcpy(source.myposition, mypos.toUtf8().constData());
 }
 
 void SecDialog::ProperPosition() {
@@ -112,5 +126,5 @@ void SecDialog::ProperPosition() {
     if (ui->Suppot2->isChecked())
         propos = ui->Suppot2->text();
 
-    strcpy(source.duoposition, propos.toLocal8Bit());
+    strcpy(source.duoposition, propos.toUtf8().constData());
 }
