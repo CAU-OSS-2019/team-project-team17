@@ -17,7 +17,7 @@ class Algorithm{
     public:
 
         static double runAlgorithm(source_of_matching_s usersrc1, source_of_matching_s usersrc2, GetCharacterInfo *info){
-             
+        	//findc=0;     
 	       	cout<<"RUN ALGORITHM....."<<endl;
 	      cout<<usersrc1.mynickname<<" "<<usersrc1.myposition<<" "<<usersrc1.duoposition<<" "<<usersrc1.rank<<endl;
 		cout<<usersrc2.mynickname<<" "<<usersrc2.myposition<<" "<<usersrc2.duoposition<<" "<<usersrc2.rank<<endl;
@@ -98,7 +98,7 @@ class Algorithm{
 			if(strcmp(temp2.description,"AD Carry")==0){
 				strcpy(temp2.description,"원딜");
 			}
-		cout<<"유저1 캐릭 : "<<(iter1->first).str<<" 유저2 : "<<(iter2->first).str<<" "<<temp1.win_rate<< " "<<temp2.win_rate<<endl;	
+//		cout<<"유저1 캐릭 : "<<(iter1->first).str<<" 유저2 : "<<(iter2->first).str<<" "<<temp1.win_rate<< " "<<temp2.win_rate<<endl;	
                     if(strcmp(temp1.description,usersrc1.duoposition)!=0){//bestpickcharacter의 description과 자신이 희망하는 듀오의 포지션이
                                                                         //   일치하지 않으면 비교 대상 범주에 들어가지 않음
                     //    continue;
@@ -130,7 +130,8 @@ class Algorithm{
             }
             conformity = conformity / compareNum;
 		cout << "두 유저의 적합도 : "<<conformity<<endl;
-            return conformity;
+          	//cout <<"FINDC:"<<findc<<endl;
+	      	return conformity;
 
             // 디비에서 각 유저들 정보 꺼내와서
             // 알고리즘 돌리고
@@ -165,23 +166,27 @@ class Algorithm{
             strcpy(tempkey.character_name,character_name);
 		//cout<<"GET READY TO FINDING MAP"<<endl;	
 	    map<best_pick_key, best_pick_value >::iterator iter = info->best_pick_map.find(tempkey);
-		//for(iter = info->best_pick_map.begin();iter!=info->best_pick_map.end();iter++){
-		//cout << "MAP 탐색중 "<<iter->first.character_name<<" "<<iter->first.best_character<<" "<<iter->first.rank<<endl;
-			//if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0&&strcmp(iter->first.best_character,tempkey.best_character)==0){
-		    //cout<<"찾았습니다"<<endl;
+		for(iter = info->best_pick_map.begin();iter!=info->best_pick_map.end();iter++){
+		cout <<iter->first.rank<< " / "<<tempkey.rank<<endl;
+			//cout << "MAP 탐색중 "<<iter->first.character_name<<" "<<iter->first.best_character<<" "<<iter->first.rank<<endl;
+			if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0&&strcmp(iter->first.best_character,tempkey.best_character)==0){
+		    cout<<"찾았습니다"<<endl;
+		//   findc++;
 		    //
 		    //
-		if(iter!=info->best_pick_map.end()){
+		//if(iter!=info->best_pick_map.end()){
+		//	cout<<"find 성공함"<<endl;
 				return iter->second;
-            } else {
-			
+            }
+			}
+		//cout<<"find 실패함"<<endl;	
 		        best_pick_value nullvalue;
         	    strcpy(nullvalue.description,"");
         	    nullvalue.win_rate=0;
 
         	    return nullvalue;
             }
-	}
+	
             
         
 
@@ -198,11 +203,11 @@ class Algorithm{
             strcpy(tempkey.rank, rankname);
 		
 	    map<base_character_key, float >::iterator iter = info->base_character_map.find(tempkey);
-		//for(iter = info->base_character_map.begin();iter!=info->base_character_map.end();iter++){
-		//	if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0){	
+		for(iter = info->base_character_map.begin();iter!=info->base_character_map.end();iter++){
+			if(strcmp(iter->first.character_name,tempkey.character_name)==0&&strcmp(iter->first.rank,tempkey.rank)==0){	
 		return iter->second;
-		//	}
-	//	}	
+			}
+		}	
 	  //  return iter->second;
 		
         }
