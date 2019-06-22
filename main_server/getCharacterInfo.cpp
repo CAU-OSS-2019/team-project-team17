@@ -86,7 +86,7 @@ cout<<++countd<<endl;		//set_base_character_info(sql_row);
 		strcpy(bp_key.best_character , sql_row[2]);
 		bp_value.win_rate = atof(sql_row[3]);
 		strcpy(bp_value.description , sql_row[4]);
-		cout<<sql_row[0]<<" "<<sql_row[1]<<" "<<sql_row[2]<<" "<<sql_row[3]<<" "<<sql_row[4]<<endl;
+		//cout<<sql_row[0]<<" "<<sql_row[1]<<" "<<sql_row[2]<<" "<<sql_row[3]<<" "<<sql_row[4]<<endl;
 		best_pick_map.insert(pair<best_pick_key, best_pick_value>(bp_key, bp_value));
 	}
 
