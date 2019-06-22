@@ -15,8 +15,6 @@ SignUp::~SignUp()
 
 void SignUp::on_pushButton_OK_clicked()
 {
-    char buf[1024] = "13.125.138.196";
-    signupSock = new SignupSocketClient("signup socket", buf, 9200);
     nickname = ui->lineEdit_lol_nickname->text().toUtf8();
     id = ui->lineEdit_id->text().toUtf8();
     pwd = ui->lineEdit_password->text().toUtf8();
@@ -32,26 +30,34 @@ void SignUp::on_pushButton_OK_clicked()
         Msgbox.setText("Please write without blank");
         Msgbox.exec();
     } else {
-        signupSock->sendData(signuInfo);
-        if (signupSock->send_success == -1) {
-            Msgbox.setText("Send Data Failed");
-            Msgbox.exec();
-        } else {
-            signupSuccess = signupSock->receiveData();
-            if (signupSuccess) {
-                Msgbox.setText("Sign up Complete");
+        if (nickCheck == true) {
+            char buf[1024] = "13.125.138.196";
+            signupSock = new SignupSocketClient("signup socket", buf, 9200);
+
+            signupSock->sendData(signuInfo);
+            if (signupSock->send_success == -1) {
+                Msgbox.setText("Send Data Failed");
                 Msgbox.exec();
-                delete signupSock;
-                close();
             } else {
-                if (signupSock->receive_success == -1) {
-                    Msgbox.setText("Sever Error");
+                signupSuccess = signupSock->receiveData();
+                if (signupSuccess) {
+                    Msgbox.setText("Sign up Complete");
                     Msgbox.exec();
+                    delete signupSock;
+                    close();
                 } else {
-                Msgbox.setText("Sign up Failed");
-                Msgbox.exec();
+                    if (signupSock->receive_success == -1) {
+                        Msgbox.setText("Sever Error");
+                        Msgbox.exec();
+                    } else {
+                    Msgbox.setText("Sign up Failed");
+                    Msgbox.exec();
+                    }
                 }
             }
+        } else {
+            Msgbox.setText("Check Nickname Verification");
+            Msgbox.exec();
         }
     }
 }
@@ -98,7 +104,7 @@ void SignUp::on_pushButton_3_clicked()
     if (nickn == str) {
         Msgbox.setText("Authentication complete");
         Msgbox.exec();
-
+        nickCheck = true;
     }
     else {
         Msgbox.setText("Not You");

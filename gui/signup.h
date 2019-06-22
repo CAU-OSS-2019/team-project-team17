@@ -34,6 +34,7 @@ private:
     QString id;
     QString pwd;
     QString nickname;
+    bool nickCheck = false;
 };
 
 #endif // SIGNUP_H
